@@ -123,20 +123,8 @@
 
     <!-- ========== 首页 - 个人工作台 ========== -->
     <div id="page-home" class="page active">
-        <!-- Header -->
-        <header class="fixed top-0 w-full z-50 glass-panel border-b border-white/5 px-4 py-3">
-            <div class="flex justify-between items-center">
-                <h1 class="text-lg font-bold text-white">
-                    <i class="fa-solid fa-user-astronaut text-neon-blue mr-2"></i>我的工作台
-                </h1>
-                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-neon-blue to-neon-purple p-0.5">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Wang" class="rounded-full bg-slate-900" alt="Avatar">
-                </div>
-            </div>
-        </header>
-
         <!-- Main Content -->
-        <main class="mt-20 px-4 space-y-6">
+        <main class="pt-6 px-4 space-y-6">
 
             <!-- 数据日期标识 -->
             <div class="flex items-center justify-between bg-slate-800/50 px-3 py-2 rounded-lg border border-white/5">
@@ -161,7 +149,6 @@
                             <i class="fa-solid fa-bullseye text-neon-blue text-sm"></i>
                             <span class="text-sm text-white font-bold">关联推荐开口率</span>
                         </div>
-                        <span class="text-[10px] text-slate-500">本周重点</span>
                     </div>
                     <p class="text-xs text-slate-300 mb-3 leading-relaxed">
                         在接待顾客时，主动询问是否需要关联产品，提升客单价。
@@ -186,12 +173,6 @@
                             <i class="fa-solid fa-arrow-up text-neon-green text-xs"></i>
                         </div>
                     </div>
-
-                    <!-- 激励提示 -->
-                    <div class="flex items-start space-x-2 text-[10px] text-slate-400 bg-white/5 rounded p-2">
-                        <i class="fa-solid fa-lightbulb text-yellow-500 mt-0.5"></i>
-                        <span>继续保持！今天再提升5%就能获得"推荐之星"徽章</span>
-                    </div>
                 </div>
 
                 <!-- SOP卡片2 -->
@@ -201,7 +182,6 @@
                             <i class="fa-solid fa-comments text-neon-blue text-sm"></i>
                             <span class="text-sm text-white font-bold">会员卡开口率</span>
                         </div>
-                        <span class="text-[10px] text-slate-500">日常任务</span>
                     </div>
                     <p class="text-xs text-slate-300 mb-3 leading-relaxed">
                         主动向顾客介绍会员卡权益，引导办理会员卡。
@@ -225,12 +205,6 @@
                             <span class="text-[10px] text-neon-red">↓ -5%</span>
                             <i class="fa-solid fa-arrow-down text-neon-red text-xs"></i>
                         </div>
-                    </div>
-
-                    <!-- 激励提示 -->
-                    <div class="flex items-start space-x-2 text-[10px] text-slate-400 bg-white/5 rounded p-2">
-                        <i class="fa-solid fa-lightbulb text-yellow-500 mt-0.5"></i>
-                        <span>加油！每成功办理一张会员卡可获得积分奖励。</span>
                     </div>
                 </div>
             </section>
@@ -339,15 +313,6 @@
                     </div>
                     <div class="flex-1">
                         <h2 class="text-lg font-bold text-white mb-1">王小美</h2>
-                        <p class="text-xs text-slate-400">中心广场店 · 药师</p>
-                        <div class="flex items-center space-x-2 mt-2">
-                            <span class="text-[10px] bg-neon-green/20 text-neon-green px-2 py-0.5 rounded font-bold">
-                                <i class="fa-solid fa-check mr-1"></i>已认证
-                            </span>
-                            <span class="text-[10px] bg-neon-blue/20 text-neon-blue px-2 py-0.5 rounded font-bold">
-                                <i class="fa-solid fa-star mr-1"></i>Top 3
-                            </span>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -370,13 +335,9 @@
 
                 <!-- 声纹状态 -->
                 <div class="bg-white/5 rounded-lg p-3 mb-3">
-                    <div class="flex items-center justify-between text-xs mb-2">
+                    <div class="flex items-center justify-between text-xs">
                         <span class="text-slate-400">录制时间</span>
                         <span class="text-white">2026-01-10 14:32</span>
-                    </div>
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="text-slate-400">质量评分</span>
-                        <span class="text-neon-green font-bold">优秀 (96分)</span>
                     </div>
                 </div>
 
@@ -418,39 +379,6 @@
                 </button>
             </section>
 
-            <!-- 其他设置 -->
-            <section class="glass-panel rounded-xl border border-white/5 overflow-hidden">
-                <div class="divide-y divide-white/5">
-                    <a href="#" class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
-                        <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-bell text-slate-400 w-5 text-center"></i>
-                            <span class="text-sm text-white">通知设置</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
-                    </a>
-                    <a href="#" class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
-                        <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-shield-halved text-slate-400 w-5 text-center"></i>
-                            <span class="text-sm text-white">隐私设置</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
-                    </a>
-                    <a href="#" class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
-                        <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-circle-question text-slate-400 w-5 text-center"></i>
-                            <span class="text-sm text-white">帮助与反馈</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
-                    </a>
-                    <a href="#" class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
-                        <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-info-circle text-slate-400 w-5 text-center"></i>
-                            <span class="text-sm text-white">关于我们</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
-                    </a>
-                </div>
-            </section>
 
             <!-- 退出登录 -->
             <button class="w-full glass-panel text-neon-red text-sm py-3 rounded-xl border border-neon-red/20 hover:bg-neon-red/10 transition-colors">
