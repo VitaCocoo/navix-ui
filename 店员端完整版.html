@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>药店智能决策 - 店员端</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tech-bg': '#0B0F19',
+                        'tech-card': '#151B2B',
+                        'neon-blue': '#00F0FF',
+                        'neon-purple': '#BC13FE',
+                        'neon-green': '#0AFF99',
+                        'neon-red': '#FF2A6D',
+                    },
+                    boxShadow: {
+                        'neon-blue': '0 0 10px rgba(0, 240, 255, 0.5)',
+                        'neon-purple': '0 0 10px rgba(188, 19, 254, 0.5)',
+                    },
+                    fontFamily: {
+                        'sans': ['Microsoft YaHei', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B0F19;
+            color: #e2e8f0;
+            font-family: 'Microsoft YaHei', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(21, 27, 43, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 2px;
+        }
+
+        /* Hide scrollbar */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* Page transition */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        /* Gradient backgrounds for cards */
+        .highlight-gradient {
+            background: linear-gradient(135deg, rgba(10, 255, 153, 0.15) 0%, rgba(10, 255, 153, 0) 100%);
+        }
+        .failure-gradient {
+            background: linear-gradient(135deg, rgba(255, 42, 109, 0.15) 0%, rgba(255, 42, 109, 0) 100%);
+        }
+        .learning-gradient {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(0, 240, 255, 0) 100%);
+        }
+
+        /* Recording waveform animation */
+        @keyframes waveform {
+            0%, 100% { height: 8px; }
+            50% { height: 24px; }
+        }
+        .waveform-bar {
+            animation: waveform 0.5s ease-in-out infinite;
+        }
+        .waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+        .waveform-bar:nth-child(3) { animation-delay: 0.2s; }
+        .waveform-bar:nth-child(4) { animation-delay: 0.3s; }
+        .waveform-bar:nth-child(5) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="pb-20">
+
+    <!-- ========== 首页 - 个人工作台 ========== -->
+    <div id="page-home" class="page active">
+        <!-- Header -->
+        <header class="fixed top-0 w-full z-50 glass-panel border-b border-white/5 px-4 py-3">
+            <div class="flex justify-between items-center">
+                <h1 class="text-lg font-bold text-white">
+                    <i class="fa-solid fa-user-astronaut text-neon-blue mr-2"></i>我的工作台
+                </h1>
+                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-neon-blue to-neon-purple p-0.5">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Wang" class="rounded-full bg-slate-900" alt="Avatar">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="mt-20 px-4 space-y-6">
+
+            <!-- 数据日期标识 -->
+            <div class="flex items-center justify-between bg-slate-800/50 px-3 py-2 rounded-lg border border-white/5">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-regular fa-calendar text-neon-blue text-sm"></i>
+                    <span class="text-xs text-slate-400">数据日期：</span>
+                    <span class="text-xs text-white font-medium">2026-01-11 (昨日)</span>
+                </div>
+                <span class="text-[10px] text-slate-500 bg-slate-700/50 px-2 py-0.5 rounded">T+1 数据</span>
+            </div>
+
+            <!-- 我的任务 -->
+            <section class="glass-panel rounded-xl p-4 border border-white/5">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-sm font-bold text-white border-l-4 border-neon-blue pl-2">我的任务</h2>
+                </div>
+
+                <!-- SOP卡片 -->
+                <div class="bg-gradient-to-br from-neon-blue/10 to-transparent rounded-lg p-3 border border-neon-blue/20">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-bullseye text-neon-blue text-sm"></i>
+                            <span class="text-sm text-white font-bold">关联推荐开口率</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500">本周重点</span>
+                    </div>
+                    <p class="text-xs text-slate-300 mb-3 leading-relaxed">
+                        在接待顾客时，主动询问是否需要关联产品，提升客单价。
+                    </p>
+
+                    <!-- 执行率反馈 -->
+                    <div class="flex items-center justify-between bg-white/5 rounded-lg p-2 mb-2">
+                        <span class="text-xs text-slate-400">昨日执行率</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-lg font-bold text-neon-green">85%</span>
+                            <span class="text-[10px] text-neon-green">↑ +15%</span>
+                            <i class="fa-solid fa-check-circle text-neon-green"></i>
+                        </div>
+                    </div>
+
+                    <!-- 与团队平均对比 -->
+                    <div class="flex items-center justify-between bg-white/5 rounded-lg p-2 mb-2">
+                        <span class="text-xs text-slate-400">与团队平均对比</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-slate-500">团队平均 72%</span>
+                            <span class="text-[10px] text-neon-green">↑ +13%</span>
+                            <i class="fa-solid fa-arrow-up text-neon-green text-xs"></i>
+                        </div>
+                    </div>
+
+                    <!-- 激励提示 -->
+                    <div class="flex items-start space-x-2 text-[10px] text-slate-400 bg-white/5 rounded p-2">
+                        <i class="fa-solid fa-lightbulb text-yellow-500 mt-0.5"></i>
+                        <span>继续保持！今天再提升5%就能获得"推荐之星"徽章</span>
+                    </div>
+                </div>
+
+                <!-- SOP卡片2 -->
+                <div class="bg-gradient-to-br from-neon-blue/10 to-transparent rounded-lg p-3 border border-neon-blue/20 mt-3">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-comments text-neon-blue text-sm"></i>
+                            <span class="text-sm text-white font-bold">会员卡开口率</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500">日常任务</span>
+                    </div>
+                    <p class="text-xs text-slate-300 mb-3 leading-relaxed">
+                        主动向顾客介绍会员卡权益，引导办理会员卡。
+                    </p>
+
+                    <!-- 执行率反馈 -->
+                    <div class="flex items-center justify-between bg-white/5 rounded-lg p-2 mb-2">
+                        <span class="text-xs text-slate-400">昨日执行率</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-lg font-bold text-yellow-500">60%</span>
+                            <span class="text-[10px] text-slate-500">- 5%</span>
+                            <i class="fa-solid fa-minus-circle text-yellow-500"></i>
+                        </div>
+                    </div>
+
+                    <!-- 与团队平均对比 -->
+                    <div class="flex items-center justify-between bg-white/5 rounded-lg p-2 mb-2">
+                        <span class="text-xs text-slate-400">与团队平均对比</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-slate-500">团队平均 65%</span>
+                            <span class="text-[10px] text-neon-red">↓ -5%</span>
+                            <i class="fa-solid fa-arrow-down text-neon-red text-xs"></i>
+                        </div>
+                    </div>
+
+                    <!-- 激励提示 -->
+                    <div class="flex items-start space-x-2 text-[10px] text-slate-400 bg-white/5 rounded p-2">
+                        <i class="fa-solid fa-lightbulb text-yellow-500 mt-0.5"></i>
+                        <span>加油！每成功办理一张会员卡可获得积分奖励。</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 昨日金句 -->
+            <section class="glass-panel rounded-xl p-4 border border-white/5">
+                <div class="flex items-center space-x-2 mb-3">
+                    <i class="fa-solid fa-trophy text-yellow-500"></i>
+                    <span class="text-sm text-white font-bold">昨日金句</span>
+                </div>
+                <p class="text-xs text-slate-400 mb-3">AI从你的对话中提炼的高转化话术片段</p>
+
+                <!-- 金句卡片 -->
+                <div class="highlight-gradient rounded-lg p-3 border border-neon-green/20 mb-3">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-[10px] bg-neon-green/20 text-neon-green px-1.5 py-0.5 rounded font-bold">得分 98</span>
+                            <span class="text-[10px] text-slate-500">14:32</span>
+                        </div>
+                        <span class="text-[10px] text-slate-400">关联成功</span>
+                    </div>
+                    <p class="text-sm text-white leading-relaxed mb-3">
+                        "这款感冒药效果很好，搭配<span class="text-neon-blue font-bold">维C泡腾片</span>一起吃，恢复更快。现在买还有活动，两盒立减10元。"
+                    </p>
+                    <button onclick="togglePlay(this)" class="text-[10px] text-white bg-white/10 px-2 py-1 rounded flex items-center w-fit hover:bg-white/20 transition-colors">
+                        <i class="fa-solid fa-play mr-1.5 text-[8px]"></i> 播放录音
+                    </button>
+                </div>
+
+                <!-- AI点评 -->
+                <div class="bg-white/5 rounded-lg p-3">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i class="fa-solid fa-robot text-neon-purple text-xs"></i>
+                        <span class="text-xs text-slate-300">AI教练点评</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        这段话术运用了<span class="text-neon-green font-bold">产品搭配</span>、<span class="text-neon-green font-bold">效果强化</span>、<span class="text-neon-green font-bold">价格优惠</span>三个技巧，逻辑清晰，说服力强。继续保持这个风格！
+                    </p>
+                </div>
+            </section>
+
+            <!-- 设备状态卡片 -->
+            <section class="glass-panel rounded-xl p-4 border border-white/5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-sm font-bold text-white border-l-4 border-neon-green pl-2">设备状态</h2>
+                    <span class="text-[10px] text-neon-green flex items-center">
+                        <span class="w-1.5 h-1.5 bg-neon-green rounded-full animate-pulse mr-1"></span>实时
+                    </span>
+                </div>
+
+                <!-- 工牌信息 -->
+                <div class="flex items-center justify-between bg-white/5 rounded-lg p-3 mb-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center">
+                            <i class="fa-solid fa-id-card text-neon-blue"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-400">工牌 SN 码</div>
+                            <div class="text-sm text-white font-mono">AI-BADGE-001</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="flex items-center space-x-1 text-neon-green text-xs">
+                            <i class="fa-solid fa-wifi"></i>
+                            <span>在线</span>
+                        </div>
+                        <div class="flex items-center space-x-1 text-xs text-slate-400 mt-1">
+                            <i class="fa-solid fa-battery-three-quarters"></i>
+                            <span>85%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电量进度条 -->
+                <div>
+                    <div class="flex justify-between text-[10px] text-slate-500 mb-1">
+                        <span>电量状态</span>
+                        <span>约可使用 8 小时</span>
+                    </div>
+                    <div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                        <div class="bg-neon-green h-full rounded-full transition-all duration-300" style="width: 85%"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ========== 我的页面 ========== -->
+    <div id="page-profile" class="page">
+        <!-- Header -->
+        <header class="fixed top-0 w-full z-50 glass-panel border-b border-white/5 px-4 py-3">
+            <h1 class="text-lg font-bold text-white">
+                <i class="fa-solid fa-user-gear text-neon-blue mr-2"></i>我的
+            </h1>
+        </header>
+
+        <!-- Main Content -->
+        <main class="mt-20 px-4 space-y-6">
+
+            <!-- 用户信息卡片 -->
+            <section class="glass-panel rounded-xl p-4 border border-white/5">
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-neon-blue to-neon-purple p-0.5">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Wang" class="rounded-full bg-slate-900 w-full h-full" alt="Avatar">
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-lg font-bold text-white mb-1">王小美</h2>
+                        <p class="text-xs text-slate-400">中心广场店 · 药师</p>
+                        <div class="flex items-center space-x-2 mt-2">
+                            <span class="text-[10px] bg-neon-green/20 text-neon-green px-2 py-0.5 rounded font-bold">
+                                <i class="fa-solid fa-check mr-1"></i>已认证
+                            </span>
+                            <span class="text-[10px] bg-neon-blue/20 text-neon-blue px-2 py-0.5 rounded font-bold">
+                                <i class="fa-solid fa-star mr-1"></i>Top 3
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 声纹管理 -->
+            <section class="glass-panel rounded-xl p-4 border border-white/5">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-microphone text-neon-purple"></i>
+                        <span class="text-sm text-white font-bold">声纹管理</span>
+                    </div>
+                    <span class="text-[10px] bg-neon-green/20 text-neon-green px-2 py-0.5 rounded font-bold">
+                        <i class="fa-solid fa-check mr-1"></i>已录制
+                    </span>
+                </div>
+
+                <p class="text-xs text-slate-400 mb-4">
+                    声纹用于识别您与顾客的对话，确保数据准确性
+                </p>
+
+                <!-- 声纹状态 -->
+                <div class="bg-white/5 rounded-lg p-3 mb-3">
+                    <div class="flex items-center justify-between text-xs mb-2">
+                        <span class="text-slate-400">录制时间</span>
+                        <span class="text-white">2026-01-10 14:32</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-400">质量评分</span>
+                        <span class="text-neon-green font-bold">优秀 (96分)</span>
+                    </div>
+                </div>
+
+                <button onclick="showRerecordModal()" class="w-full bg-white/10 hover:bg-white/20 text-white text-xs py-2 rounded-lg transition-colors">
+                    <i class="fa-solid fa-rotate mr-2"></i>重新录制
+                </button>
+            </section>
+
+            <!-- 设备管理 -->
+            <section class="glass-panel rounded-xl p-4 border border-white/5">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-link text-neon-blue"></i>
+                        <span class="text-sm text-white font-bold">设备管理</span>
+                    </div>
+                </div>
+
+                <!-- 已绑定设备 -->
+                <div class="bg-white/5 rounded-lg p-3 mb-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center">
+                                <i class="fa-solid fa-id-card text-neon-blue"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-white font-mono">AI-BADGE-001</div>
+                                <div class="text-[10px] text-neon-green">已连接</div>
+                            </div>
+                        </div>
+                        <button class="text-[10px] text-slate-400 hover:text-white transition-colors">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 扫码绑定 -->
+                <button class="w-full bg-neon-blue/20 hover:bg-neon-blue/30 text-neon-blue text-xs py-2 rounded-lg transition-colors">
+                    <i class="fa-solid fa-qrcode mr-2"></i>扫码绑定新设备
+                </button>
+            </section>
+
+            <!-- 其他设置 -->
+            <section class="glass-panel rounded-xl border border-white/5 overflow-hidden">
+                <div class="divide-y divide-white/5">
+                    <a href="#" class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-bell text-slate-400 w-5 text-center"></i>
+                            <span class="text-sm text-white">通知设置</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-shield-halved text-slate-400 w-5 text-center"></i>
+                            <span class="text-sm text-white">隐私设置</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-question text-slate-400 w-5 text-center"></i>
+                            <span class="text-sm text-white">帮助与反馈</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-info-circle text-slate-400 w-5 text-center"></i>
+                            <span class="text-sm text-white">关于我们</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 退出登录 -->
+            <button class="w-full glass-panel text-neon-red text-sm py-3 rounded-xl border border-neon-red/20 hover:bg-neon-red/10 transition-colors">
+                <i class="fa-solid fa-right-from-bracket mr-2"></i>退出登录
+            </button>
+
+        </main>
+    </div>
+
+    <!-- ========== 声纹录制弹窗 ========== -->
+    <div id="rerecord-modal" class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4">
+        <div class="glass-panel rounded-xl p-6 w-full max-w-sm border border-white/10">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-white">重新录制声纹</h3>
+                <button onclick="hideRerecordModal()" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-white/5 rounded-lg p-3">
+                    <p class="text-xs text-slate-400 mb-2">
+                        <i class="fa-solid fa-circle-info text-neon-blue mr-1"></i>
+                        请在安静环境下录制
+                    </p>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        请朗读以下标准文本（约30秒）：
+                    </p>
+                </div>
+
+                <div class="bg-slate-800/50 rounded-lg p-3 max-h-32 overflow-y-auto">
+                    <p class="text-xs text-white leading-relaxed">
+                        "您好，欢迎光临本店。我是执业药师，很高兴为您服务。请问您有什么需要帮助的吗？如果是感冒发热，我建议您多喝温水，注意休息。我们店里有很多优质药品，可以帮您快速恢复健康。感谢您的信任，祝您身体健康，生活愉快。"
+                    </p>
+                </div>
+
+                <!-- 录制按钮 -->
+                <div class="flex justify-center">
+                    <button id="record-btn" onclick="toggleRecording()" class="w-16 h-16 rounded-full bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center hover:scale-105 transition-transform shadow-neon-purple">
+                        <i class="fa-solid fa-microphone text-white text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- 录制状态 -->
+                <div id="recording-status" class="text-center hidden">
+                    <p class="text-xs text-neon-purple mb-2">正在录制...</p>
+                    <div class="flex items-center justify-center space-x-1">
+                        <div class="w-1 bg-neon-purple rounded waveform-bar"></div>
+                        <div class="w-1 bg-neon-purple rounded waveform-bar"></div>
+                        <div class="w-1 bg-neon-purple rounded waveform-bar"></div>
+                        <div class="w-1 bg-neon-purple rounded waveform-bar"></div>
+                        <div class="w-1 bg-neon-purple rounded waveform-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 底部导航栏 ========== -->
+    <nav class="fixed bottom-0 w-full glass-panel border-t border-white/10 pb-safe pt-2 z-50">
+        <div class="flex justify-around items-center h-14">
+            <button onclick="switchPage('home')" id="nav-home" class="flex flex-col items-center justify-center space-y-1 w-1/2">
+                <i class="fa-solid fa-house text-neon-blue text-lg"></i>
+                <span class="text-[10px] text-neon-blue font-medium">首页</span>
+            </button>
+            <button onclick="switchPage('profile')" id="nav-profile" class="flex flex-col items-center justify-center space-y-1 w-1/2">
+                <i class="fa-solid fa-user text-lg text-slate-500"></i>
+                <span class="text-[10px] text-slate-500">我的</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script>
+        // ==================== 页面切换 ====================
+        function switchPage(page) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // 显示目标页面
+            document.getElementById('page-' + page).classList.add('active');
+
+            // 更新导航栏状态
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.querySelector('i').classList.remove('text-neon-blue');
+                btn.querySelector('i').classList.add('text-slate-500');
+                btn.querySelector('span').classList.remove('text-neon-blue', 'font-medium');
+                btn.querySelector('span').classList.add('text-slate-500');
+            });
+
+            const activeNav = document.getElementById('nav-' + page);
+            activeNav.querySelector('i').classList.remove('text-slate-500');
+            activeNav.querySelector('i').classList.add('text-neon-blue');
+            activeNav.querySelector('span').classList.remove('text-slate-500');
+            activeNav.querySelector('span').classList.add('text-neon-blue', 'font-medium');
+
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        }
+
+        // ==================== 录音播放模拟 ====================
+        function togglePlay(btn) {
+            const icon = btn.querySelector('i');
+            const isPlaying = icon.classList.contains('fa-pause');
+
+            // 重置所有播放按钮
+            document.querySelectorAll('button').forEach(b => {
+                if (b !== btn && b.textContent.includes('播放') || b.textContent.includes('收听')) {
+                    const i = b.querySelector('i');
+                    if (i) {
+                        i.classList.remove('fa-pause');
+                        i.classList.add('fa-play');
+                        if (b.textContent.includes('暂停')) {
+                            b.innerHTML = '<i class="fa-solid fa-play mr-1.5 text-[8px]"></i> ' + (b.textContent.includes('学习') ? '收听学习' : '播放录音');
+                        }
+                    }
+                }
+            });
+
+            if (isPlaying) {
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+                const text = btn.textContent.includes('学习') ? '收听学习' : '播放录音';
+                btn.innerHTML = '<i class="fa-solid fa-play mr-1.5 text-[8px]"></i> ' + text;
+            } else {
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                const text = btn.textContent.includes('学习') ? '暂停学习' : '暂停播放';
+                btn.innerHTML = '<i class="fa-solid fa-pause mr-1.5 text-[8px]"></i> ' + text;
+
+                // 3秒后自动恢复（演示模式）
+                setTimeout(() => {
+                    icon.classList.remove('fa-pause');
+                    icon.classList.add('fa-play');
+                    const originalText = btn.textContent.includes('学习') ? '收听学习' : '播放录音';
+                    btn.innerHTML = '<i class="fa-solid fa-play mr-1.5 text-[8px]"></i> ' + originalText;
+                }, 3000);
+            }
+        }
+
+        // ==================== 声纹录制弹窗 ====================
+        function showRerecordModal() {
+            const modal = document.getElementById('rerecord-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function hideRerecordModal() {
+            const modal = document.getElementById('rerecord-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            // 重置录制状态
+            const status = document.getElementById('recording-status');
+            status.classList.add('hidden');
+        }
+
+        let isRecording = false;
+        function toggleRecording() {
+            const btn = document.getElementById('record-btn');
+            const status = document.getElementById('recording-status');
+
+            if (!isRecording) {
+                // 开始录制
+                isRecording = true;
+                status.classList.remove('hidden');
+                btn.classList.add('scale-110', 'ring-4', 'ring-neon-purple/50');
+
+                // 模拟30秒录制
+                setTimeout(() => {
+                    isRecording = false;
+                    status.classList.add('hidden');
+                    btn.classList.remove('scale-110', 'ring-4', 'ring-neon-purple/50');
+
+                    // 显示完成提示
+                    alert('录制完成！声纹质量检测：优秀 (96分)');
+                    hideRerecordModal();
+                }, 3000); // 演示模式：3秒后完成
+            }
+        }
+
+        // ==================== 初始化 ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('店员端已加载完成');
+        });
+    </script>
+</body>
+</html>
