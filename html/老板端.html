@@ -382,11 +382,11 @@
                             
                             <!-- Actions -->
                             <div class="flex items-center justify-between border-t border-white/5 pt-2">
-                                <button class="flex items-center space-x-1 text-[10px] text-neon-blue hover:text-white transition-colors">
-                                    <i class="fa-solid fa-play-circle"></i>
-                                    <span>试听</span>
+                                <button onclick="showGoldenDetails('gs-001')" class="flex items-center space-x-1 text-[10px] text-white bg-white/10 px-2 py-1 rounded hover:bg-neon-blue hover:text-black transition-colors">
+                                    <i class="fa-regular fa-file-lines"></i>
+                                    <span>详情</span>
                                 </button>
-                                <button class="flex items-center space-x-1 text-[10px] text-slate-400 hover:text-white transition-colors">
+                                <button onclick="showSharePreview('gs-001')" class="flex items-center space-x-1 text-[10px] text-slate-400 hover:text-white transition-colors">
                                     <i class="fa-solid fa-share-nodes"></i>
                                     <span>分享</span>
                                 </button>
@@ -417,11 +417,11 @@
                             
                             <!-- Actions -->
                             <div class="flex items-center justify-between border-t border-white/5 pt-2">
-                                <button class="flex items-center space-x-1 text-[10px] text-neon-blue hover:text-white transition-colors">
-                                    <i class="fa-solid fa-play-circle"></i>
-                                    <span>试听</span>
+                                <button onclick="showGoldenDetails('gs-002')" class="flex items-center space-x-1 text-[10px] text-white bg-white/10 px-2 py-1 rounded hover:bg-neon-blue hover:text-black transition-colors">
+                                    <i class="fa-regular fa-file-lines"></i>
+                                    <span>详情</span>
                                 </button>
-                                <button class="flex items-center space-x-1 text-[10px] text-slate-400 hover:text-white transition-colors">
+                                <button onclick="showSharePreview('gs-002')" class="flex items-center space-x-1 text-[10px] text-slate-400 hover:text-white transition-colors">
                                     <i class="fa-solid fa-share-nodes"></i>
                                     <span>分享</span>
                                 </button>
@@ -2207,6 +2207,85 @@
         }
         */
         // --- Main App Navigation ---
+        // --- Golden Sentences Logic ---
+        const goldenSentencesData = {
+            'gs-001': {
+                name: '李晓红',
+                avatar: '李',
+                store: '中心广场店',
+                tag: '关联销售',
+                tagClass: 'bg-neon-green/20 text-neon-green',
+                content: '"阿姨，您买这个感冒灵是给家里人吃吗？最近流感挺厉害的，<span class="text-neon-green font-bold bg-neon-green/10 px-1 rounded">家里人如果要预防的话，可以搭配点维生素C，增强抵抗力。</span>"',
+                cleanContent: '阿姨，您买这个感冒灵是给家里人吃吗？最近流感挺厉害的，家里人如果要预防的话，可以搭配点维生素C，增强抵抗力。',
+                score: 98,
+                analysis: '精准捕捉到顾客购买感冒药的场景，自然引出维C的关联推荐，理由充分（预防流感），语气亲切。'
+            },
+            'gs-002': {
+                name: '王强',
+                avatar: '王',
+                store: '滨江路分店',
+                tag: '会员关怀',
+                tagClass: 'bg-neon-purple/20 text-neon-purple',
+                content: '"您好，看您也是老顾客了，<span class="text-neon-purple font-bold bg-neon-purple/10 px-1 rounded">今天是我们的会员日，积分可以双倍抵现</span>，您结账的时候记得出示一下会员码，能省不少钱呢。"',
+                cleanContent: '您好，看您也是老顾客了，今天是我们的会员日，积分可以双倍抵现，您结账的时候记得出示一下会员码，能省不少钱呢。',
+                score: 95,
+                analysis: '主动识别老顾客身份并告知会员权益，有效提升了顾客忠诚度和客单价，体现了良好的服务意识。'
+            }
+        };
+
+        function showGoldenDetails(id) {
+            const data = goldenSentencesData[id];
+            if (!data) return;
+
+            document.getElementById('gd-avatar').innerText = data.avatar;
+            document.getElementById('gd-name').innerText = data.name;
+            document.getElementById('gd-store').innerText = data.store;
+            
+            const tagEl = document.getElementById('gd-tag');
+            tagEl.innerText = data.tag;
+            tagEl.className = `text-xs px-2 py-0.5 rounded font-medium ${tagEl.className.split(' ').filter(c => !c.startsWith('bg-') && !c.startsWith('text-')).join(' ')} ${data.tagClass}`;
+            
+            document.getElementById('gd-content').innerHTML = data.content;
+            document.getElementById('gd-analysis').innerText = data.analysis;
+            document.getElementById('gd-score').innerText = data.score;
+
+            document.getElementById('golden-details-view').classList.remove('translate-x-full');
+        }
+
+        function hideGoldenDetails() {
+            document.getElementById('golden-details-view').classList.add('translate-x-full');
+        }
+
+        function showSharePreview(id) {
+            const data = goldenSentencesData[id];
+            if (!data) return;
+
+            document.getElementById('poster-avatar').innerText = data.avatar;
+            document.getElementById('poster-name').innerText = data.name;
+            document.getElementById('poster-store').innerText = data.store;
+            document.getElementById('poster-content').innerText = data.cleanContent;
+
+            const modal = document.getElementById('share-preview-view');
+            modal.classList.remove('hidden');
+            
+            // Animation trigger
+            setTimeout(() => {
+                const card = document.getElementById('poster-card');
+                card.classList.remove('scale-95', 'opacity-0');
+                card.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function hideSharePreview() {
+            const card = document.getElementById('poster-card');
+            card.classList.remove('scale-100', 'opacity-100');
+            card.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                document.getElementById('share-preview-view').classList.add('hidden');
+            }, 300);
+        }
+
         function switchMainTab(tab) {
             const dashboardView = document.getElementById('dashboard-view');
             const profileView = document.getElementById('profile-view');
@@ -2243,5 +2322,133 @@
             }
         }
     </script>
+    <!-- Golden Sentence Details View -->
+    <section id="golden-details-view" class="fixed inset-0 z-[70] bg-[#0B0F19] transition-transform duration-300 translate-x-full flex flex-col">
+        <!-- Header -->
+        <header class="h-14 border-b border-white/10 flex items-center justify-between px-4 bg-[#0B0F19]/95 backdrop-blur z-10">
+            <button onclick="hideGoldenDetails()" class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h1 class="text-base font-bold text-white">金句详情</h1>
+            <div class="w-8"></div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-4">
+            <!-- Basic Info -->
+            <div class="glass-panel p-4 rounded-xl border border-white/5 space-y-3">
+                 <div class="flex items-center justify-between">
+                     <div class="flex items-center space-x-3">
+                        <div id="gd-avatar" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-sm text-white font-bold">
+                            李
+                        </div>
+                        <div>
+                            <div id="gd-name" class="text-sm text-white font-bold">李晓红</div>
+                            <div id="gd-store" class="text-xs text-slate-400">中心广场店</div>
+                        </div>
+                    </div>
+                    <div id="gd-tag" class="text-xs px-2 py-0.5 rounded bg-neon-green/20 text-neon-green font-medium">
+                        关联销售
+                    </div>
+                 </div>
+                 <div class="border-t border-white/5 pt-3">
+                     <div class="text-xs text-slate-400 mb-2">金句内容</div>
+                     <div id="gd-content" class="text-sm text-white leading-relaxed font-medium">
+                         <!-- Content injected here -->
+                     </div>
+                 </div>
+            </div>
+
+            <!-- AI Analysis -->
+            <div class="glass-panel p-4 rounded-xl border border-white/5 space-y-3 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-2 opacity-10">
+                    <i class="fa-solid fa-robot text-6xl text-neon-blue"></i>
+                </div>
+                <div class="flex items-center space-x-2 text-neon-blue mb-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span class="text-sm font-bold">AI 亮点点评</span>
+                </div>
+                <div id="gd-analysis" class="text-sm text-slate-300 leading-relaxed relative z-10">
+                    <!-- Analysis injected here -->
+                </div>
+                
+                <!-- Score -->
+                <div class="flex items-center justify-between mt-4 bg-white/5 p-3 rounded-lg border border-white/5">
+                    <span class="text-xs text-slate-400">话术得分</span>
+                    <div class="flex items-baseline space-x-1">
+                        <span id="gd-score" class="text-2xl font-bold text-neon-green font-mono">98</span>
+                        <span class="text-xs text-slate-500">/ 100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Poster Preview Modal -->
+    <section id="share-preview-view" class="fixed inset-0 z-[80] bg-black/90 backdrop-blur-sm transition-opacity duration-300 hidden flex flex-col items-center justify-center p-6">
+        <!-- Close Area -->
+        <div onclick="hideSharePreview()" class="absolute inset-0 z-0"></div>
+
+        <!-- Poster Container -->
+        <div class="relative z-10 w-full max-w-sm bg-gradient-to-br from-[#1a2235] to-[#0B0F19] rounded-2xl overflow-hidden shadow-2xl border border-white/10 transform transition-all scale-95 opacity-0 animate-fade-in-up" id="poster-card">
+            
+            <!-- Poster Header -->
+            <div class="bg-neon-blue/10 p-4 flex items-center justify-between border-b border-white/5">
+                <div class="flex items-center space-x-2">
+                    <div class="w-6 h-6 rounded bg-neon-blue flex items-center justify-center text-black text-xs font-bold">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <span class="text-xs font-bold text-white tracking-widest uppercase">药店智能决策</span>
+                </div>
+                <span class="text-[10px] text-neon-blue border border-neon-blue/30 px-2 py-0.5 rounded-full">每日金句</span>
+            </div>
+
+            <!-- Poster Body -->
+            <div class="p-6 relative">
+                <!-- Decorative Quote -->
+                <i class="fa-solid fa-quote-left absolute top-4 left-4 text-4xl text-white/5"></i>
+                
+                <div class="relative z-10 mt-2 mb-6">
+                    <div id="poster-content" class="text-lg text-white font-medium leading-relaxed font-serif italic">
+                        <!-- Content -->
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                    <div class="flex items-center space-x-3">
+                         <div id="poster-avatar" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-sm text-white font-bold ring-2 ring-white/10">
+                            李
+                        </div>
+                        <div>
+                            <div id="poster-name" class="text-sm text-white font-bold">李晓红</div>
+                            <div id="poster-store" class="text-[10px] text-slate-400">中心广场店</div>
+                        </div>
+                    </div>
+                    <!-- Fake QR Code -->
+                    <div class="w-12 h-12 bg-white p-1 rounded">
+                         <div class="w-full h-full bg-black flex items-center justify-center">
+                             <i class="fa-solid fa-qrcode text-white text-lg"></i>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Poster Footer -->
+            <div class="bg-[#05080f] p-3 text-center text-[10px] text-slate-600">
+                Generated by AI Smart Badge
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="relative z-10 mt-6 flex space-x-4">
+            <button onclick="hideSharePreview()" class="px-6 py-2 rounded-full bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-colors">
+                取消
+            </button>
+            <button class="px-6 py-2 rounded-full bg-neon-blue text-black text-sm font-bold shadow-[0_0_15px_rgba(0,240,255,0.4)] hover:bg-white transition-colors flex items-center space-x-2">
+                <i class="fa-solid fa-download"></i>
+                <span>保存图片</span>
+            </button>
+        </div>
+    </section>
 </body>
 </html>
