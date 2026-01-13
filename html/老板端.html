@@ -104,6 +104,9 @@
                 <button onclick="switchHomeTab('sentiment')" id="tab-home-sentiment" class="flex-1 py-3 text-center text-xs font-bold text-slate-400 hover:text-white border-b-2 border-transparent transition-all">
                     舆情洞察
                 </button>
+                <button onclick="switchHomeTab('goldensentences')" id="tab-home-goldensentences" class="flex-1 py-3 text-center text-xs font-bold text-slate-400 hover:text-white border-b-2 border-transparent transition-all">
+                    昨日金句
+                </button>
             </div>
 
             <!-- Tab Content Container -->
@@ -113,7 +116,6 @@
                 <div id="panel-home-hotwords" class="animate-fade-in">
                     <div class="flex justify-between items-center mb-3">
                         <span class="text-[10px] text-slate-500">顾客提及 Top 5</span>
-                        <a href="#" class="text-[10px] text-neon-blue">查看更多 ></a>
                     </div>
                     <div class="space-y-3">
                         <!-- Item 1 -->
@@ -132,7 +134,6 @@
                             </div>
                             <div class="text-right">
                                 <div class="text-xs text-white font-bold">324次</div>
-                                <div class="text-[10px] text-neon-red">↑ 12%</div>
                             </div>
                         </div>
                         <!-- Item 2 -->
@@ -151,7 +152,6 @@
                             </div>
                             <div class="text-right">
                                 <div class="text-xs text-white font-bold">210次</div>
-                                <div class="text-[10px] text-slate-500">- 2%</div>
                             </div>
                         </div>
                         <!-- Item 3 -->
@@ -170,7 +170,6 @@
                             </div>
                             <div class="text-right">
                                 <div class="text-xs text-white font-bold">185次</div>
-                                <div class="text-[10px] text-neon-red">↑ 5%</div>
                             </div>
                         </div>
                         <!-- Item 4 -->
@@ -189,7 +188,6 @@
                             </div>
                             <div class="text-right">
                                 <div class="text-xs text-white font-bold">150次</div>
-                                <div class="text-[10px] text-slate-500">-</div>
                             </div>
                         </div>
                         <!-- Item 5 -->
@@ -208,7 +206,6 @@
                             </div>
                             <div class="text-right">
                                 <div class="text-xs text-white font-bold">98次</div>
-                                <div class="text-[10px] text-neon-green">↓ 8%</div>
                             </div>
                         </div>
                     </div>
@@ -357,9 +354,137 @@
                          <a href="#" class="text-[10px] text-slate-500 hover:text-white transition-colors">查看全部 12 条记录 ></a>
                     </div>
                 </div>
+
+                <!-- Tab 4: Golden Sentences -->
+                <div id="panel-home-goldensentences" class="hidden animate-fade-in">
+                    <div class="space-y-3">
+                        <!-- Item 1 -->
+                        <div class="glass-panel rounded-xl p-3 border border-white/5 relative overflow-hidden group">
+                            <!-- Tag -->
+                            <div class="absolute top-0 right-0 bg-neon-green/20 text-neon-green text-[10px] px-2 py-0.5 rounded-bl-lg font-medium">
+                                关联销售
+                            </div>
+                            
+                            <!-- Header -->
+                            <div class="flex items-center space-x-2 mb-2">
+                                <div class="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-[10px] text-white font-bold">
+                                    李
+                                </div>
+                                <div class="text-[10px] text-slate-400">
+                                    李晓红 · 中心广场店
+                                </div>
+                            </div>
+                            
+                            <!-- Content -->
+                            <div class="text-xs text-white leading-relaxed mb-3">
+                                "阿姨，您买这个感冒灵是给家里人吃吗？最近流感挺厉害的，<span class="text-neon-green font-bold bg-neon-green/10 px-1 rounded">家里人如果要预防的话，可以搭配点维生素C，增强抵抗力。</span>"
+                            </div>
+                            
+                            <!-- Actions -->
+                            <div class="flex items-center justify-between border-t border-white/5 pt-2">
+                                <button class="flex items-center space-x-1 text-[10px] text-neon-blue hover:text-white transition-colors">
+                                    <i class="fa-solid fa-play-circle"></i>
+                                    <span>试听</span>
+                                </button>
+                                <button class="flex items-center space-x-1 text-[10px] text-slate-400 hover:text-white transition-colors">
+                                    <i class="fa-solid fa-share-nodes"></i>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="glass-panel rounded-xl p-3 border border-white/5 relative overflow-hidden group">
+                            <!-- Tag -->
+                            <div class="absolute top-0 right-0 bg-neon-purple/20 text-neon-purple text-[10px] px-2 py-0.5 rounded-bl-lg font-medium">
+                                会员关怀
+                            </div>
+                            
+                            <!-- Header -->
+                            <div class="flex items-center space-x-2 mb-2">
+                                <div class="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-[10px] text-white font-bold">
+                                    王
+                                </div>
+                                <div class="text-[10px] text-slate-400">
+                                    王强 · 滨江路分店
+                                </div>
+                            </div>
+                            
+                            <!-- Content -->
+                            <div class="text-xs text-white leading-relaxed mb-3">
+                                "您好，看您也是老顾客了，<span class="text-neon-purple font-bold bg-neon-purple/10 px-1 rounded">今天是我们的会员日，积分可以双倍抵现</span>，您结账的时候记得出示一下会员码，能省不少钱呢。"
+                            </div>
+                            
+                            <!-- Actions -->
+                            <div class="flex items-center justify-between border-t border-white/5 pt-2">
+                                <button class="flex items-center space-x-1 text-[10px] text-neon-blue hover:text-white transition-colors">
+                                    <i class="fa-solid fa-play-circle"></i>
+                                    <span>试听</span>
+                                </button>
+                                <button class="flex items-center space-x-1 text-[10px] text-slate-400 hover:text-white transition-colors">
+                                    <i class="fa-solid fa-share-nodes"></i>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="text-center mt-3">
+                         <a href="#" class="text-[10px] text-slate-500 hover:text-white transition-colors">查看全部 8 条金句 ></a>
+                    </div>
+                </div>
             </div>
         </section>
 
+    </main>
+
+    <!-- Profile View (Hidden by default) -->
+    <main id="profile-view" class="pt-6 px-4 space-y-6 hidden h-full">
+        <!-- User Info Header -->
+        <div class="glass-panel p-6 rounded-2xl flex items-center space-x-4 border border-white/10 bg-gradient-to-r from-slate-800/50 to-slate-900/50">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-neon-blue to-purple-600 p-0.5 shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=0B0F19&color=fff" class="w-full h-full rounded-full object-cover border-2 border-[#0B0F19]">
+            </div>
+            <div>
+                <h2 class="text-xl font-bold text-white tracking-wide">张总</h2>
+                <div class="flex items-center mt-1">
+                    <span class="text-xs text-black bg-neon-blue px-2 py-0.5 rounded font-bold mr-2">超级管理员</span>
+                    <span class="text-xs text-slate-400">大参林医药</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu List -->
+        <div class="space-y-4">
+            <div class="glass-panel rounded-xl overflow-hidden border border-white/10 divide-y divide-white/5">
+                <button class="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors group">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-neon-blue/10 flex items-center justify-center text-neon-blue group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <span class="text-sm text-slate-200">切换租户</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                         <span class="text-xs text-slate-500">当前: 大参林医药</span>
+                         <i class="fa-solid fa-chevron-right text-xs text-slate-600"></i>
+                    </div>
+                </button>
+            </div>
+
+            <div class="glass-panel rounded-xl overflow-hidden border border-white/10 mt-6">
+                <button class="w-full flex items-center justify-between p-4 hover:bg-red-500/10 transition-colors group text-slate-300 hover:text-red-500">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </div>
+                        <span class="text-sm font-medium">退出登录</span>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="text-center text-xs text-slate-600 mt-8">
+                药店智能决策系统 v1.2.0
+            </div>
+        </div>
     </main>
 
     <!-- Metric Details Overlay (Hidden by default) -->
@@ -397,6 +522,11 @@
                 <div class="chart-container">
                     <canvas id="trafficChart"></canvas>
                 </div>
+            </section>
+
+            <!-- 3. Metric Info Card (New) -->
+            <section id="metric-info-container" class="hidden animate-fade-in-up">
+                <!-- Injected via JS -->
             </section>
 
             <!-- Drill Down List -->
@@ -889,11 +1019,8 @@
                 </div>
             </section>
 
-            <!-- 2. Analysis Tags -->
-            <section class="flex space-x-2">
-                <span class="px-2 py-1 rounded bg-neon-purple/10 text-neon-purple text-xs border border-neon-purple/20">关联失败</span>
-                <span class="px-2 py-1 rounded bg-slate-700 text-slate-300 text-xs border border-white/10">咨询场景</span>
-            </section>
+            <!-- 2. Analysis Tags (Removed) -->
+
 
             <!-- 3. Transcript -->
             <section class="space-y-4">
@@ -935,10 +1062,8 @@
                     </div>
                 </div>
                 
-                 <!-- Compliance Alert -->
-                 <div class="my-4 mx-8 py-2 border-t border-b border-neon-purple/30 text-center">
-                    <p class="text-xs text-neon-purple"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 检测到未关联推荐维C</p>
-                 </div>
+                 <!-- Compliance Alert (Removed) -->
+
 
                 <!-- Turn 5: Clerk -->
                 <div class="flex space-x-3 flex-row-reverse space-x-reverse">
@@ -989,53 +1114,85 @@
     <!-- Bottom Navigation -->
     <nav class="fixed bottom-0 w-full glass-panel border-t border-white/10 pb-safe pt-2 z-50">
         <div class="flex justify-around items-center h-14">
-            <a href="#" class="flex flex-col items-center justify-center space-y-1 w-1/2">
-                <i class="fa-solid fa-chart-pie text-neon-blue text-lg shadow-neon-blue"></i>
-                <span class="text-[10px] text-neon-blue font-medium">经营概览</span>
-            </a>
-            <a href="#" class="flex flex-col items-center justify-center space-y-1 w-1/2 text-slate-500 hover:text-white transition">
-                <i class="fa-solid fa-user-gear text-lg"></i>
+            <button onclick="switchMainTab('dashboard')" id="nav-item-dashboard" class="flex flex-col items-center justify-center space-y-1 w-1/2 text-neon-blue group">
+                <i class="fa-solid fa-house text-lg text-neon-blue shadow-neon-blue mb-1"></i>
+                <span class="text-[10px] text-neon-blue font-medium">首页</span>
+            </button>
+            <button onclick="switchMainTab('profile')" id="nav-item-profile" class="flex flex-col items-center justify-center space-y-1 w-1/2 text-slate-500 hover:text-white transition group">
+                <i class="fa-solid fa-user-gear text-lg mb-1"></i>
                 <span class="text-[10px]">我的</span>
-            </a>
+            </button>
         </div>
     </nav>
 
     <!-- Add Metric Modal -->
     <div id="add-metric-modal" class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="glass-panel w-full max-w-sm rounded-xl border border-white/10 flex flex-col max-h-[80vh]">
+        <div class="glass-panel w-full max-w-md rounded-xl border border-white/10 flex flex-col max-h-[90vh]">
             <div class="p-4 border-b border-white/10 flex justify-between items-center">
-                <h3 class="text-white font-bold">添加监控指标</h3>
+                <h3 class="text-white font-bold">新增监控指标</h3>
                 <button onclick="closeAddMetricModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="p-4 overflow-y-auto space-y-3">
-                <!-- Mock Available Metrics -->
-                <div onclick="addMetricToHome('会员卡办理率')" class="p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 cursor-pointer flex justify-between items-center group">
-                    <div>
-                        <div class="text-sm text-white font-medium">会员卡办理率</div>
-                        <div class="text-[10px] text-slate-400">当前: 32% (↓ 1.2%)</div>
+            
+            <div class="p-5 overflow-y-auto">
+                <!-- Step 1: Input -->
+                <div id="add-metric-step-1">
+                    <div class="mb-4">
+                        <label class="block text-slate-400 text-sm mb-2">请输入监控需求</label>
+                        <textarea id="metric-input-text" class="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-neon-blue h-32 resize-none" placeholder="例如：我想抓一下谁卖感冒药的时候没有推荐维C"></textarea>
+                        
+                        <!-- Quick Suggestions -->
+                        <div class="mt-3">
+                            <div class="text-xs text-slate-500 mb-2">猜你想查：</div>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="fillMetricInput('查一下卖感冒药有没有关联维C')" class="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-300 hover:text-white hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-colors">
+                                    💊 感冒药关联维C
+                                </button>
+                                <button onclick="fillMetricInput('监控是否向新客推荐会员卡')" class="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-300 hover:text-white hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-colors">
+                                    💳 会员卡办理
+                                </button>
+                                <button onclick="fillMetricInput('检查是否主动介绍本月新品')" class="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-300 hover:text-white hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-colors">
+                                    🔥 新品推广
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <i class="fa-solid fa-plus text-neon-blue opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    <div class="flex justify-between items-center">
+                        <button class="text-neon-blue hover:text-white flex items-center gap-2 px-3 py-2 rounded hover:bg-white/5 transition-colors">
+                            <i class="fa-solid fa-microphone"></i> <span class="text-sm">按住说话</span>
+                        </button>
+                        <button onclick="processAIInput()" class="bg-neon-blue text-black font-bold py-2 px-6 rounded-lg hover:bg-white transition-colors shadow-lg shadow-neon-blue/20">
+                            下一步
+                        </button>
+                    </div>
                 </div>
-                <div onclick="addMetricToHome('关联销售成功率')" class="p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 cursor-pointer flex justify-between items-center group">
-                    <div>
-                        <div class="text-sm text-white font-medium">关联销售成功率</div>
-                        <div class="text-[10px] text-slate-400">当前: 15% (↑ 0.5%)</div>
-                    </div>
-                    <i class="fa-solid fa-plus text-neon-blue opacity-0 group-hover:opacity-100 transition-opacity"></i>
+
+                <!-- Loading State -->
+                <div id="add-metric-loading" class="hidden py-10 flex flex-col items-center justify-center text-center">
+                    <div class="w-12 h-12 border-4 border-neon-blue border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p class="text-white font-medium">AI正在分析您的需求...</p>
+                    <p class="text-slate-400 text-xs mt-2">生成指标定义与行动方案</p>
                 </div>
-                <div onclick="addMetricToHome('平均客单价')" class="p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 cursor-pointer flex justify-between items-center group">
+
+                <!-- Step 2: Edit & Confirm -->
+                <div id="add-metric-step-2" class="hidden space-y-4">
                     <div>
-                        <div class="text-sm text-white font-medium">平均客单价</div>
-                        <div class="text-[10px] text-slate-400">当前: ¥45.2 (↑ ¥2.1)</div>
+                        <label class="block text-slate-400 text-xs mb-1">指标名称 <span class="text-red-500">*</span></label>
+                        <input id="metric-name" type="text" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white text-sm focus:border-neon-blue outline-none transition-colors" placeholder="AI自动生成...">
                     </div>
-                    <i class="fa-solid fa-plus text-neon-blue opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <div onclick="addMetricToHome('新品推广率')" class="p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 cursor-pointer flex justify-between items-center group">
                     <div>
-                        <div class="text-sm text-white font-medium">新品推广率</div>
-                        <div class="text-[10px] text-slate-400">当前: 8% (↓ 0.3%)</div>
+                        <label class="block text-slate-400 text-xs mb-1">指标介绍</label>
+                        <textarea id="metric-desc" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white text-sm focus:border-neon-blue outline-none transition-colors h-20 resize-none"></textarea>
                     </div>
-                    <i class="fa-solid fa-plus text-neon-blue opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    <div>
+                        <label class="block text-slate-400 text-xs mb-1">行动方案 (员工端任务)</label>
+                        <textarea id="metric-action" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white text-sm focus:border-neon-blue outline-none transition-colors h-24 resize-none"></textarea>
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2 border-t border-white/10 mt-4">
+                         <button onclick="resetAddMetric()" class="text-slate-400 hover:text-white text-sm px-4 py-2">上一步</button>
+                         <button onclick="saveNewAIMetric()" class="bg-neon-blue text-black font-bold py-2 px-6 rounded-lg hover:bg-white transition-colors shadow-lg shadow-neon-blue/20">
+                            保存指标
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1052,7 +1209,7 @@
                 <!-- Rendered by JS -->
             </div>
             <div class="p-4 border-t border-white/10 text-center text-xs text-slate-500">
-                拖拽排序功能暂未开放，请使用 ↑ ↓ 按钮
+                按住左侧 <i class="fa-solid fa-grip-vertical mx-1"></i> 图标拖拽排序
             </div>
         </div>
     </div>
@@ -1081,7 +1238,9 @@
                 changeRel: '-2.3%', 
                 isUp: false, 
                 color: 'neon-purple', 
-                canDelete: true 
+                canDelete: true,
+                desc: '监控店员接待过程中是否包含：欢迎语、症状问询、用药交代、道别语等标准SOP环节。',
+                action: '请确保每位顾客接待流程完整，重点关注“用药交代”环节，避免顾客投诉。'
             }
         ];
 
@@ -1145,6 +1304,7 @@
         }
 
         function openAddMetricModal() {
+            resetAddMetric();
             document.getElementById('add-metric-modal').classList.remove('hidden');
         }
 
@@ -1152,29 +1312,106 @@
             document.getElementById('add-metric-modal').classList.add('hidden');
         }
 
-        function addMetricToHome(metricName) {
-            // Check if already exists
-            if (metricsData.find(m => m.title === metricName)) {
+        function resetAddMetric() {
+            document.getElementById('add-metric-step-1').classList.remove('hidden');
+            document.getElementById('add-metric-loading').classList.add('hidden');
+            document.getElementById('add-metric-step-2').classList.add('hidden');
+            document.getElementById('metric-input-text').value = '';
+        }
+
+        function fillMetricInput(text) {
+            document.getElementById('metric-input-text').value = text;
+        }
+
+        function processAIInput() {
+            const input = document.getElementById('metric-input-text').value;
+            // Allow empty input for demo, or require it
+            if (!input.trim()) {
+                // For demo convenience, if empty, use a default string
+                // or alert('请输入监控需求');
+            }
+
+            // Show Loading
+            document.getElementById('add-metric-step-1').classList.add('hidden');
+            document.getElementById('add-metric-loading').classList.remove('hidden');
+
+            // Simulate AI Processing Delay
+            setTimeout(() => {
+                document.getElementById('add-metric-loading').classList.add('hidden');
+                document.getElementById('add-metric-step-2').classList.remove('hidden');
+
+                // Mock AI Generation Logic
+                let name = "智能监控指标";
+                let desc = "AI自动生成的监控规则";
+                let action = "请店员注意执行";
+
+                if (input && (input.includes("维C") || input.includes("感冒"))) {
+                    name = "感冒药关联维C";
+                    desc = "监控店员在销售感冒药（如感冒灵、连花清瘟）时，是否主动关联推荐维生素C。";
+                    action = "当顾客购买感冒药时，请主动询问：'家里有备维C吗？搭配吃增强抵抗力好得快。'";
+                } else if (input && input.includes("会员")) {
+                    name = "会员卡办理率";
+                    desc = "监控店员是否向新客主动推荐办理会员卡。";
+                    action = "结账前请询问：'您有我们的会员卡吗？现在免费办卡可以积分抵现。'";
+                } else if (input && input.includes("新品")) {
+                    name = "新品推广率";
+                    desc = "监控店员是否向顾客介绍了本月主推的新品活动。";
+                    action = "在顾客进店或结账时，顺带介绍：'我们现在有新品体验活动，您要不要了解一下？'";
+                } else if (input) {
+                    name = "自定义监控任务";
+                    desc = "基于需求：" + input + " 生成的监控规则。";
+                    action = "根据要求：" + input + " 执行服务流程。";
+                } else {
+                    // Default fallback if empty input
+                     name = "新品推广率";
+                     desc = "监控本月主推新品的介绍情况";
+                     action = "向进店顾客主动介绍本月新品活动。";
+                }
+
+                document.getElementById('metric-name').value = name;
+                document.getElementById('metric-desc').value = desc;
+                document.getElementById('metric-action').value = action;
+
+            }, 1500);
+        }
+
+        function saveNewAIMetric() {
+            const title = document.getElementById('metric-name').value;
+            
+            const desc = document.getElementById('metric-desc').value;
+            const action = document.getElementById('metric-action').value;
+            
+            if (!title) {
+                alert('请输入指标名称');
+                return;
+            }
+
+            if (metricsData.find(m => m.title === title)) {
                 alert('该指标已存在');
                 return;
             }
 
-            const mockData = availableMetricsPool[metricName];
-            if (mockData) {
-                metricsData.push({
-                    id: 'm' + Date.now(),
-                    title: metricName,
-                    ...mockData
-                });
-                renderMetrics();
-                closeAddMetricModal();
-                
-                // Scroll to end
-                setTimeout(() => {
-                    const container = document.getElementById('metrics-scroll-container');
-                    container.scrollLeft = container.scrollWidth;
-                }, 100);
-            }
+            metricsData.push({
+                id: 'm' + Date.now(),
+                title: title,
+                subtitle: '今日新增',
+                value: '0%', 
+                changeAbs: '-', 
+                changeRel: '-', 
+                isUp: true, 
+                color: 'neon-blue', 
+                canDelete: true,
+                desc: desc,
+                action: action
+            });
+            
+            renderMetrics();
+            closeAddMetricModal();
+            
+            setTimeout(() => {
+                const container = document.getElementById('metrics-scroll-container');
+                container.scrollLeft = container.scrollWidth;
+            }, 100);
         }
 
         function openManageMetricsMode() {
@@ -1186,35 +1423,82 @@
             document.getElementById('manage-metrics-modal').classList.add('hidden');
         }
 
+        // --- Drag & Drop Handlers ---
+        let dragSrcEl = null;
+
+        function handleDragStart(e) {
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+            this.classList.add('opacity-50', 'border-neon-blue');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('bg-white/10');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('bg-white/10');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            
+            if (dragSrcEl !== this) {
+                const oldIndex = parseInt(dragSrcEl.getAttribute('data-index'));
+                const newIndex = parseInt(this.getAttribute('data-index'));
+                
+                // Move in array
+                const item = metricsData.splice(oldIndex, 1)[0];
+                metricsData.splice(newIndex, 0, item);
+                
+                renderMetrics();
+                renderManageList();
+            }
+            return false;
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('opacity-50', 'border-neon-blue', 'bg-white/10');
+             document.querySelectorAll('.draggable-item').forEach(item => {
+                item.classList.remove('bg-white/10');
+            });
+        }
+
         function renderManageList() {
             const container = document.getElementById('manage-list-container');
             container.innerHTML = '';
             
             metricsData.forEach((m, index) => {
-                const isFirst = index === 0;
-                const isLast = index === metricsData.length - 1;
-                
                 const deleteBtn = m.canDelete 
                     ? `<button onclick="deleteMetric('${index}')" class="w-8 h-8 rounded bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-colors flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>`
                     : `<div class="w-8 h-8 flex items-center justify-center text-slate-600 cursor-not-allowed"><i class="fa-solid fa-lock text-xs"></i></div>`;
 
-                const editBtn = `<button onclick="editMetric('${index}')" class="w-8 h-8 rounded bg-white/5 text-slate-400 hover:bg-neon-blue/20 hover:text-neon-blue transition-colors flex items-center justify-center mr-2"><i class="fa-solid fa-pen text-xs"></i></button>`;
+                const editBtn = m.title !== '客流量' 
+                    ? `<button onclick="editMetric('${index}')" class="w-8 h-8 rounded bg-white/5 text-slate-400 hover:bg-neon-blue/20 hover:text-neon-blue transition-colors flex items-center justify-center mr-2"><i class="fa-solid fa-pen text-xs"></i></button>`
+                    : `<div class="w-8 h-8 flex items-center justify-center text-slate-600 cursor-not-allowed mr-2"><i class="fa-solid fa-lock text-xs"></i></div>`;
 
-                const upBtn = !isFirst
-                    ? `<button onclick="moveMetric(${index}, -1)" class="w-6 h-6 rounded hover:bg-white/10 text-slate-400 hover:text-white"><i class="fa-solid fa-chevron-up text-[10px]"></i></button>`
-                    : `<div class="w-6 h-6"></div>`;
-                
-                const downBtn = !isLast
-                    ? `<button onclick="moveMetric(${index}, 1)" class="w-6 h-6 rounded hover:bg-white/10 text-slate-400 hover:text-white"><i class="fa-solid fa-chevron-down text-[10px]"></i></button>`
-                    : `<div class="w-6 h-6"></div>`;
+                // Drag Handle
+                const dragHandle = `
+                    <div class="cursor-move text-slate-500 hover:text-white px-2 py-3 mr-1">
+                        <i class="fa-solid fa-grip-vertical"></i>
+                    </div>
+                `;
 
                 const html = `
-                    <div class="flex items-center justify-between p-3 glass-panel border border-white/5 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex flex-col justify-center">
-                                ${upBtn}
-                                ${downBtn}
-                            </div>
+                    <div draggable="true" data-index="${index}" class="draggable-item flex items-center justify-between p-3 glass-panel border border-white/5 rounded-lg transition-all">
+                        <div class="flex items-center space-x-2">
+                            ${dragHandle}
                             <div>
                                 <div class="text-sm text-white font-medium">${m.title}</div>
                                 <div class="text-[10px] text-slate-500">${m.subtitle}</div>
@@ -1226,7 +1510,19 @@
                         </div>
                     </div>
                 `;
-                container.insertAdjacentHTML('beforeend', html);
+                
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html.trim();
+                const el = tempDiv.firstChild;
+                
+                el.addEventListener('dragstart', handleDragStart);
+                el.addEventListener('dragenter', handleDragEnter);
+                el.addEventListener('dragover', handleDragOver);
+                el.addEventListener('dragleave', handleDragLeave);
+                el.addEventListener('drop', handleDrop);
+                el.addEventListener('dragend', handleDragEnd);
+                
+                container.appendChild(el);
             });
         }
 
@@ -1440,20 +1736,22 @@
             const btnHotwords = document.getElementById('tab-home-hotwords');
             const btnProducts = document.getElementById('tab-home-products');
             const btnSentiment = document.getElementById('tab-home-sentiment');
+            const btnGolden = document.getElementById('tab-home-goldensentences');
             
             const panelHotwords = document.getElementById('panel-home-hotwords');
             const panelProducts = document.getElementById('panel-home-products');
             const panelSentiment = document.getElementById('panel-home-sentiment');
+            const panelGolden = document.getElementById('panel-home-goldensentences');
 
             const activeBtnClasses = ['text-neon-blue', 'border-neon-blue', 'bg-white/5'];
             const inactiveBtnClasses = ['text-slate-400', 'hover:text-white', 'border-transparent'];
 
             // Reset all
-            [btnHotwords, btnProducts, btnSentiment].forEach(btn => {
+            [btnHotwords, btnProducts, btnSentiment, btnGolden].forEach(btn => {
                 btn.classList.remove(...activeBtnClasses);
                 btn.classList.add(...inactiveBtnClasses);
             });
-            [panelHotwords, panelProducts, panelSentiment].forEach(panel => {
+            [panelHotwords, panelProducts, panelSentiment, panelGolden].forEach(panel => {
                 panel.classList.add('hidden');
             });
 
@@ -1470,6 +1768,10 @@
                 btnSentiment.classList.add(...activeBtnClasses);
                 btnSentiment.classList.remove(...inactiveBtnClasses);
                 panelSentiment.classList.remove('hidden');
+            } else if (tab === 'goldensentences') {
+                btnGolden.classList.add(...activeBtnClasses);
+                btnGolden.classList.remove(...inactiveBtnClasses);
+                panelGolden.classList.remove('hidden');
             }
         }
 
@@ -1546,6 +1848,58 @@
             
             changeEl.className = `text-sm flex items-center justify-center ${colorClass}`;
             changeEl.innerHTML = `<i class="fa-solid ${iconClass} mr-2"></i> ${changeAbs} <span class="mx-2 text-slate-600">|</span> ${changeRel} <span class="ml-1 text-slate-500">较前日</span>`;
+            
+            // --- Info Card Logic ---
+            const infoContainer = document.getElementById('metric-info-container');
+            // Reset content
+            infoContainer.innerHTML = '';
+            infoContainer.classList.add('hidden');
+
+            const currentMetric = metricsData.find(m => m.title === title);
+
+            if (title === '客流量') {
+                infoContainer.classList.remove('hidden');
+                infoContainer.innerHTML = `
+                    <div class="glass-panel p-3 rounded-lg border border-yellow-500/20 bg-yellow-500/5 flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-info text-yellow-500 mt-0.5 text-sm"></i>
+                        <div>
+                            <div class="text-xs text-slate-300 leading-relaxed">
+                                <span class="text-yellow-500 font-bold mr-1">数据说明:</span>
+                                本指标通过语音数据获取，无法保证完全准确。
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (currentMetric && (currentMetric.desc || currentMetric.action)) {
+                infoContainer.classList.remove('hidden');
+                let html = '<div class="glass-panel p-4 rounded-lg border border-white/10 space-y-3">';
+                
+                if (currentMetric.desc) {
+                    html += `
+                        <div>
+                            <div class="text-xs text-slate-400 mb-1">指标说明</div>
+                            <div class="text-sm text-white leading-relaxed">${currentMetric.desc}</div>
+                        </div>
+                    `;
+                }
+                
+                if (currentMetric.action) {
+                     // Add separator if both exist
+                    if (currentMetric.desc) html += `<div class="border-t border-white/5"></div>`;
+                    
+                    html += `
+                        <div>
+                            <div class="text-xs text-neon-blue mb-1 font-bold">行动方案 (SOP)</div>
+                            <div class="text-sm text-slate-300 leading-relaxed bg-white/5 p-2 rounded border-l-2 border-neon-blue">
+                                ${currentMetric.action}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+                infoContainer.innerHTML = html;
+            }
             
             // Show the view
             const view = document.getElementById('metric-details-view');
@@ -1852,6 +2206,42 @@
             });
         }
         */
+        // --- Main App Navigation ---
+        function switchMainTab(tab) {
+            const dashboardView = document.getElementById('dashboard-view');
+            const profileView = document.getElementById('profile-view');
+            const navDashboard = document.getElementById('nav-item-dashboard');
+            const navProfile = document.getElementById('nav-item-profile');
+
+            if (tab === 'dashboard') {
+                dashboardView.classList.remove('hidden');
+                profileView.classList.add('hidden');
+                
+                // Update Nav Dashboard
+                navDashboard.className = "flex flex-col items-center justify-center space-y-1 w-1/2 text-neon-blue group";
+                navDashboard.querySelector('i').className = "fa-solid fa-house text-lg text-neon-blue shadow-neon-blue mb-1";
+                navDashboard.querySelector('span').className = "text-[10px] text-neon-blue font-medium";
+
+                // Update Nav Profile
+                navProfile.className = "flex flex-col items-center justify-center space-y-1 w-1/2 text-slate-500 hover:text-white transition group";
+                navProfile.querySelector('i').className = "fa-solid fa-user-gear text-lg mb-1";
+                navProfile.querySelector('span').className = "text-[10px]";
+                
+            } else {
+                dashboardView.classList.add('hidden');
+                profileView.classList.remove('hidden');
+
+                // Update Nav Dashboard
+                navDashboard.className = "flex flex-col items-center justify-center space-y-1 w-1/2 text-slate-500 hover:text-white transition group";
+                navDashboard.querySelector('i').className = "fa-solid fa-house text-lg mb-1";
+                navDashboard.querySelector('span').className = "text-[10px]";
+
+                // Update Nav Profile
+                navProfile.className = "flex flex-col items-center justify-center space-y-1 w-1/2 text-neon-blue group";
+                navProfile.querySelector('i').className = "fa-solid fa-user-gear text-lg text-neon-blue shadow-neon-blue mb-1";
+                navProfile.querySelector('span').className = "text-[10px] text-neon-blue font-medium";
+            }
+        }
     </script>
 </body>
 </html>
