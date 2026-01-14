@@ -95,11 +95,11 @@
         <section class="flex flex-col">
             <!-- Tab Headers -->
             <div class="flex border-b border-white/10 mb-4 bg-slate-800/30 rounded-t-xl overflow-hidden">
-                <button onclick="switchHomeTab('hotwords')" id="tab-home-hotwords" class="flex-1 py-3 text-center text-xs font-bold text-neon-blue border-b-2 border-neon-blue bg-white/5 transition-all">
-                    昨日热词
+                <button onclick="switchHomeTab('supervision')" id="tab-home-supervision" class="flex-1 py-3 text-center text-xs font-bold text-neon-blue border-b-2 border-neon-blue bg-white/5 transition-all">
+                    监督任务
                 </button>
-                <button onclick="switchHomeTab('products')" id="tab-home-products" class="flex-1 py-3 text-center text-xs font-bold text-slate-400 hover:text-white border-b-2 border-transparent transition-all">
-                    商品洞察
+                <button onclick="switchHomeTab('hotwords')" id="tab-home-hotwords" class="flex-1 py-3 text-center text-xs font-bold text-slate-400 hover:text-white border-b-2 border-transparent transition-all">
+                    昨日热词
                 </button>
                 <button onclick="switchHomeTab('sentiment')" id="tab-home-sentiment" class="flex-1 py-3 text-center text-xs font-bold text-slate-400 hover:text-white border-b-2 border-transparent transition-all">
                     舆情洞察
@@ -112,14 +112,27 @@
             <!-- Tab Content Container -->
             <div class="glass-panel rounded-b-xl p-4 border border-white/5 min-h-[250px]">
                 
-                <!-- Tab 1: Hot Words -->
-                <div id="panel-home-hotwords" class="animate-fade-in">
+                <!-- Tab 1: Supervision Tasks -->
+                <div id="panel-home-supervision" class="animate-fade-in">
+                     <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] text-slate-500">当前任务 (最多3个)</span>
+                        <button onclick="openAddMetricModal()" class="text-[10px] text-neon-blue border border-neon-blue/30 px-2 py-1 rounded hover:bg-neon-blue/10 transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i> 新增任务
+                        </button>
+                    </div>
+                    <div id="supervision-task-list" class="space-y-3">
+                        <!-- Tasks rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Tab 2: Hot Words -->
+                <div id="panel-home-hotwords" class="hidden animate-fade-in">
                     <div class="flex justify-between items-center mb-3">
                         <span class="text-[10px] text-slate-500">顾客提及 Top 5</span>
                     </div>
                     <div class="space-y-3">
                         <!-- Item 1 -->
-                        <div onclick="showKeywordDetails('感冒', '症状', '324', '12', true)" class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded transition-colors active:scale-95">
+                        <div class="flex items-center justify-between group p-2 rounded">
                             <div class="flex items-center space-x-3">
                                 <span class="text-neon-red font-bold font-mono text-sm w-4 text-center">1</span>
                                 <div>
@@ -137,7 +150,7 @@
                             </div>
                         </div>
                         <!-- Item 2 -->
-                        <div onclick="showKeywordDetails('连花清瘟', '药品', '210', '-2', false)" class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded transition-colors active:scale-95">
+                        <div class="flex items-center justify-between group p-2 rounded">
                             <div class="flex items-center space-x-3">
                                 <span class="text-neon-red font-bold font-mono text-sm w-4 text-center">2</span>
                                 <div>
@@ -155,7 +168,7 @@
                             </div>
                         </div>
                         <!-- Item 3 -->
-                        <div onclick="showKeywordDetails('布洛芬', '药品', '185', '5', true)" class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded transition-colors active:scale-95">
+                        <div class="flex items-center justify-between group p-2 rounded">
                             <div class="flex items-center space-x-3">
                                 <span class="text-yellow-500 font-bold font-mono text-sm w-4 text-center">3</span>
                                 <div>
@@ -173,7 +186,7 @@
                             </div>
                         </div>
                         <!-- Item 4 -->
-                        <div class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded transition-colors">
+                        <div class="flex items-center justify-between group p-2 rounded">
                             <div class="flex items-center space-x-3">
                                 <span class="text-slate-500 font-bold font-mono text-sm w-4 text-center">4</span>
                                 <div>
@@ -191,7 +204,7 @@
                             </div>
                         </div>
                         <!-- Item 5 -->
-                        <div class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded transition-colors">
+                        <div class="flex items-center justify-between group p-2 rounded">
                             <div class="flex items-center space-x-3">
                                 <span class="text-slate-500 font-bold font-mono text-sm w-4 text-center">5</span>
                                 <div>
@@ -211,89 +224,6 @@
                     </div>
                 </div>
 
-                <!-- Tab 2: Product Insights -->
-                <div id="panel-home-products" class="hidden animate-fade-in">
-                    <div class="grid grid-cols-2 gap-4 h-full">
-                        <!-- Out of Stock -->
-                        <div class="bg-white/5 rounded-lg p-3 border border-white/5">
-                            <div class="flex items-center justify-between mb-3 border-b border-white/10 pb-2">
-                                <h3 class="text-xs font-bold text-neon-red flex items-center">
-                                    <i class="fa-solid fa-box-open mr-1.5"></i>缺货预警
-                                </h3>
-                                <span class="text-[10px] text-slate-500">Top 3</span>
-                            </div>
-                            <div class="space-y-3">
-                                <div onclick="showProductDetails('儿童退热贴', 'stockout')" class="cursor-pointer active:scale-95 transition-transform">
-                                    <div class="flex justify-between text-xs mb-1">
-                                        <span class="text-slate-200">儿童退热贴</span>
-                                        <span class="text-neon-red font-bold">42次</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 h-1 rounded-full">
-                                        <div class="bg-neon-red h-full rounded-full" style="width: 80%"></div>
-                                    </div>
-                                </div>
-                                <div onclick="showProductDetails('N95口罩', 'stockout')" class="cursor-pointer active:scale-95 transition-transform">
-                                    <div class="flex justify-between text-xs mb-1">
-                                        <span class="text-slate-200">N95口罩</span>
-                                        <span class="text-neon-red font-bold">28次</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 h-1 rounded-full">
-                                        <div class="bg-neon-red h-full rounded-full" style="width: 60%"></div>
-                                    </div>
-                                </div>
-                                <div onclick="showProductDetails('酒精喷雾', 'stockout')" class="cursor-pointer active:scale-95 transition-transform">
-                                    <div class="flex justify-between text-xs mb-1">
-                                        <span class="text-slate-200">酒精喷雾</span>
-                                        <span class="text-neon-red font-bold">15次</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 h-1 rounded-full">
-                                        <div class="bg-neon-red h-full rounded-full" style="width: 40%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Hard to Sell -->
-                        <div class="bg-white/5 rounded-lg p-3 border border-white/5">
-                            <div class="flex items-center justify-between mb-3 border-b border-white/10 pb-2">
-                                <h3 class="text-xs font-bold text-yellow-500 flex items-center">
-                                    <i class="fa-solid fa-hand-holding-dollar mr-1.5"></i>难推预警
-                                </h3>
-                                <span class="text-[10px] text-slate-500">Top 3</span>
-                            </div>
-                            <div class="space-y-3">
-                                <div onclick="showProductDetails('高钙片', 'hard')" class="cursor-pointer active:scale-95 transition-transform">
-                                    <div class="flex justify-between text-xs mb-1">
-                                        <span class="text-slate-200">高钙片</span>
-                                        <span class="text-yellow-500 font-bold">85%</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 h-1 rounded-full">
-                                        <div class="bg-yellow-500 h-full rounded-full" style="width: 85%"></div>
-                                    </div>
-                                    <div class="text-[8px] text-slate-500 mt-0.5 text-right">关联失败率</div>
-                                </div>
-                                <div onclick="showProductDetails('西洋参', 'hard')" class="cursor-pointer active:scale-95 transition-transform">
-                                    <div class="flex justify-between text-xs mb-1">
-                                        <span class="text-slate-200">西洋参</span>
-                                        <span class="text-yellow-500 font-bold">82%</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 h-1 rounded-full">
-                                        <div class="bg-yellow-500 h-full rounded-full" style="width: 82%"></div>
-                                    </div>
-                                </div>
-                                <div onclick="showProductDetails('阿胶糕', 'hard')" class="cursor-pointer active:scale-95 transition-transform">
-                                    <div class="flex justify-between text-xs mb-1">
-                                        <span class="text-slate-200">阿胶糕</span>
-                                        <span class="text-yellow-500 font-bold">78%</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 h-1 rounded-full">
-                                        <div class="bg-yellow-500 h-full rounded-full" style="width: 78%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Tab 3: Sentiment Insights -->
                 <div id="panel-home-sentiment" class="hidden animate-fade-in">
@@ -302,12 +232,15 @@
                         <!-- Timeline Item 1 -->
                         <div class="relative pl-6">
                             <div class="absolute left-0 top-1.5 w-2.5 h-2.5 rounded-full bg-neon-red shadow-[0_0_8px_rgba(255,42,109,0.5)] border border-[#0B0F19]"></div>
-                            <div onclick="showSessionDetails('session-risk-001')" class="bg-white/5 rounded-lg p-3 border border-neon-red/30 hover:bg-white/10 transition-colors cursor-pointer active:scale-95 transform transition-transform">
+                            <div onclick="showSentimentDetails('session-risk-001', 'risk', '价格差异引发投诉', '18:30', '中心广场店', '顾客投诉连花清瘟价格比隔壁药店贵5元，情绪激动并表示要拨打12315。店员解释未被接受。')" class="bg-white/5 rounded-lg p-3 border border-neon-red/30 hover:bg-white/10 transition-colors cursor-pointer active:scale-95 transform transition-transform">
                                 <div class="flex justify-between items-start mb-1">
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-[10px] text-neon-blue font-medium"><i class="fa-solid fa-store mr-1"></i>中心广场店</span>
+                                        <span class="text-[10px] bg-neon-red/20 text-neon-red px-1.5 py-0.5 rounded border border-neon-red/20">投诉风险</span>
                                     </div>
                                     <span class="text-[10px] text-slate-400">18:30</span>
+                                </div>
+                                <div class="mb-1">
+                                     <span class="text-[10px] text-neon-blue font-medium"><i class="fa-solid fa-store mr-1"></i>中心广场店</span>
                                 </div>
                                 <h3 class="text-xs text-white font-bold mb-1">价格差异引发投诉</h3>
                                 <p class="text-[11px] text-slate-300 leading-relaxed line-clamp-2">
@@ -319,12 +252,15 @@
                         <!-- Timeline Item 2 -->
                         <div class="relative pl-6">
                             <div class="absolute left-0 top-1.5 w-2.5 h-2.5 rounded-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)] border border-[#0B0F19]"></div>
-                            <div onclick="showSessionDetails('session-risk-002')" class="bg-white/5 rounded-lg p-3 border border-yellow-500/30 hover:bg-white/10 transition-colors cursor-pointer active:scale-95 transform transition-transform">
+                            <div onclick="showSentimentDetails('session-risk-002', 'warning', '排队插队纠纷', '14:15', '滨江路分店', '收银台两名顾客因插队问题发生口角，店员介入调解较慢，导致后方排队顾客不满，引发争吵。')" class="bg-white/5 rounded-lg p-3 border border-yellow-500/30 hover:bg-white/10 transition-colors cursor-pointer active:scale-95 transform transition-transform">
                                 <div class="flex justify-between items-start mb-1">
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-[10px] text-neon-blue font-medium"><i class="fa-solid fa-store mr-1"></i>滨江路分店</span>
+                                        <span class="text-[10px] bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded border border-yellow-500/20">服务纠纷</span>
                                     </div>
                                     <span class="text-[10px] text-slate-400">14:15</span>
+                                </div>
+                                <div class="mb-1">
+                                     <span class="text-[10px] text-neon-blue font-medium"><i class="fa-solid fa-store mr-1"></i>滨江路分店</span>
                                 </div>
                                 <h3 class="text-xs text-white font-bold mb-1">排队插队纠纷</h3>
                                 <p class="text-[11px] text-slate-300 leading-relaxed line-clamp-2">
@@ -336,12 +272,15 @@
                          <!-- Timeline Item 3 -->
                          <div class="relative pl-6">
                             <div class="absolute left-0 top-1.5 w-2.5 h-2.5 rounded-full bg-neon-blue shadow-[0_0_8px_rgba(0,240,255,0.5)] border border-[#0B0F19]"></div>
-                            <div onclick="showSessionDetails('session-risk-003')" class="bg-white/5 rounded-lg p-3 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer active:scale-95 transform transition-transform">
+                            <div onclick="showSentimentDetails('session-risk-003', 'feedback', '建议增加代煎服务', '10:42', '火车站店', '老顾客询问是否提供代煎服务，表示如果有的话会更愿意来抓药。建议门店考虑增加代煎设备。')" class="bg-white/5 rounded-lg p-3 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer active:scale-95 transform transition-transform">
                                 <div class="flex justify-between items-start mb-1">
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-[10px] text-neon-blue font-medium"><i class="fa-solid fa-store mr-1"></i>火车站店</span>
+                                        <span class="text-[10px] bg-neon-blue/20 text-neon-blue px-1.5 py-0.5 rounded border border-neon-blue/20">客户建议</span>
                                     </div>
                                     <span class="text-[10px] text-slate-400">10:42</span>
+                                </div>
+                                <div class="mb-1">
+                                     <span class="text-[10px] text-neon-blue font-medium"><i class="fa-solid fa-store mr-1"></i>火车站店</span>
                                 </div>
                                 <h3 class="text-xs text-white font-bold mb-1">建议增加代煎服务</h3>
                                 <p class="text-[11px] text-slate-300 leading-relaxed line-clamp-2">
@@ -1144,14 +1083,11 @@
                         <div class="mt-3">
                             <div class="text-xs text-slate-500 mb-2">猜你想查：</div>
                             <div class="flex flex-wrap gap-2">
-                                <button onclick="fillMetricInput('查一下卖感冒药有没有关联维C')" class="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-300 hover:text-white hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-colors">
-                                    💊 感冒药关联维C
+                                <button onclick="fillMetricInput('检查是否使用了标准问好词')" class="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-300 hover:text-white hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-colors">
+                                    👋 问好词提及
                                 </button>
-                                <button onclick="fillMetricInput('监控是否向新客推荐会员卡')" class="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-300 hover:text-white hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-colors">
-                                    💳 会员卡办理
-                                </button>
-                                <button onclick="fillMetricInput('检查是否主动介绍本月新品')" class="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-300 hover:text-white hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-colors">
-                                    🔥 新品推广
+                                <button onclick="fillMetricInput('检查是否提及了当前的营销活动')" class="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-300 hover:text-white hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-colors">
+                                    📢 营销活动提及
                                 </button>
                             </div>
                         </div>
@@ -1214,8 +1150,7 @@
         </div>
     </div>
 
-    <!-- Scripts for Charts -->
-    <script>
+    <!-- Scripts for Charts -->    <script>
         // --- Metrics Data & Management ---
         let metricsData = [
             { 
@@ -1230,18 +1165,43 @@
                 canDelete: false 
             },
             { 
-                id: 'm2',
-                title: '合规率', 
-                subtitle: '昨日合规率',
+                id: 'm_usage',
+                title: '工牌使用率', 
+                subtitle: '昨日佩戴使用',
+                value: '95%', 
+                changeAbs: '+2%', 
+                changeRel: '+2.1%', 
+                isUp: true, 
+                color: 'neon-green', 
+                canDelete: false 
+            },
+            { 
+                id: 'm_duration',
+                title: '平均使用时间', 
+                subtitle: '昨日人均时长',
+                value: '8.5h', 
+                changeAbs: '+0.5h', 
+                changeRel: '+6.2%', 
+                isUp: true, 
+                color: 'neon-purple', 
+                canDelete: false 
+            }
+        ];
+
+        let supervisionTasks = [
+             {
+                id: 't1',
+                title: '合规率检查',
+                subtitle: 'SOP执行情况',
                 value: '88.4%', 
                 changeAbs: '-2.1%', 
                 changeRel: '-2.3%', 
                 isUp: false, 
-                color: 'neon-purple', 
+                color: 'neon-red', 
                 canDelete: true,
                 desc: '监控店员接待过程中是否包含：欢迎语、症状问询、用药交代、道别语等标准SOP环节。',
                 action: '请确保每位顾客接待流程完整，重点关注“用药交代”环节，避免顾客投诉。'
-            }
+             }
         ];
 
         // Mock data for new additions
@@ -1251,6 +1211,82 @@
             '平均客单价': { subtitle: '昨日客单价', value: '¥45.2', changeAbs: '+¥2.1', changeRel: '+4.8%', isUp: true, color: 'neon-red', canDelete: true },
             '新品推广率': { subtitle: '昨日新品推广', value: '8%', changeAbs: '-0.3%', changeRel: '-3.6%', isUp: false, color: 'neon-blue', canDelete: true }
         };
+
+        // --- Metric Details Logic ---
+        function showMetricDetails(metricTitle) {
+            currentMetricTitle = metricTitle; // Set Global
+
+            // 1. Find Data
+            const metric = metricsData.find(m => m.title === metricTitle);
+            if (!metric) return;
+
+            // 2. Update UI
+            document.getElementById('detail-title').innerText = metric.title + '详情';
+            document.getElementById('detail-value').innerText = metric.value;
+            
+            const changeEl = document.getElementById('detail-change');
+            const icon = metric.isUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
+            // Logic match with renderMetrics: IsUp -> Red (Bad? Or Good?), renderMetrics uses Red for IsUp.
+            // But let's check trendColor logic in renderMetrics: 
+            // const trendColor = m.isUp ? 'text-neon-red' : 'text-neon-green';
+            const color = metric.isUp ? 'text-neon-red' : 'text-neon-green';
+            
+            changeEl.className = `text-sm ${color} flex items-center justify-center`;
+            changeEl.innerHTML = `<i class="fa-solid ${icon} mr-1"></i> ${metric.changeAbs} <span class="text-xs ml-1 opacity-80">(${metric.changeRel})</span>`;
+
+            // 3. Update Chart
+            // Default to 'daily' tab
+            document.getElementById('tab-daily').click(); 
+            
+            // 4. Show AI Info if available (for new metrics)
+            const infoContainer = document.getElementById('metric-info-container');
+            
+            if (metricTitle === '客流量') {
+                infoContainer.classList.remove('hidden');
+                infoContainer.innerHTML = `
+                    <div class="glass-panel p-3 rounded-lg border border-yellow-500/20 bg-yellow-500/5 flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-info text-yellow-500 mt-0.5 text-sm"></i>
+                        <div>
+                            <div class="text-xs text-slate-300 leading-relaxed">
+                                <span class="text-yellow-500 font-bold mr-1">风险提示:</span>
+                                客流量数据通过语音数据获取，未必一定准确。
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (metric.desc) {
+                infoContainer.classList.remove('hidden');
+                infoContainer.innerHTML = `
+                    <div class="glass-panel rounded-xl p-4 border border-white/5 bg-neon-blue/5">
+                        <h2 class="text-sm font-bold text-white mb-2 flex items-center">
+                            <i class="fa-solid fa-robot text-neon-blue mr-2"></i> 监控规则
+                        </h2>
+                        <div class="text-xs text-slate-300 space-y-2">
+                            <p><span class="text-slate-500">说明：</span>${metric.desc}</p>
+                            ${metric.action ? `<p><span class="text-slate-500">建议：</span>${metric.action}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+            } else {
+                infoContainer.classList.add('hidden');
+            }
+
+            // 5. Show View
+            document.getElementById('metric-details-view').classList.remove('translate-x-full');
+            
+            // 6. Update Chart (must be after view is visible for correct sizing)
+            setTimeout(() => {
+                 // Ensure chart resizes correctly
+                 if(trafficChartInstance) {
+                     trafficChartInstance.resize();
+                     switchChartTab('daily');
+                 }
+            }, 100);
+        }
+
+        function hideMetricDetails() {
+            document.getElementById('metric-details-view').classList.add('translate-x-full');
+        }
 
         function renderMetrics() {
             const container = document.getElementById('metrics-scroll-container');
@@ -1270,8 +1306,8 @@
                                (m.color === 'neon-red' ? 'bg-neon-red/20' : 'bg-yellow-500/20')));
 
                 const html = `
-                    <div onclick="showMetricDetails('${m.title}', '${m.value}', '${m.changeAbs}', '${m.changeRel}', ${m.isUp})" 
-                         class="flex-shrink-0 w-[45%] glass-panel p-4 rounded-xl relative overflow-hidden group cursor-pointer active:scale-95 transition-transform whitespace-normal snap-start">
+                    <div onclick="showMetricDetails('${m.title}')"
+                         class="flex-shrink-0 w-[45%] glass-panel p-4 rounded-xl relative overflow-hidden group transition-transform whitespace-normal snap-start cursor-pointer hover:bg-white/5 active:scale-95">
                         <div class="absolute -right-4 -top-4 w-16 h-16 ${bgColor} rounded-full blur-xl ${shadowColor} transition-all"></div>
                         <div class="flex items-start justify-between mb-2">
                             <span class="text-slate-400 text-xs">${m.subtitle}</span>
@@ -1284,26 +1320,14 @@
                 `;
                 container.insertAdjacentHTML('beforeend', html);
             });
-
-            // 2. Render Action Buttons (Add & Manage)
-            const actionsHtml = `
-            <div class="flex flex-col space-y-3 flex-shrink-0 w-[15%] min-w-[60px] snap-start">
-                 <!-- Add Button -->
-                 <button onclick="openAddMetricModal()" class="flex-1 glass-panel rounded-xl flex flex-col items-center justify-center text-slate-400 hover:text-white active:scale-95 transition-all border border-dashed border-white/20 hover:border-neon-blue/50 hover:bg-neon-blue/5">
-                    <i class="fa-solid fa-plus text-lg mb-1"></i>
-                    <span class="text-[10px]">新增</span>
-                 </button>
-                 <!-- Manage Button -->
-                 <button onclick="openManageMetricsMode()" class="flex-1 glass-panel rounded-xl flex flex-col items-center justify-center text-slate-400 hover:text-white active:scale-95 transition-all border border-dashed border-white/20 hover:border-neon-purple/50 hover:bg-neon-purple/5">
-                    <i class="fa-solid fa-sliders text-lg mb-1"></i>
-                    <span class="text-[10px]">管理</span>
-                 </button>
-            </div>
-            `;
-            container.insertAdjacentHTML('beforeend', actionsHtml);
         }
 
         function openAddMetricModal() {
+            // Check limit
+            if (supervisionTasks.length >= 3) {
+                alert('您最多只能设置3个监督任务，请先删除旧任务。');
+                return;
+            }
             resetAddMetric();
             document.getElementById('add-metric-modal').classList.remove('hidden');
         }
@@ -1341,7 +1365,7 @@
                 document.getElementById('add-metric-step-2').classList.remove('hidden');
 
                 // Mock AI Generation Logic
-                let name = "智能监控指标";
+                let name = "智能监督任务";
                 let desc = "AI自动生成的监控规则";
                 let action = "请店员注意执行";
 
@@ -1382,17 +1406,17 @@
             const action = document.getElementById('metric-action').value;
             
             if (!title) {
-                alert('请输入指标名称');
+                alert('请输入任务名称');
                 return;
             }
 
-            if (metricsData.find(m => m.title === title)) {
-                alert('该指标已存在');
+            if (supervisionTasks.find(t => t.title === title)) {
+                alert('该任务已存在');
                 return;
             }
 
-            metricsData.push({
-                id: 'm' + Date.now(),
+            supervisionTasks.push({
+                id: 't' + Date.now(),
                 title: title,
                 subtitle: '今日新增',
                 value: '0%', 
@@ -1405,142 +1429,25 @@
                 action: action
             });
             
-            renderMetrics();
+            renderSupervisionTasks();
             closeAddMetricModal();
-            
-            setTimeout(() => {
-                const container = document.getElementById('metrics-scroll-container');
-                container.scrollLeft = container.scrollWidth;
-            }, 100);
         }
 
-        function openManageMetricsMode() {
-            renderManageList();
-            document.getElementById('manage-metrics-modal').classList.remove('hidden');
-        }
-
-        function closeManageMetricsModal() {
-            document.getElementById('manage-metrics-modal').classList.add('hidden');
-        }
-
-        // --- Drag & Drop Handlers ---
-        let dragSrcEl = null;
-
-        function handleDragStart(e) {
-            dragSrcEl = this;
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', this.innerHTML);
-            this.classList.add('opacity-50', 'border-neon-blue');
-        }
-
-        function handleDragOver(e) {
-            if (e.preventDefault) {
-                e.preventDefault();
-            }
-            e.dataTransfer.dropEffect = 'move';
-            return false;
-        }
-
-        function handleDragEnter(e) {
-            this.classList.add('bg-white/10');
-        }
-
-        function handleDragLeave(e) {
-            this.classList.remove('bg-white/10');
-        }
-
-        function handleDrop(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            }
-            
-            if (dragSrcEl !== this) {
-                const oldIndex = parseInt(dragSrcEl.getAttribute('data-index'));
-                const newIndex = parseInt(this.getAttribute('data-index'));
-                
-                // Move in array
-                const item = metricsData.splice(oldIndex, 1)[0];
-                metricsData.splice(newIndex, 0, item);
-                
-                renderMetrics();
-                renderManageList();
-            }
-            return false;
-        }
-
-        function handleDragEnd(e) {
-            this.classList.remove('opacity-50', 'border-neon-blue', 'bg-white/10');
-             document.querySelectorAll('.draggable-item').forEach(item => {
-                item.classList.remove('bg-white/10');
-            });
-        }
-
-        function renderManageList() {
-            const container = document.getElementById('manage-list-container');
-            container.innerHTML = '';
-            
-            metricsData.forEach((m, index) => {
-                const deleteBtn = m.canDelete 
-                    ? `<button onclick="deleteMetric('${index}')" class="w-8 h-8 rounded bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-colors flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>`
-                    : `<div class="w-8 h-8 flex items-center justify-center text-slate-600 cursor-not-allowed"><i class="fa-solid fa-lock text-xs"></i></div>`;
-
-                const editBtn = m.title !== '客流量' 
-                    ? `<button onclick="editMetric('${index}')" class="w-8 h-8 rounded bg-white/5 text-slate-400 hover:bg-neon-blue/20 hover:text-neon-blue transition-colors flex items-center justify-center mr-2"><i class="fa-solid fa-pen text-xs"></i></button>`
-                    : `<div class="w-8 h-8 flex items-center justify-center text-slate-600 cursor-not-allowed mr-2"><i class="fa-solid fa-lock text-xs"></i></div>`;
-
-                // Drag Handle
-                const dragHandle = `
-                    <div class="cursor-move text-slate-500 hover:text-white px-2 py-3 mr-1">
-                        <i class="fa-solid fa-grip-vertical"></i>
-                    </div>
-                `;
-
-                const html = `
-                    <div draggable="true" data-index="${index}" class="draggable-item flex items-center justify-between p-3 glass-panel border border-white/5 rounded-lg transition-all">
-                        <div class="flex items-center space-x-2">
-                            ${dragHandle}
-                            <div>
-                                <div class="text-sm text-white font-medium">${m.title}</div>
-                                <div class="text-[10px] text-slate-500">${m.subtitle}</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            ${editBtn}
-                            ${deleteBtn}
-                        </div>
-                    </div>
-                `;
-                
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html.trim();
-                const el = tempDiv.firstChild;
-                
-                el.addEventListener('dragstart', handleDragStart);
-                el.addEventListener('dragenter', handleDragEnter);
-                el.addEventListener('dragover', handleDragOver);
-                el.addEventListener('dragleave', handleDragLeave);
-                el.addEventListener('drop', handleDrop);
-                el.addEventListener('dragend', handleDragEnd);
-                
-                container.appendChild(el);
-            });
-        }
+        // Removed unused openManageMetricsMode/closeManageMetricsMode/DragDrop for now as tasks are simple list
 
         function editMetric(index) {
-            const m = metricsData[index];
-            const newTitle = prompt('编辑指标名称:', m.title);
-            if (newTitle && newTitle !== m.title) {
-                metricsData[index].title = newTitle;
-                renderMetrics();
-                renderManageList();
+            const t = supervisionTasks[index];
+            const newTitle = prompt('编辑任务名称:', t.title);
+            if (newTitle && newTitle !== t.title) {
+                supervisionTasks[index].title = newTitle;
+                renderSupervisionTasks();
             }
         }
 
         function deleteMetric(index) {
-            if (confirm('确定要移除该指标吗？')) {
-                metricsData.splice(index, 1);
-                renderMetrics();
-                renderManageList();
+            if (confirm('确定要移除该监督任务吗？')) {
+                supervisionTasks.splice(index, 1);
+                renderSupervisionTasks();
             }
         }
 
@@ -1686,7 +1593,7 @@
                 const signRel = isUp && store.changeRel > 0 ? '+' : '';
 
                 const html = `
-                    <div onclick="showStoreDetails('${store.name}')" class="flex items-center text-sm border-b border-white/5 pb-2 last:border-0 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors p-1 rounded">
+                    <div class="flex items-center text-sm border-b border-white/5 pb-2 last:border-0 p-1 rounded">
                         <div class="flex-1 text-slate-300 truncate pr-2">${store.name}</div>
                         <div class="w-16 text-right text-white font-mono">${store.value}</div>
                         <div class="w-16 text-right font-mono text-xs ${colorClass}">${signAbs}${store.changeAbs}</div>
@@ -1727,19 +1634,20 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             renderMetrics();
+            renderSupervisionTasks();
             initTrafficChart();
             renderStoreList();
         });
 
         // --- Home Tab Switching Logic ---
         function switchHomeTab(tab) {
+            const btnSupervision = document.getElementById('tab-home-supervision');
             const btnHotwords = document.getElementById('tab-home-hotwords');
-            const btnProducts = document.getElementById('tab-home-products');
             const btnSentiment = document.getElementById('tab-home-sentiment');
             const btnGolden = document.getElementById('tab-home-goldensentences');
             
+            const panelSupervision = document.getElementById('panel-home-supervision');
             const panelHotwords = document.getElementById('panel-home-hotwords');
-            const panelProducts = document.getElementById('panel-home-products');
             const panelSentiment = document.getElementById('panel-home-sentiment');
             const panelGolden = document.getElementById('panel-home-goldensentences');
 
@@ -1747,23 +1655,25 @@
             const inactiveBtnClasses = ['text-slate-400', 'hover:text-white', 'border-transparent'];
 
             // Reset all
-            [btnHotwords, btnProducts, btnSentiment, btnGolden].forEach(btn => {
-                btn.classList.remove(...activeBtnClasses);
-                btn.classList.add(...inactiveBtnClasses);
+            [btnSupervision, btnHotwords, btnSentiment, btnGolden].forEach(btn => {
+                if(btn) {
+                    btn.classList.remove(...activeBtnClasses);
+                    btn.classList.add(...inactiveBtnClasses);
+                }
             });
-            [panelHotwords, panelProducts, panelSentiment, panelGolden].forEach(panel => {
-                panel.classList.add('hidden');
+            [panelSupervision, panelHotwords, panelSentiment, panelGolden].forEach(panel => {
+                if(panel) panel.classList.add('hidden');
             });
 
             // Activate target
-            if (tab === 'hotwords') {
+            if (tab === 'supervision') {
+                btnSupervision.classList.add(...activeBtnClasses);
+                btnSupervision.classList.remove(...inactiveBtnClasses);
+                panelSupervision.classList.remove('hidden');
+            } else if (tab === 'hotwords') {
                 btnHotwords.classList.add(...activeBtnClasses);
                 btnHotwords.classList.remove(...inactiveBtnClasses);
                 panelHotwords.classList.remove('hidden');
-            } else if (tab === 'products') {
-                btnProducts.classList.add(...activeBtnClasses);
-                btnProducts.classList.remove(...inactiveBtnClasses);
-                panelProducts.classList.remove('hidden');
             } else if (tab === 'sentiment') {
                 btnSentiment.classList.add(...activeBtnClasses);
                 btnSentiment.classList.remove(...inactiveBtnClasses);
@@ -1773,6 +1683,44 @@
                 btnGolden.classList.remove(...inactiveBtnClasses);
                 panelGolden.classList.remove('hidden');
             }
+        }
+
+        function renderSupervisionTasks() {
+            const container = document.getElementById('supervision-task-list');
+            container.innerHTML = '';
+
+            supervisionTasks.forEach((t, index) => {
+                 const html = `
+                    <div class="glass-panel p-3 rounded-lg border border-white/5 relative group">
+                        <div class="flex justify-between items-start mb-2">
+                             <div>
+                                <h3 class="text-sm font-bold text-white mb-1">${t.title}</h3>
+                                <p class="text-[10px] text-slate-400 line-clamp-1">${t.desc}</p>
+                             </div>
+                             <div class="flex space-x-2">
+                                <button onclick="editMetric('${index}')" class="text-slate-500 hover:text-neon-blue transition-colors">
+                                    <i class="fa-solid fa-pen text-xs"></i>
+                                </button>
+                                <button onclick="deleteMetric('${index}')" class="text-slate-500 hover:text-red-500 transition-colors">
+                                    <i class="fa-solid fa-trash text-xs"></i>
+                                </button>
+                             </div>
+                        </div>
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-[10px] text-slate-500 mb-0.5">昨日数据</div>
+                                <div class="text-lg font-bold text-white">${t.value || '--'}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-[10px] ${t.isUp ? 'text-neon-red' : 'text-neon-green'}">
+                                     ${t.changeAbs || '-'} (${t.changeRel || '-'})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 `;
+                 container.insertAdjacentHTML('beforeend', html);
+            });
         }
 
         // --- Interaction Logic ---
@@ -1835,7 +1783,7 @@
             trafficChartInstance.update();
         }
 
-        function showMetricDetails(title, value, changeAbs, changeRel, isUp) {
+        function _unused_showMetricDetails(title, value, changeAbs, changeRel, isUp) {
             currentMetricTitle = title; // Set current metric context
             
             document.getElementById('detail-title').innerText = title + '详情';
@@ -1966,7 +1914,7 @@
                 panelGeneral.classList.add('hidden');
             }
         }
-        function showStoreMetricDetails(metric, value, change, changeRel, isUp) {
+        function _unused_showStoreMetricDetails(metric, value, change, changeRel, isUp) {
             // Re-use the metric details view but hide the store list
             // We need to bump z-index to show it ABOVE the store details view (z-70)
             const metricView = document.getElementById('metric-details-view');
@@ -2071,7 +2019,7 @@
             });
         }
 
-        function showProductDetails(name, type) {
+        function _unused_showProductDetails(name, type) {
             document.getElementById('prod-detail-title').innerText = name;
             const tagEl = document.getElementById('prod-detail-tag');
             const attrSection = document.getElementById('attribution-section');
@@ -2247,7 +2195,6 @@
             
             document.getElementById('gd-content').innerHTML = data.content;
             document.getElementById('gd-analysis').innerText = data.analysis;
-            document.getElementById('gd-score').innerText = data.score;
 
             document.getElementById('golden-details-view').classList.remove('translate-x-full');
         }
@@ -2372,14 +2319,6 @@
                     <!-- Analysis injected here -->
                 </div>
                 
-                <!-- Score -->
-                <div class="flex items-center justify-between mt-4 bg-white/5 p-3 rounded-lg border border-white/5">
-                    <span class="text-xs text-slate-400">话术得分</span>
-                    <div class="flex items-baseline space-x-1">
-                        <span id="gd-score" class="text-2xl font-bold text-neon-green font-mono">98</span>
-                        <span class="text-xs text-slate-500">/ 100</span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -2450,5 +2389,84 @@
             </button>
         </div>
     </section>
+    <!-- Sentiment Details View (New) -->
+    <section id="sentiment-details-view" class="fixed inset-0 z-[90] bg-[#0B0F19] transition-transform duration-300 translate-x-full flex flex-col">
+        <!-- Header -->
+        <header class="glass-panel border-b border-white/5 px-4 py-3 flex items-center justify-between z-10">
+            <button onclick="hideSentimentDetails()" class="mr-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h1 class="text-base font-bold text-white">舆情详情</h1>
+            <div class="w-8"></div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-6">
+            <!-- 1. Overview Card -->
+            <div class="glass-panel rounded-xl p-4 border border-white/5 relative overflow-hidden">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <div id="sd-tag" class="text-xs px-2 py-0.5 rounded bg-neon-red/20 text-neon-red font-bold border border-neon-red/20 inline-block mb-2">
+                            投诉风险
+                        </div>
+                        <h2 id="sd-title" class="text-lg font-bold text-white leading-tight">价格差异引发投诉</h2>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 text-xs">
+                     <div>
+                        <span class="text-slate-500 block mb-1">发生时间</span>
+                        <span id="sd-time" class="text-white font-mono">18:30</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block mb-1">门店</span>
+                        <span id="sd-store" class="text-white">中心广场店</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. AI Summary -->
+            <div class="glass-panel rounded-xl p-4 border border-white/5">
+                <div class="flex items-center space-x-2 mb-3">
+                    <i class="fa-solid fa-robot text-neon-blue"></i>
+                    <h3 class="text-sm font-bold text-white">事件摘要</h3>
+                </div>
+                <p id="sd-summary" class="text-xs text-slate-300 leading-relaxed bg-white/5 p-3 rounded-lg border border-white/5">
+                    顾客投诉连花清瘟价格比隔壁药店贵5元，情绪激动并表示要拨打12315。店员解释未被接受。
+                </p>
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <script>
+        function showSentimentDetails(id, type, title, time, store, summary) {
+             const tagEl = document.getElementById('sd-tag');
+             
+             if (type === 'risk') {
+                 tagEl.innerText = '投诉风险';
+                 tagEl.className = 'text-xs px-2 py-0.5 rounded bg-neon-red/20 text-neon-red font-bold border border-neon-red/20 inline-block mb-2';
+             } else if (type === 'warning') {
+                 tagEl.innerText = '服务纠纷';
+                 tagEl.className = 'text-xs px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-500 font-bold border border-yellow-500/20 inline-block mb-2';
+             } else {
+                 tagEl.innerText = '客户建议';
+                 tagEl.className = 'text-xs px-2 py-0.5 rounded bg-neon-blue/20 text-neon-blue font-bold border border-neon-blue/20 inline-block mb-2';
+             }
+
+             document.getElementById('sd-title').innerText = title;
+             document.getElementById('sd-time').innerText = time;
+             document.getElementById('sd-store').innerText = store;
+             document.getElementById('sd-summary').innerText = summary;
+
+             document.getElementById('sentiment-details-view').classList.remove('translate-x-full');
+        }
+
+        function hideSentimentDetails() {
+            document.getElementById('sentiment-details-view').classList.add('translate-x-full');
+        }
+    </script>
 </body>
 </html>
