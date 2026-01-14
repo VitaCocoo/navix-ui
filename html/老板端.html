@@ -1150,6 +1150,38 @@
         </div>
     </div>
 
+    <!-- Edit Metric Modal -->
+    <div id="edit-metric-modal" class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="glass-panel w-full max-w-md rounded-xl border border-white/10 flex flex-col max-h-[90vh]">
+            <div class="p-4 border-b border-white/10 flex justify-between items-center">
+                <h3 class="text-white font-bold">编辑监控指标</h3>
+                <button onclick="closeEditMetricModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="p-5 overflow-y-auto space-y-4">
+                <input type="hidden" id="edit-metric-index">
+                <div>
+                    <label class="block text-slate-400 text-xs mb-1">指标名称 <span class="text-red-500">*</span></label>
+                    <input id="edit-metric-name" type="text" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white text-sm focus:border-neon-blue outline-none transition-colors">
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-xs mb-1">指标介绍</label>
+                    <textarea id="edit-metric-desc" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white text-sm focus:border-neon-blue outline-none transition-colors h-20 resize-none"></textarea>
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-xs mb-1">行动方案 (员工端任务)</label>
+                    <textarea id="edit-metric-action" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white text-sm focus:border-neon-blue outline-none transition-colors h-24 resize-none"></textarea>
+                </div>
+                <div class="flex justify-end gap-3 pt-2 border-t border-white/10 mt-4">
+                     <button onclick="closeEditMetricModal()" class="text-slate-400 hover:text-white text-sm px-4 py-2">取消</button>
+                     <button onclick="saveEditMetric()" class="bg-neon-blue text-black font-bold py-2 px-6 rounded-lg hover:bg-white transition-colors shadow-lg shadow-neon-blue/20">
+                        保存修改
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts for Charts -->    <script>
         // --- Metrics Data & Management ---
         let metricsData = [
@@ -1200,7 +1232,14 @@
                 color: 'neon-red', 
                 canDelete: true,
                 desc: '监控店员接待过程中是否包含：欢迎语、症状问询、用药交代、道别语等标准SOP环节。',
-                action: '请确保每位顾客接待流程完整，重点关注“用药交代”环节，避免顾客投诉。'
+                action: '请确保每位顾客接待流程完整，重点关注“用药交代”环节，避免顾客投诉。',
+                chartData: [85, 87, 88, 90, 89, 88, 88.4],
+                storeData: [
+                    { name: '中心广场店', value: '95%', rank: 1 },
+                    { name: '滨江路分店', value: '92%', rank: 2 },
+                    { name: '火车站店', value: '85%', rank: 3 },
+                    { name: '老街店', value: '78%', rank: 4 }
+                ]
              }
         ];
 
@@ -1437,10 +1476,38 @@
 
         function editMetric(index) {
             const t = supervisionTasks[index];
-            const newTitle = prompt('编辑任务名称:', t.title);
-            if (newTitle && newTitle !== t.title) {
-                supervisionTasks[index].title = newTitle;
+            if (!t) return;
+
+            document.getElementById('edit-metric-index').value = index;
+            document.getElementById('edit-metric-name').value = t.title;
+            document.getElementById('edit-metric-desc').value = t.desc || '';
+            document.getElementById('edit-metric-action').value = t.action || '';
+
+            document.getElementById('edit-metric-modal').classList.remove('hidden');
+        }
+
+        function closeEditMetricModal() {
+            document.getElementById('edit-metric-modal').classList.add('hidden');
+        }
+
+        function saveEditMetric() {
+            const index = document.getElementById('edit-metric-index').value;
+            const title = document.getElementById('edit-metric-name').value;
+            const desc = document.getElementById('edit-metric-desc').value;
+            const action = document.getElementById('edit-metric-action').value;
+
+            if (!title) {
+                alert('请输入任务名称');
+                return;
+            }
+
+            if (supervisionTasks[index]) {
+                supervisionTasks[index].title = title;
+                supervisionTasks[index].desc = desc;
+                supervisionTasks[index].action = action;
+                
                 renderSupervisionTasks();
+                closeEditMetricModal();
             }
         }
 
@@ -1691,17 +1758,17 @@
 
             supervisionTasks.forEach((t, index) => {
                  const html = `
-                    <div class="glass-panel p-3 rounded-lg border border-white/5 relative group">
+                    <div onclick="showTaskDetails('${index}')" class="glass-panel p-3 rounded-lg border border-white/5 relative group cursor-pointer active:scale-95 transition-transform">
                         <div class="flex justify-between items-start mb-2">
                              <div>
                                 <h3 class="text-sm font-bold text-white mb-1">${t.title}</h3>
                                 <p class="text-[10px] text-slate-400 line-clamp-1">${t.desc}</p>
                              </div>
                              <div class="flex space-x-2">
-                                <button onclick="editMetric('${index}')" class="text-slate-500 hover:text-neon-blue transition-colors">
+                                <button onclick="event.stopPropagation(); editMetric('${index}')" class="text-slate-500 hover:text-neon-blue transition-colors">
                                     <i class="fa-solid fa-pen text-xs"></i>
                                 </button>
-                                <button onclick="deleteMetric('${index}')" class="text-slate-500 hover:text-red-500 transition-colors">
+                                <button onclick="event.stopPropagation(); deleteMetric('${index}')" class="text-slate-500 hover:text-red-500 transition-colors">
                                     <i class="fa-solid fa-trash text-xs"></i>
                                 </button>
                              </div>
@@ -1721,6 +1788,97 @@
                  `;
                  container.insertAdjacentHTML('beforeend', html);
             });
+        }
+
+        // --- Task Details Logic ---
+        let taskTrendChartInstance = null;
+
+        function showTaskDetails(index) {
+            const task = supervisionTasks[index];
+            if (!task) return;
+
+            // 1. Update Text Info
+            document.getElementById('task-detail-header-title').innerText = task.title;
+            document.getElementById('task-detail-title').innerText = task.title;
+            document.getElementById('task-detail-value').innerText = task.value;
+            
+            document.getElementById('task-detail-desc').innerText = task.desc;
+            document.getElementById('task-detail-action').innerText = task.action;
+
+            // 2. Render Chart
+            const ctx = document.getElementById('taskTrendChart').getContext('2d');
+            
+            if (taskTrendChartInstance) {
+                taskTrendChartInstance.destroy();
+            }
+
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+            gradient.addColorStop(0, 'rgba(0, 240, 255, 0.4)');
+            gradient.addColorStop(1, 'rgba(0, 240, 255, 0.0)');
+
+            taskTrendChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['T-6', 'T-5', 'T-4', 'T-3', 'T-2', 'T-1', '昨日'],
+                    datasets: [{
+                        label: '达成率',
+                        data: task.chartData || [0,0,0,0,0,0,0], 
+                        borderColor: '#00F0FF',
+                        backgroundColor: gradient,
+                        pointBackgroundColor: '#0B0F19',
+                        pointBorderColor: '#00F0FF',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 9 }, color: '#64748b' }
+                        },
+                        y: {
+                            beginAtZero: false, 
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#64748b' }
+                        }
+                    }
+                }
+            });
+
+            // 3. Render Store List
+            const listContainer = document.getElementById('task-store-list');
+            listContainer.innerHTML = '';
+            
+            if (task.storeData) {
+                task.storeData.forEach(store => {
+                    const html = `
+                        <div class="flex items-center text-sm py-2 border-b border-white/5 last:border-0">
+                            <div class="flex-1 text-white font-medium">${store.name}</div>
+                            <div class="w-20 text-right text-neon-blue font-bold">${store.value}</div>
+                            <div class="w-20 text-right">
+                                <span class="bg-slate-700 text-slate-300 text-[10px] px-1.5 py-0.5 rounded font-mono">${store.rank}</span>
+                            </div>
+                        </div>
+                    `;
+                    listContainer.insertAdjacentHTML('beforeend', html);
+                });
+            }
+
+            // 4. Show View
+            document.getElementById('task-details-view').classList.remove('translate-x-full');
+        }
+
+        function hideTaskDetails() {
+            document.getElementById('task-details-view').classList.add('translate-x-full');
         }
 
         // --- Interaction Logic ---
@@ -2269,6 +2427,70 @@
             }
         }
     </script>
+    <!-- Task Details View (New) -->
+    <section id="task-details-view" class="fixed inset-0 z-[70] bg-[#0B0F19] transition-transform duration-300 translate-x-full flex flex-col">
+        <!-- Header -->
+        <header class="glass-panel border-b border-white/5 px-4 py-3 flex items-center justify-between z-10">
+            <button onclick="hideTaskDetails()" class="mr-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h1 id="task-detail-header-title" class="text-base font-bold text-white">任务详情</h1>
+            <div class="w-8"></div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-6">
+            
+            <!-- 1. Intro Card -->
+            <div class="glass-panel rounded-xl p-4 border border-white/5">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 id="task-detail-title" class="text-lg font-bold text-white">--</h2>
+                    <span id="task-detail-value" class="text-2xl font-bold text-neon-blue">--</span>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <div class="text-xs text-slate-500 mb-1">指标介绍</div>
+                        <p id="task-detail-desc" class="text-xs text-slate-300 leading-relaxed">--</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+                        <div class="text-xs text-neon-green font-bold mb-1 flex items-center">
+                            <i class="fa-solid fa-bolt mr-1.5"></i>行动方案
+                        </div>
+                        <p id="task-detail-action" class="text-xs text-white leading-relaxed">--</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Trend Chart -->
+            <section class="glass-panel rounded-xl p-4 border border-white/5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-sm font-bold text-white border-l-4 border-neon-blue pl-2">近7日趋势</h2>
+                </div>
+                <div class="chart-container" style="height: 220px; position: relative;">
+                    <canvas id="taskTrendChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 3. Store List -->
+            <section class="glass-panel rounded-xl p-4 border border-white/5">
+                <h2 class="text-sm font-bold text-white mb-3">门店指标达成情况</h2>
+                
+                <!-- Table Header -->
+                <div class="flex items-center text-xs text-slate-400 border-b border-white/10 pb-2 mb-2">
+                    <div class="flex-1">门店名称</div>
+                    <div class="w-20 text-right">达成率</div>
+                    <div class="w-20 text-right">排名</div>
+                </div>
+
+                <!-- List Container -->
+                <div id="task-store-list" class="space-y-2">
+                    <!-- Dynamic Content -->
+                </div>
+            </section>
+        </div>
+    </section>
+
     <!-- Golden Sentence Details View -->
     <section id="golden-details-view" class="fixed inset-0 z-[70] bg-[#0B0F19] transition-transform duration-300 translate-x-full flex flex-col">
         <!-- Header -->
