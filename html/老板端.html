@@ -16,16 +16,95 @@
             theme: {
                 extend: {
                     colors: {
-                        'tech-bg': '#0B0F19',
-                        'tech-card': '#151B2B',
-                        'neon-blue': '#00F0FF',
-                        'neon-purple': '#BC13FE',
-                        'neon-green': '#0AFF99',
-                        'neon-red': '#FF2A6D',
+                        // 主品牌色梯度
+                        'primary': {
+                            1: '#E8F4FD',
+                            2: '#BEE3F8',
+                            3: '#90CDF4',
+                            4: '#63B3ED',
+                            5: '#4299E1',
+                            6: '#3182CE',
+                            7: '#2D7DD2',
+                            8: '#2C5AA0',
+                            9: '#1A365D',
+                            10: '#0D1B2E',
+                            DEFAULT: '#4299E1',
+                            'hover': '#3182CE',
+                            'active': '#2D7DD2',
+                        },
+                        // 辅助色
+                        'secondary': {
+                            'teal': '#2EC4B6',
+                            'teal-bg': 'rgba(46, 196, 182, 0.1)',
+                            'orange': '#FF9F1C',
+                            'purple': '#9F7AEA',
+                            'pink': '#ED64A6',
+                        },
+                        // 功能色
+                        'success': {
+                            DEFAULT: '#48BB78',
+                            'bg': '#F0FFF4',
+                            'border': '#9AE6B4',
+                        },
+                        'warning': {
+                            DEFAULT: '#ECC94B',
+                            'text': '#D69E2E',
+                            'bg': '#FFFBEB',
+                            'border': '#F6E05E',
+                        },
+                        'error': {
+                            DEFAULT: '#F56565',
+                            'bg': '#FFF5F5',
+                            'border': '#FEB2B2',
+                        },
+                        'info': {
+                            DEFAULT: '#4299E1',
+                            'bg': '#E8F4FD',
+                            'border': '#90CDF4',
+                        },
+                        // 文字颜色
+                        'text': {
+                            'primary': '#2D3748',
+                            'secondary': '#4A5568',
+                            'tertiary': '#718096',
+                            'disabled': '#A0AEC0',
+                            'inverse': '#FFFFFF',
+                        },
+                        // 背景颜色
+                        'bg': {
+                            'base': '#FFFFFF',
+                            'light': '#F7FAFC',
+                            'container': '#EDF2F7',
+                            'hover': '#E2E8F0',
+                        },
+                        // 边框颜色
+                        'border': {
+                            'base': '#E2E8F0',
+                            'light': '#EDF2F7',
+                            'split': '#F7FAFC',
+                        },
+                        // 中性灰度
+                        'gray': {
+                            100: '#F7FAFC',
+                            300: '#E2E8F0',
+                            500: '#718096',
+                            700: '#4A5568',
+                            900: '#2D3748',
+                        },
+                        // 图表色彩
+                        'chart': {
+                            'blue': '#2D7DD2',
+                            'orange': '#FF9F1C',
+                            'teal': '#2EC4B6',
+                            'purple': '#9F7AEA',
+                            'pink': '#ED64A6',
+                            'green': '#68D391',
+                        },
                     },
                     boxShadow: {
-                        'neon-blue': '0 0 10px rgba(0, 240, 255, 0.5)',
-                        'neon-purple': '0 0 10px rgba(188, 19, 254, 0.5)',
+                        'card': '0 2px 8px rgba(0, 0, 0, 0.08)',
+                        'hover': '0 4px 16px rgba(0, 0, 0, 0.12)',
+                        'modal': '0 12px 32px rgba(0, 0, 0, 0.16)',
                     },
                     fontFamily: {
                         'sans': ['Microsoft YaHei', 'sans-serif'],
@@ -49,70 +128,262 @@
         }
     </script>
     <style>
+        /* ===== CSS Variables 色彩系统 ===== */
+        :root {
+            /* 主品牌色梯度 */
+            --primary-1: #E8F4FD;
+            --primary-2: #BEE3F8;
+            --primary-3: #90CDF4;
+            --primary-4: #63B3ED;
+            --primary-5: #4299E1;
+            --primary-6: #3182CE;
+            --primary-7: #2D7DD2;
+            --primary-8: #2C5AA0;
+            --primary-9: #1A365D;
+            --primary-10: #0D1B2E;
+            
+            /* 主要交互色 */
+            --primary-color: #4299E1;
+            --primary-hover: #3182CE;
+            --primary-active: #2D7DD2;
+            
+            /* 辅助色 */
+            --secondary-teal: #2EC4B6;
+            --secondary-teal-bg: rgba(46, 196, 182, 0.1);
+            --secondary-orange: #FF9F1C;
+            --secondary-purple: #9F7AEA;
+            --secondary-pink: #ED64A6;
+            
+            /* 功能色 */
+            --success-color: #48BB78;
+            --success-bg: #F0FFF4;
+            --success-border: #9AE6B4;
+            
+            --warning-color: #ECC94B;
+            --warning-text: #D69E2E;
+            --warning-bg: #FFFBEB;
+            --warning-border: #F6E05E;
+            
+            --error-color: #F56565;
+            --error-bg: #FFF5F5;
+            --error-border: #FEB2B2;
+            
+            --info-color: #4299E1;
+            --info-bg: #E8F4FD;
+            --info-border: #90CDF4;
+            
+            --disabled-color: #E2E8F0;
+            
+            /* 文字颜色 */
+            --text-primary: #2D3748;
+            --text-secondary: #4A5568;
+            --text-tertiary: #718096;
+            --text-disabled: #A0AEC0;
+            --text-inverse: #FFFFFF;
+            
+            /* 背景颜色 */
+            --bg-base: #FFFFFF;
+            --bg-light: #F7FAFC;
+            --bg-container: #EDF2F7;
+            --bg-hover: #E2E8F0;
+            
+            /* 边框颜色 */
+            --border-base: #E2E8F0;
+            --border-light: #EDF2F7;
+            --border-split: #F7FAFC;
+            
+            /* 中性灰度 */
+            --gray-100: #F7FAFC;
+            --gray-300: #E2E8F0;
+            --gray-500: #718096;
+            --gray-700: #4A5568;
+            --gray-900: #2D3748;
+            
+            /* 图表色彩 */
+            --chart-blue: #2D7DD2;
+            --chart-orange: #FF9F1C;
+            --chart-teal: #2EC4B6;
+            --chart-purple: #9F7AEA;
+            --chart-pink: #ED64A6;
+            --chart-green: #68D391;
+            
+            /* 阴影 */
+            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-modal: 0 12px 32px rgba(0, 0, 0, 0.16);
+            
+            /* ===== 渐变色定义 ===== */
+            /* 主要渐变 */
+            --gradient-primary: linear-gradient(135deg, #4299E1 0%, #2C5AA0 100%);
+            --gradient-accent: linear-gradient(135deg, #4299E1 0%, #2EC4B6 100%);
+            --gradient-success: linear-gradient(135deg, #48BB78 0%, #38A169 100%);
+            --gradient-warning: linear-gradient(135deg, #FF9F1C 0%, #ECC94B 100%);
+            
+            /* 装饰性渐变 */
+            --gradient-bg: linear-gradient(180deg, #F7FAFC 0%, #FFFFFF 100%);
+            --gradient-card: linear-gradient(135deg, rgba(66, 153, 225, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
+            --gradient-topbar: linear-gradient(90deg, #FFFFFF 0%, #E8F4FD 100%);
+            --gradient-divider: linear-gradient(90deg, transparent 0%, #4299E1 50%, transparent 100%);
+            
+            /* 数据可视化渐变 */
+            --gradient-chart-fill: linear-gradient(180deg, rgba(66, 153, 225, 0.2) 0%, rgba(66, 153, 225, 0.05) 100%);
+            --gradient-chart-blue: linear-gradient(135deg, #90CDF4 0%, #2D7DD2 100%);
+            --gradient-chart-orange: linear-gradient(135deg, #FFA94D 0%, #FF9F1C 100%);
+            --gradient-chart-teal: linear-gradient(135deg, #81E6D9 0%, #2EC4B6 100%);
+        }
+        
         body {
-            background-color: #0B0F19;
-            color: #e2e8f0;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
             font-family: 'Microsoft YaHei', sans-serif;
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
         }
-        /* Glassmorphism */
+        
+        /* 卡片面板 */
         .glass-panel {
-            background: rgba(21, 27, 43, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--gradient-card);
+            border: 1px solid var(--border-base);
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
         }
-        /* Scrollbar */
+        
+        .glass-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* 滚动条 */
         ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
+            width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #0B0F19;
+            background: var(--bg-light);
         }
         ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 2px;
+            background: var(--gray-300);
+            border-radius: 3px;
         }
-        /* Chart Constraints */
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-500);
+        }
+        
+        /* 图表容器 */
         .chart-container {
             position: relative;
-            height: 220px; /* Fixed height for mobile */
+            height: 220px;
             width: 100%;
             overflow: hidden;
         }
-        /* Sticky Tabs */
+        
+        /* 固定顶部标签栏 */
         .sticky-tabs {
             position: sticky;
             top: 0;
             z-index: 40;
-            background: rgba(11, 15, 25, 0.95);
+            background: var(--bg-base);
             backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--border-light);
         }
-        .typewriter::after {
-            content: '|';
-            animation: blink 1s infinite;
+        
+        /* 禁用横向滚动条显示 */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
         }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* ===== 渐变色应用样式 ===== */
+        
+        /* 主按钮渐变 */
+        .btn-gradient-primary {
+            background: var(--gradient-primary);
+            color: var(--text-inverse);
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.2);
+        }
+        
+        .btn-gradient-primary:hover {
+            filter: brightness(1.1);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        .btn-gradient-primary:active {
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.4);
+            transform: translateY(0);
+        }
+        
+        /* 强调渐变卡片 */
+        .card-gradient-accent {
+            background: var(--gradient-accent);
+            color: var(--text-inverse);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .card-gradient-accent:hover {
+            filter: brightness(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(66, 153, 225, 0.25);
+        }
+        
+        /* 成功渐变元素 */
+        .gradient-success {
+            background: var(--gradient-success);
+        }
+        
+        /* 装饰性渐变分隔线 */
+        .gradient-divider {
+            height: 2px;
+            background: var(--gradient-divider);
+            border: none;
+            margin: 16px 0;
+        }
+        
+        /* 文字渐变效果 */
+        .text-gradient {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        /* 渐变顶部栏 */
+        .topbar-gradient {
+            background: var(--gradient-topbar);
+        }
+        
+        /* 数据卡片渐变背景 */
+        .metric-card-gradient {
+            background: var(--gradient-card);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
     </style>
 </head>
 <body class="pb-24">
 
     <!-- Main Dashboard -->
-    <main id="dashboard-view" class="pt-4 px-4 space-y-5">
+    <main id="dashboard-view" class="pt-4 px-4 space-y-5 pb-24">
 
         <!-- Date & T+1 Badge -->
-        <div class="flex items-center justify-between bg-slate-800/40 px-3 py-2 rounded-lg border border-white/5">
+        <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-gray-300 shadow-sm">
             <div class="flex items-center space-x-2">
-                <i class="fa-regular fa-calendar text-neon-blue text-xs"></i>
-                <span class="text-xs text-slate-400">数据日期：</span>
-                <span class="text-xs text-white font-medium">2026-01-13 (昨日)</span>
+                <i class="fa-regular fa-calendar text-primary text-xs"></i>
+                <span class="text-xs text-text-tertiary">数据日期：</span>
+                <span class="text-xs text-text-primary font-medium">2026-01-13 (昨日)</span>
             </div>
-            <span class="text-[10px] text-slate-500 bg-slate-700/50 px-2 py-0.5 rounded">T+1 数据</span>
+            <span class="text-[10px] text-text-tertiary bg-bg-container px-2 py-0.5 rounded">T+1 数据</span>
         </div>
 
         <!-- Metrics Cards (Horizontal Scroll) -->
@@ -123,14 +394,14 @@
         <!-- Intelligence Tab Panel -->
         <section class="flex flex-col relative min-h-[500px]">
             <!-- Sticky Headers -->
-            <div class="sticky-tabs flex border-b border-white/10 mb-4 pt-2">
-                <button onclick="switchHomeTab('supervision')" id="tab-home-supervision" class="flex-1 py-3 text-center text-xs font-bold text-neon-blue border-b-2 border-neon-blue transition-all">
+            <div class="sticky-tabs flex mb-4 pt-2">
+                <button onclick="switchHomeTab('supervision')" id="tab-home-supervision" class="flex-1 py-3 text-center text-xs font-bold text-primary border-b-2 border-primary transition-all">
                     任务
                 </button>
-                <button onclick="switchHomeTab('insights')" id="tab-home-insights" class="flex-1 py-3 text-center text-xs font-bold text-slate-400 border-b-2 border-transparent hover:text-white transition-all">
+                <button onclick="switchHomeTab('insights')" id="tab-home-insights" class="flex-1 py-3 text-center text-xs font-bold text-text-tertiary border-b-2 border-transparent hover:text-text-primary transition-all">
                     洞察
                 </button>
-                <button onclick="switchHomeTab('cases')" id="tab-home-cases" class="flex-1 py-3 text-center text-xs font-bold text-slate-400 border-b-2 border-transparent hover:text-white transition-all">
+                <button onclick="switchHomeTab('cases')" id="tab-home-cases" class="flex-1 py-3 text-center text-xs font-bold text-text-tertiary border-b-2 border-transparent hover:text-text-primary transition-all">
                     案例
                 </button>
             </div>
@@ -138,10 +409,10 @@
             <!-- Tab Content -->
             
             <!-- 1. Supervision Tasks -->
-            <div id="panel-home-supervision" class="animate-fade-in pb-20">
+            <div id="panel-home-supervision" class="animate-fade-in">
                 <div class="flex justify-between items-center mb-3">
-                    <span class="text-[10px] text-slate-500">当前任务 (3/3)</span>
-                    <button onclick="openCreateTaskView()" class="text-[10px] text-neon-blue border border-neon-blue/30 px-2 py-1 rounded hover:bg-neon-blue/10 transition-colors">
+                    <span class="text-[10px] text-text-tertiary">当前任务 (3/3)</span>
+                    <button onclick="openCreateTaskView()" class="text-[10px] text-primary border border-primary/30 px-2 py-1 rounded hover:bg-primary-1 transition-colors">
                         <i class="fa-solid fa-plus mr-1"></i> 新增任务
                     </button>
                 </div>
@@ -151,14 +422,14 @@
             </div>
 
             <!-- 2. Insights -->
-            <div id="panel-home-insights" class="hidden animate-fade-in pb-20">
+            <div id="panel-home-insights" class="hidden animate-fade-in">
                 
                 <!-- Sub-tabs for Insights -->
-                <div class="flex space-x-2 mb-4 bg-white/5 p-1 rounded-lg">
-                    <button onclick="switchInsightsSubTab('keywords')" id="tab-insights-keywords" class="flex-1 py-2 text-center text-xs font-medium text-white bg-neon-blue/20 border border-neon-blue/30 rounded-md transition-all">
+                <div class="flex space-x-2 mb-4 bg-bg-container p-1 rounded-lg">
+                    <button onclick="switchInsightsSubTab('keywords')" id="tab-insights-keywords" class="flex-1 py-2 text-center text-xs font-medium text-primary bg-primary-1 border border-primary/30 rounded-md transition-all">
                         热词
                     </button>
-                    <button onclick="switchInsightsSubTab('sentiment')" id="tab-insights-sentiment" class="flex-1 py-2 text-center text-xs font-medium text-slate-400 bg-transparent rounded-md transition-all">
+                    <button onclick="switchInsightsSubTab('sentiment')" id="tab-insights-sentiment" class="flex-1 py-2 text-center text-xs font-medium text-text-tertiary bg-transparent rounded-md transition-all hover:bg-bg-hover">
                         舆情
                     </button>
                 </div>
@@ -170,23 +441,37 @@
 
                 <!-- Sentiment Section -->
                 <div id="insights-sentiment" class="hidden">
-                    <!-- Filter Tags -->
-                    <div class="flex flex-wrap gap-2 mb-4 bg-white/5 p-2 rounded-lg">
-                        <button onclick="filterSentiments('all')" id="filter-all" class="px-3 py-1.5 text-xs font-medium rounded-full bg-neon-blue/20 text-neon-blue border border-neon-blue/30 transition-all">
-                            全部
-                        </button>
-                        <button onclick="filterSentiments('complaint')" id="filter-complaint" class="px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-slate-400 border border-white/10 hover:border-neon-red/30 hover:text-neon-red transition-all">
-                            投诉
-                        </button>
-                        <button onclick="filterSentiments('risk')" id="filter-risk" class="px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-slate-400 border border-white/10 hover:border-orange-400/30 hover:text-orange-400 transition-all">
-                            风险
-                        </button>
-                        <button onclick="filterSentiments('praise')" id="filter-praise" class="px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-slate-400 border border-white/10 hover:border-neon-green/30 hover:text-neon-green transition-all">
-                            好评
-                        </button>
-                        <button onclick="filterSentiments('anomaly')" id="filter-anomaly" class="px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-slate-400 border border-white/10 hover:border-yellow-400/30 hover:text-yellow-400 transition-all">
-                            异常
-                        </button>
+                    <!-- Filter Tags - Horizontal Scroll -->
+                    <div class="mb-4">
+                        <div class="flex overflow-x-auto whitespace-nowrap pb-2 -mx-4 px-4 gap-2 scrollbar-hide bg-bg-container py-2 rounded-lg">
+                            <button onclick="filterSentiments('all')" id="filter-all" class="flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-primary-1 text-primary border border-primary/30 transition-all">
+                                全部
+                            </button>
+                            <button onclick="filterSentiments('complaint')" id="filter-complaint" class="flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-text-tertiary border border-border-base hover:border-error/30 hover:text-error transition-all">
+                                投诉
+                            </button>
+                            <button onclick="filterSentiments('dispute')" id="filter-dispute" class="flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-text-tertiary border border-border-base hover:border-error/30 hover:text-error transition-all">
+                                纠纷
+                            </button>
+                            <button onclick="filterSentiments('stock-out')" id="filter-stock-out" class="flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-text-tertiary border border-border-base hover:border-warning/30 hover:text-warning-text transition-all">
+                                商品缺货
+                            </button>
+                            <button onclick="filterSentiments('quality-issue')" id="filter-quality-issue" class="flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-text-tertiary border border-border-base hover:border-error/30 hover:text-error transition-all">
+                                质量问题
+                            </button>
+                            <button onclick="filterSentiments('price-dispute')" id="filter-price-dispute" class="flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-text-tertiary border border-border-base hover:border-warning/30 hover:text-warning-text transition-all">
+                                价格争议
+                            </button>
+                            <button onclick="filterSentiments('service-risk')" id="filter-service-risk" class="flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-text-tertiary border border-border-base hover:border-error/30 hover:text-error transition-all">
+                                服务风险
+                            </button>
+                            <button onclick="filterSentiments('store-anomaly')" id="filter-store-anomaly" class="flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-text-tertiary border border-border-base hover:border-warning/30 hover:text-warning-text transition-all">
+                                门店异常
+                            </button>
+                            <button onclick="filterSentiments('praise')" id="filter-praise" class="flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-text-tertiary border border-border-base hover:border-success/30 hover:text-success transition-all">
+                                好评
+                            </button>
+                        </div>
                     </div>
                     
                     <!-- Sentiment Cards List -->
@@ -197,8 +482,8 @@
             </div>
 
             <!-- 3. Excellent Cases -->
-            <div id="panel-home-cases" class="hidden animate-fade-in pb-20">
-                <div class="text-[10px] text-slate-500 mb-3 text-center">昨日优秀话术精选</div>
+            <div id="panel-home-cases" class="hidden animate-fade-in">
+                <div class="text-[10px] text-text-tertiary mb-3 text-center">昨日优秀话术精选</div>
                 <div id="cases-list" class="space-y-4">
                     <!-- Dynamic Cases -->
                 </div>
@@ -211,24 +496,24 @@
     <main id="profile-view" class="hidden pt-4 px-4 space-y-5 pb-24">
         
         <!-- User Profile Card -->
-        <div class="glass-panel rounded-xl p-5 border border-white/5 relative overflow-hidden">
+        <div class="glass-panel rounded-xl p-5 relative overflow-hidden">
             <!-- Decorative Background -->
-            <div class="absolute top-0 right-0 w-20 h-20 bg-neon-blue/10 blur-xl rounded-full -mr-10 -mt-10"></div>
+            <div class="absolute top-0 right-0 w-20 h-20 bg-primary-1 rounded-full -mr-10 -mt-10"></div>
             
             <div class="relative z-10 flex items-center space-x-4">
                 <!-- Avatar -->
-                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-neon-blue to-neon-purple p-0.5">
-                    <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center">
-                        <i class="fa-solid fa-user text-2xl text-neon-blue"></i>
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary-purple p-0.5">
+                    <div class="w-full h-full rounded-full bg-white flex items-center justify-center">
+                        <i class="fa-solid fa-user text-2xl text-primary"></i>
                     </div>
                 </div>
                 
                 <!-- User Info -->
                 <div class="flex-1">
-                    <h2 class="text-lg font-bold text-white mb-1">张总</h2>
+                    <h2 class="text-lg font-bold text-text-primary mb-1">张总</h2>
                     <div class="flex items-center space-x-2">
-                        <span class="text-[10px] bg-neon-blue/20 text-neon-blue px-2 py-0.5 rounded-full border border-neon-blue/30">运营管理者</span>
-                        <span class="text-xs text-slate-400">大参林连锁药店</span>
+                        <span class="text-[10px] bg-primary-1 text-primary px-2 py-0.5 rounded-full border border-primary/30">运营管理者</span>
+                        <span class="text-xs text-text-tertiary">大参林连锁药店</span>
                     </div>
                 </div>
             </div>
@@ -236,13 +521,13 @@
 
         <!-- Stats Overview -->
         <div class="grid grid-cols-2 gap-3">
-            <div class="glass-panel rounded-xl p-3 border border-white/5 text-center">
-                <div class="text-xs text-slate-400 mb-1">门店数</div>
-                <div class="text-xl font-bold text-white font-mono">18</div>
+            <div class="glass-panel rounded-xl p-3 text-center">
+                <div class="text-xs text-text-tertiary mb-1">门店数</div>
+                <div class="text-xl font-bold text-text-primary font-mono">18</div>
             </div>
-            <div class="glass-panel rounded-xl p-3 border border-white/5 text-center">
-                <div class="text-xs text-slate-400 mb-1">设备数</div>
-                <div class="text-xl font-bold text-white font-mono">120</div>
+            <div class="glass-panel rounded-xl p-3 text-center">
+                <div class="text-xs text-text-tertiary mb-1">设备数</div>
+                <div class="text-xl font-bold text-text-primary font-mono">120</div>
             </div>
         </div>
 
@@ -252,37 +537,37 @@
         </div>
 
         <!-- Logout Button -->
-        <button onclick="handleLogout()" class="w-full glass-panel rounded-xl p-4 border border-neon-red/20 flex items-center justify-center space-x-2 active:scale-95 transition-transform mt-8">
-            <i class="fa-solid fa-right-from-bracket text-neon-red"></i>
-            <span class="text-sm text-neon-red font-medium">退出登录</span>
+        <button onclick="handleLogout()" class="w-full glass-panel rounded-xl p-4 border border-error/30 flex items-center justify-center space-x-2 active:scale-95 transition-transform mt-8 hover:bg-error-bg">
+            <i class="fa-solid fa-right-from-bracket text-error"></i>
+            <span class="text-sm text-error font-medium">退出登录</span>
         </button>
 
         <!-- Version Info -->
-        <div class="text-center text-[10px] text-slate-600 pt-4 pb-2">
+        <div class="text-center text-[10px] text-text-disabled pt-4 pb-2">
             药店智能决策系统 v1.2.0
         </div>
 
     </main>
 
     <!-- Bottom Navigation -->
-    <nav class="fixed bottom-0 w-full h-16 bg-[#0B0F19]/95 backdrop-blur border-t border-white/10 flex z-50">
-        <button onclick="switchMainTab('dashboard')" id="nav-item-dashboard" class="flex-1 flex flex-col items-center justify-center space-y-1 text-neon-blue">
-            <i class="fa-solid fa-house text-lg drop-shadow-[0_0_5px_rgba(0,240,255,0.5)]"></i>
+    <nav class="fixed bottom-0 w-full h-16 bg-white/95 backdrop-blur border-t border-border-light flex z-50 shadow-hover">
+        <button onclick="switchMainTab('dashboard')" id="nav-item-dashboard" class="flex-1 flex flex-col items-center justify-center space-y-1 text-primary">
+            <i class="fa-solid fa-house text-lg"></i>
             <span class="text-[10px] font-medium">驾驶舱</span>
         </button>
-        <button onclick="switchMainTab('profile')" id="nav-item-profile" class="flex-1 flex flex-col items-center justify-center space-y-1 text-slate-500 hover:text-white transition-colors">
+        <button onclick="switchMainTab('profile')" id="nav-item-profile" class="flex-1 flex flex-col items-center justify-center space-y-1 text-text-tertiary hover:text-text-primary transition-colors">
             <i class="fa-solid fa-user-gear text-lg"></i>
             <span class="text-[10px]">我的</span>
         </button>
     </nav>
 
     <!-- Create Task View (Slide-in Page) -->
-    <div id="create-task-view" class="fixed inset-0 bg-[#0B0F19] z-[60] transform translate-x-full transition-transform duration-300 flex flex-col">
-        <header class="h-14 border-b border-white/10 flex items-center justify-between px-4 bg-[#0B0F19]">
-            <button onclick="hideCreateTaskView()" class="w-8 h-8 flex items-center justify-center text-slate-400">
+    <div id="create-task-view" class="fixed inset-0 bg-bg-light z-[60] transform translate-x-full transition-transform duration-300 flex flex-col">
+        <header class="h-14 border-b border-border-light flex items-center justify-between px-4 bg-white">
+            <button onclick="hideCreateTaskView()" class="w-8 h-8 flex items-center justify-center text-text-tertiary hover:text-text-primary">
                 <i class="fa-solid fa-arrow-left"></i>
             </button>
-            <h1 id="create-task-title" class="text-sm font-bold text-white">新建任务</h1>
+            <h1 id="create-task-title" class="text-sm font-bold text-text-primary">新建任务</h1>
             <div class="w-8"></div>
         </header>
         
@@ -291,59 +576,78 @@
                 
                 <!-- AI Description Input -->
                 <div id="ai-input-section" class="relative">
-                    <label class="block text-xs text-neon-blue font-bold mb-2">请输入监控需求</label>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-xs text-primary font-bold">请输入监控需求</label>
+                        <div class="flex items-center space-x-2">
+                            <span id="ai-input-count" class="text-[10px] text-text-tertiary"><span class="text-primary">0</span>/200</span>
+                            <button id="btn-clear-input" onclick="clearInput()" class="text-[10px] text-text-tertiary hover:text-error transition-colors hidden">
+                                <i class="fa-solid fa-xmark mr-1"></i>清空
+                            </button>
+                        </div>
+                    </div>
                     <div class="relative">
-                        <textarea id="ai-input-desc" rows="4" placeholder="例如：我想抓一下有没有推荐新品益生菌..." class="w-full bg-slate-800/50 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-neon-blue/50 transition-colors resize-none"></textarea>
+                        <textarea id="ai-input-desc" rows="4" maxlength="200" oninput="updateInputCharCount()" placeholder="例如：我想抓一下有没有推荐新品益生菌..." class="w-full bg-white border border-border-base rounded-lg px-4 py-3 pr-12 text-sm text-text-primary placeholder-text-disabled focus:outline-none focus:border-primary transition-colors resize-none"></textarea>
+                        <button id="btn-voice-input" onclick="startVoiceInput()" class="absolute right-3 bottom-3 w-8 h-8 flex items-center justify-center bg-primary-1 text-primary rounded-full hover:bg-primary-2 transition-colors border border-primary/20">
+                            <i class="fa-solid fa-microphone text-sm"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Voice Input Warning (Hidden by default) -->
+                    <div id="voice-warning" class="hidden mt-2 bg-warning-bg p-3 rounded-lg border border-warning-border animate-fade-in">
+                        <div class="flex items-start space-x-2">
+                            <i class="fa-solid fa-exclamation-triangle text-warning-text mt-0.5"></i>
+                            <div class="text-xs text-warning-text">语音输入已达上限（200字），已自动截断。您可以编辑或重新输入。</div>
+                        </div>
                     </div>
                     
                     <!-- Quick Cases -->
                     <div class="mt-3">
-                        <div class="text-[10px] text-slate-500 mb-2">推荐案例：</div>
+                        <div class="text-[10px] text-text-tertiary mb-2">推荐案例：</div>
                         <div class="flex flex-wrap gap-2">
-                            <button onclick="fillInput('查一下谁卖感冒药没推维C')" class="text-[10px] bg-slate-800 text-slate-300 px-3 py-1.5 rounded-full border border-white/5 hover:border-neon-blue/30 transition-colors">关联维C</button>
-                            <button onclick="fillInput('检查是否说了欢迎光临')" class="text-[10px] bg-slate-800 text-slate-300 px-3 py-1.5 rounded-full border border-white/5 hover:border-neon-blue/30 transition-colors">欢迎语合规</button>
-                            <button onclick="fillInput('有没有向会员介绍积分抵扣')" class="text-[10px] bg-slate-800 text-slate-300 px-3 py-1.5 rounded-full border border-white/5 hover:border-neon-blue/30 transition-colors">会员权益</button>
+                            <button onclick="fillInput('查一下谁卖感冒药没推维C')" class="text-[10px] bg-white text-text-secondary px-3 py-1.5 rounded-full border border-border-base hover:border-primary hover:text-primary transition-colors">关联维C</button>
+                            <button onclick="fillInput('检查是否说了欢迎光临')" class="text-[10px] bg-white text-text-secondary px-3 py-1.5 rounded-full border border-border-base hover:border-primary hover:text-primary transition-colors">欢迎语合规</button>
+                            <button onclick="fillInput('有没有向会员介绍积分抵扣')" class="text-[10px] bg-white text-text-secondary px-3 py-1.5 rounded-full border border-border-base hover:border-primary hover:text-primary transition-colors">会员权益</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Generated Result (Hidden initially) -->
-                <div id="generated-result-area" class="hidden space-y-5 animate-fade-in border-t border-white/10 pt-5">
+                <div id="generated-result-area" class="hidden space-y-5 animate-fade-in border-t border-border-light pt-5">
                     
                     <!-- Field 1: Name -->
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <label class="text-xs text-slate-400">任务名称</label>
+                            <label class="text-xs text-text-secondary">任务名称</label>
                             <div class="flex items-center space-x-2">
-                                <span id="task-name-count" class="text-[10px] text-slate-500"><span class="text-neon-blue">0</span>/20</span>
-                                <button onclick="regenerateField('task-name')" class="text-[10px] text-neon-blue hover:text-white"><i class="fa-solid fa-rotate-right mr-1"></i>重写</button>
+                                <span id="task-name-count" class="text-[10px] text-text-tertiary"><span class="text-primary">0</span>/20</span>
+                                <button onclick="regenerateField('task-name')" class="text-[10px] text-primary hover:text-primary-hover"><i class="fa-solid fa-rotate-right mr-1"></i>重写</button>
                             </div>
                         </div>
-                        <input type="text" id="task-name" value="" maxlength="20" oninput="updateCharCount('task-name', 20)" class="w-full bg-slate-800/50 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-neon-blue/50 transition-colors">
+                        <input type="text" id="task-name" value="" maxlength="20" oninput="updateCharCount('task-name', 20)" class="w-full bg-white border border-border-base rounded-lg px-4 py-3 text-sm text-text-primary focus:outline-none focus:border-primary transition-colors">
                     </div>
 
                     <!-- Field 2: Intro -->
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <label class="text-xs text-slate-400">任务要求</label>
+                            <label class="text-xs text-text-secondary">任务要求</label>
                             <div class="flex items-center space-x-2">
-                                <span id="task-intro-count" class="text-[10px] text-slate-500"><span class="text-neon-blue">0</span>/100</span>
-                                <button onclick="regenerateField('task-intro')" class="text-[10px] text-neon-blue hover:text-white"><i class="fa-solid fa-rotate-right mr-1"></i>重写</button>
+                                <span id="task-intro-count" class="text-[10px] text-text-tertiary"><span class="text-primary">0</span>/100</span>
+                                <button onclick="regenerateField('task-intro')" class="text-[10px] text-primary hover:text-primary-hover"><i class="fa-solid fa-rotate-right mr-1"></i>重写</button>
                             </div>
                         </div>
-                        <textarea id="task-intro" rows="2" maxlength="100" oninput="updateCharCount('task-intro', 100)" class="w-full bg-slate-800/50 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-neon-blue/50 transition-colors resize-none"></textarea>
+                        <textarea id="task-intro" rows="2" maxlength="100" oninput="updateCharCount('task-intro', 100)" class="w-full bg-white border border-border-base rounded-lg px-4 py-3 text-sm text-text-primary focus:outline-none focus:border-primary transition-colors resize-none"></textarea>
                     </div>
 
                     <!-- Field 3: Action Plan -->
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <label class="text-xs text-slate-400">任务案例</label>
+                            <label class="text-xs text-text-secondary">任务案例</label>
                             <div class="flex items-center space-x-2">
-                                <span id="task-action-count" class="text-[10px] text-slate-500"><span class="text-neon-blue">0</span>/200</span>
-                                <button onclick="regenerateField('task-action')" class="text-[10px] text-neon-blue hover:text-white"><i class="fa-solid fa-rotate-right mr-1"></i>重写</button>
+                                <span id="task-action-count" class="text-[10px] text-text-tertiary"><span class="text-primary">0</span>/200</span>
+                                <button onclick="regenerateField('task-action')" class="text-[10px] text-primary hover:text-primary-hover"><i class="fa-solid fa-rotate-right mr-1"></i>重写</button>
                             </div>
                         </div>
-                        <textarea id="task-action" rows="3" maxlength="200" oninput="updateCharCount('task-action', 200)" class="w-full bg-slate-800/50 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-neon-blue/50 transition-colors resize-none"></textarea>
+                        <textarea id="task-action" rows="3" maxlength="200" oninput="updateCharCount('task-action', 200)" class="w-full bg-white border border-border-base rounded-lg px-4 py-3 text-sm text-text-primary focus:outline-none focus:border-primary transition-colors resize-none"></textarea>
                     </div>
 
                 </div>
@@ -351,18 +655,18 @@
         </div>
 
         <!-- Footer Actions -->
-        <div class="p-4 border-t border-white/10 bg-[#0B0F19]">
+        <div class="p-4 border-t border-border-light bg-white">
             <!-- State 1: Generate -->
-            <button id="btn-initial-generate" onclick="triggerGenerate()" class="w-full bg-neon-blue text-black font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(0,240,255,0.3)] active:scale-95 transition-transform flex items-center justify-center">
+            <button id="btn-initial-generate" onclick="triggerGenerate()" class="w-full btn-gradient-primary font-bold py-3 rounded-lg active:scale-95 flex items-center justify-center">
                 <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> 生成
             </button>
 
             <!-- State 2: Save & Regenerate (Hidden) -->
             <div id="btn-group-generated" class="hidden flex space-x-3">
-                <button onclick="resetGenerate()" class="flex-1 bg-slate-800 text-slate-300 font-bold py-3 rounded-lg border border-white/10 active:scale-95 transition-transform">
+                <button onclick="resetGenerate()" class="flex-1 bg-white text-text-secondary font-bold py-3 rounded-lg border border-border-base hover:bg-bg-hover active:scale-95 transition-transform">
                     <i class="fa-solid fa-rotate mr-1"></i> 重新生成
                 </button>
-                <button id="btn-save-task" onclick="saveNewTask()" class="flex-[2] bg-neon-blue text-black font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(0,240,255,0.3)] active:scale-95 transition-transform">
+                <button id="btn-save-task" onclick="saveNewTask()" class="flex-[2] btn-gradient-primary font-bold py-3 rounded-lg active:scale-95">
                     <i class="fa-solid fa-check mr-1"></i> 保存指标
                 </button>
             </div>
@@ -370,47 +674,47 @@
     </div>
 
     <!-- Metric Detail View (Slide-in Page) -->
-    <div id="metric-detail-view" class="fixed inset-0 bg-[#0B0F19] z-[65] transform translate-x-full transition-transform duration-300 flex flex-col">
-        <header class="h-14 border-b border-white/10 flex items-center justify-between px-4 bg-[#0B0F19]">
-            <button onclick="hideMetricDetailView()" class="w-8 h-8 flex items-center justify-center text-slate-400">
+    <div id="metric-detail-view" class="fixed inset-0 bg-bg-light z-[65] transform translate-x-full transition-transform duration-300 flex flex-col">
+        <header class="h-14 border-b border-border-light flex items-center justify-between px-4 bg-white">
+            <button onclick="hideMetricDetailView()" class="w-8 h-8 flex items-center justify-center text-text-tertiary hover:text-text-primary">
                 <i class="fa-solid fa-arrow-left"></i>
             </button>
-            <h1 class="text-sm font-bold text-white">指标详情</h1>
+            <h1 class="text-sm font-bold text-text-primary">指标详情</h1>
             <div class="w-8"></div>
         </header>
 
-        <div class="flex-1 overflow-y-auto">
+        <div class="flex-1 overflow-y-auto pb-6">
             <!-- Header Card -->
-            <div class="p-4 bg-gradient-to-b from-slate-800/30 to-[#0B0F19] border-b border-white/5">
+            <div class="p-4 topbar-gradient border-b border-border-light">
                 <div class="text-center mb-4">
-                    <h2 id="metric-detail-title" class="text-2xl font-bold text-white mb-3">...</h2>
-                    <div id="metric-detail-value" class="text-4xl font-bold text-neon-blue font-mono mb-3">...</div>
+                    <h2 id="metric-detail-title" class="text-2xl font-bold text-text-primary mb-3">...</h2>
+                    <div id="metric-detail-value" class="text-4xl font-bold text-gradient font-mono mb-3">...</div>
                     <div id="metric-detail-change" class="flex items-center justify-center text-sm">
                         <!-- Dynamic content -->
                     </div>
                 </div>
                 
                 <!-- Warning for Traffic Metric -->
-                <div id="metric-warning" class="hidden mt-4 glass-panel p-3 rounded-lg border border-yellow-400/20 bg-yellow-400/5">
+                <div id="metric-warning" class="hidden mt-4 bg-warning-bg p-3 rounded-lg border border-warning-border">
                     <div class="flex items-start space-x-2">
-                        <i class="fa-solid fa-lightbulb text-yellow-400 mt-0.5"></i>
-                        <div class="text-xs text-slate-300">客流量数据通过语音数据获取，存在一定误差</div>
+                        <i class="fa-solid fa-lightbulb text-warning-text mt-0.5"></i>
+                        <div class="text-xs text-warning-text">客流量数据通过语音数据获取，存在一定误差</div>
                     </div>
                 </div>
             </div>
 
             <!-- Chart Section -->
-            <div class="p-4 border-b border-white/5">
+            <div class="p-4 border-b border-border-light bg-white">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 id="metric-chart-title" class="text-xs font-bold text-white border-l-2 border-neon-blue pl-2">近7日趋势</h3>
+                    <h3 id="metric-chart-title" class="text-xs font-bold text-text-primary border-l-2 border-primary pl-2">近7日趋势</h3>
                 </div>
                 
                 <!-- Trend Switch Buttons (Only for Traffic Metric) -->
-                <div id="trend-switch-container" class="hidden flex space-x-2 mb-4 bg-white/5 p-1 rounded-lg">
-                    <button onclick="switchMetricTrend('7days')" id="btn-trend-7days" class="flex-1 py-2 text-center text-xs font-medium text-white bg-neon-blue/20 border border-neon-blue/30 rounded-md transition-all">
+                <div id="trend-switch-container" class="hidden flex space-x-2 mb-4 bg-bg-container p-1 rounded-lg">
+                    <button onclick="switchMetricTrend('7days')" id="btn-trend-7days" class="flex-1 py-2 text-center text-xs font-medium text-primary bg-primary-1 border border-primary/30 rounded-md transition-all">
                         7日趋势
                     </button>
-                    <button onclick="switchMetricTrend('hourly')" id="btn-trend-hourly" class="flex-1 py-2 text-center text-xs font-medium text-slate-400 bg-transparent rounded-md transition-all">
+                    <button onclick="switchMetricTrend('hourly')" id="btn-trend-hourly" class="flex-1 py-2 text-center text-xs font-medium text-text-tertiary bg-transparent rounded-md hover:bg-bg-hover transition-all">
                         昨日分时趋势
                     </button>
                 </div>
@@ -421,10 +725,10 @@
             </div>
 
             <!-- Store Ranking -->
-            <div class="p-4 pb-20">
+            <div class="p-4">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-bold text-white border-l-2 border-neon-blue pl-2">门店排行榜</h3>
-                    <span class="text-[10px] text-slate-500">昨日数据</span>
+                    <h3 class="text-xs font-bold text-text-primary border-l-2 border-primary pl-2">门店排行榜</h3>
+                    <span class="text-[10px] text-text-tertiary">昨日数据</span>
                 </div>
                 <div id="metric-store-list" class="space-y-2">
                     <!-- Dynamic Content -->
@@ -434,47 +738,47 @@
     </div>
 
     <!-- Task Detail View (Slide-in Page) -->
-    <div id="task-detail-view" class="fixed inset-0 bg-[#0B0F19] z-[65] transform translate-x-full transition-transform duration-300 flex flex-col">
-        <header class="h-14 border-b border-white/10 flex items-center justify-between px-4 bg-[#0B0F19]">
-            <button onclick="hideTaskDetailView()" class="w-8 h-8 flex items-center justify-center text-slate-400">
+    <div id="task-detail-view" class="fixed inset-0 bg-bg-light z-[65] transform translate-x-full transition-transform duration-300 flex flex-col">
+        <header class="h-14 border-b border-border-light flex items-center justify-between px-4 bg-white">
+            <button onclick="hideTaskDetailView()" class="w-8 h-8 flex items-center justify-center text-text-tertiary hover:text-text-primary">
                 <i class="fa-solid fa-arrow-left"></i>
             </button>
-            <h1 class="text-sm font-bold text-white">任务详情</h1>
+            <h1 class="text-sm font-bold text-text-primary">任务详情</h1>
             <div class="w-8"></div>
         </header>
 
-        <div class="flex-1 overflow-y-auto">
+        <div class="flex-1 overflow-y-auto pb-6">
             <!-- Header Card -->
-            <div class="p-4 bg-gradient-to-b from-slate-800/30 to-[#0B0F19] border-b border-white/5">
+            <div class="p-4 bg-gradient-to-b from-primary-1 to-bg-light border-b border-border-light">
                 <div class="flex items-start justify-between mb-4">
                     <div>
-                        <h2 id="detail-task-title" class="text-lg font-bold text-white mb-1">...</h2>
+                        <h2 id="detail-task-title" class="text-lg font-bold text-text-primary mb-1">...</h2>
                     </div>
                     <div class="text-right flex flex-col items-end">
-                         <button onclick="openTaskShareModal(currentDetailTaskId)" class="mb-2 text-neon-blue bg-neon-blue/10 w-8 h-8 rounded-full flex items-center justify-center hover:bg-neon-blue/20 transition-colors">
+                         <button onclick="openTaskShareModal(currentDetailTaskId)" class="mb-2 text-primary bg-primary-1 w-8 h-8 rounded-full flex items-center justify-center hover:bg-primary-2 transition-colors border border-primary/20">
                                 <i class="fa-solid fa-share-nodes text-xs"></i>
                          </button>
-                         <div class="text-[10px] text-slate-500 mb-0.5">昨日执行率</div>
-                         <div id="detail-task-value" class="text-2xl font-bold text-neon-blue font-mono">--%</div>
+                         <div class="text-[10px] text-text-tertiary mb-0.5">昨日执行率</div>
+                         <div id="detail-task-value" class="text-2xl font-bold text-primary font-mono">--%</div>
                     </div>
                 </div>
                 
                 <div class="space-y-3">
-                    <div class="glass-panel p-3 rounded-lg border border-white/5">
-                        <div class="text-[10px] text-slate-500 mb-1">任务要求</div>
-                        <div id="detail-task-intro" class="text-xs text-slate-300 leading-relaxed">...</div>
+                    <div class="bg-white p-3 rounded-lg border border-border-base shadow-sm">
+                        <div class="text-[10px] text-text-tertiary mb-1">任务要求</div>
+                        <div id="detail-task-intro" class="text-xs text-text-secondary leading-relaxed">...</div>
                     </div>
-                    <div class="glass-panel p-3 rounded-lg border border-white/5">
-                        <div class="text-[10px] text-slate-500 mb-1">任务案例 (SOP)</div>
-                        <div id="detail-task-action" class="text-xs text-slate-300 leading-relaxed">...</div>
+                    <div class="bg-white p-3 rounded-lg border border-border-base shadow-sm">
+                        <div class="text-[10px] text-text-tertiary mb-1">任务案例 (SOP)</div>
+                        <div id="detail-task-action" class="text-xs text-text-secondary leading-relaxed">...</div>
                     </div>
                 </div>
             </div>
 
             <!-- Chart Section -->
-            <div class="p-4 border-b border-white/5">
+            <div class="p-4 border-b border-border-light bg-white">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-bold text-white border-l-2 border-neon-blue pl-2">近7日趋势</h3>
+                    <h3 class="text-xs font-bold text-text-primary border-l-2 border-primary pl-2">近7日趋势</h3>
                 </div>
                 <div class="chart-container" style="height: 200px;">
                     <canvas id="detail-task-chart"></canvas>
@@ -482,10 +786,10 @@
             </div>
 
             <!-- Store Ranking -->
-            <div class="p-4 pb-20">
+            <div class="p-4">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-bold text-white border-l-2 border-neon-blue pl-2">门店执行红黑榜</h3>
-                    <span class="text-[10px] text-slate-500">昨日数据</span>
+                    <h3 class="text-xs font-bold text-text-primary border-l-2 border-primary pl-2">门店执行红黑榜</h3>
+                    <span class="text-[10px] text-text-tertiary">昨日数据</span>
                 </div>
                 <div id="detail-store-list" class="space-y-2">
                     <!-- Dynamic Content -->
@@ -495,41 +799,41 @@
     </div>
 
     <!-- Case Detail View (Slide-in Page) -->
-    <div id="case-detail-view" class="fixed inset-0 bg-[#0B0F19] z-[65] transform translate-x-full transition-transform duration-300 flex flex-col">
-        <header class="h-14 border-b border-white/10 flex items-center justify-between px-4 bg-[#0B0F19]">
-            <button onclick="hideCaseDetailView()" class="w-8 h-8 flex items-center justify-center text-slate-400">
+    <div id="case-detail-view" class="fixed inset-0 bg-bg-light z-[65] transform translate-x-full transition-transform duration-300 flex flex-col">
+        <header class="h-14 border-b border-border-light flex items-center justify-between px-4 bg-white">
+            <button onclick="hideCaseDetailView()" class="w-8 h-8 flex items-center justify-center text-text-tertiary hover:text-text-primary">
                 <i class="fa-solid fa-arrow-left"></i>
             </button>
-            <h1 class="text-sm font-bold text-white">案例详情</h1>
+            <h1 class="text-sm font-bold text-text-primary">案例详情</h1>
             <div class="w-8"></div>
         </header>
 
         <div class="flex-1 overflow-y-auto pb-24">
             <!-- Hero Card (Staff) -->
-            <div class="p-5 bg-gradient-to-b from-slate-800/40 to-[#0B0F19]">
+            <div class="p-5 bg-gradient-to-b from-primary-1 to-bg-light">
                 <div class="flex justify-between items-start mb-4">
                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 rounded-full bg-slate-700 border-2 border-neon-blue p-0.5">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-primary p-0.5 shadow-sm">
                             <img src="" id="case-detail-avatar" class="w-full h-full rounded-full object-cover">
                         </div>
                         <div>
                             <div class="flex items-center space-x-2">
-                                <h2 id="case-detail-name" class="text-lg font-bold text-white">...</h2>
-                                <span id="case-detail-store" class="text-[10px] text-slate-400 bg-white/5 px-2 py-0.5 rounded-full">...</span>
+                                <h2 id="case-detail-name" class="text-lg font-bold text-text-primary">...</h2>
+                                <span id="case-detail-store" class="text-[10px] text-text-tertiary bg-white px-2 py-0.5 rounded-full border border-border-light">...</span>
                             </div>
-                            <div id="case-detail-tag" class="text-xs text-neon-blue mt-1">...</div>
+                            <div id="case-detail-tag" class="text-xs text-primary mt-1">...</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- AI Insight -->
-                <div class="glass-panel p-4 rounded-xl border border-neon-blue/20 relative overflow-hidden mb-4">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-neon-blue"></div>
+                <div class="bg-white p-4 rounded-xl border border-primary/20 relative overflow-hidden mb-4 shadow-card">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
                     <div class="flex items-start space-x-3">
-                        <i class="fa-solid fa-wand-magic-sparkles text-neon-blue mt-1"></i>
+                        <i class="fa-solid fa-wand-magic-sparkles text-primary mt-1"></i>
                         <div>
-                            <div class="text-xs font-bold text-white mb-1">AI 亮点点评</div>
-                            <p id="case-detail-reason" class="text-xs text-slate-300 leading-relaxed">...</p>
+                            <div class="text-xs font-bold text-text-primary mb-1">AI 亮点点评</div>
+                            <p id="case-detail-reason" class="text-xs text-text-secondary leading-relaxed">...</p>
                         </div>
                     </div>
                 </div>
@@ -537,8 +841,8 @@
             </div>
 
             <!-- Transcript -->
-            <div class="px-4">
-                <div class="text-xs font-bold text-slate-500 mb-3 ml-1">对话记录</div>
+            <div class="px-4 bg-white pt-4">
+                <div class="text-xs font-bold text-text-tertiary mb-3 ml-1">对话记录</div>
                 <div id="case-transcript-list" class="space-y-4">
                     <!-- Chat Bubbles -->
                 </div>
@@ -546,53 +850,53 @@
         </div>
 
         <!-- Footer Actions -->
-        <div class="fixed bottom-0 w-full p-4 bg-[#0B0F19]/95 backdrop-blur border-t border-white/10 flex z-[70]">
-             <button onclick="openCaseShareModal()" class="w-full bg-neon-blue text-black font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(0,240,255,0.3)] active:scale-95 transition-transform flex items-center justify-center">
+        <div class="fixed bottom-0 w-full p-4 bg-white/95 backdrop-blur border-t border-border-light flex z-[70] shadow-hover">
+             <button onclick="openCaseShareModal()" class="w-full btn-gradient-primary font-bold py-3 rounded-lg active:scale-95 flex items-center justify-center">
                 <i class="fa-solid fa-share-nodes mr-2"></i> 分享优秀案例
             </button>
         </div>
     </div>
 
     <!-- Share Task Modal (Floating Window) -->
-    <div id="share-task-modal" class="fixed inset-0 bg-black/80 z-[80] hidden flex items-center justify-center p-6 animate-fade-in">
-        <div class="bg-[#151B2B] rounded-2xl w-full max-w-sm overflow-hidden flex flex-col max-h-[90vh]">
+    <div id="share-task-modal" class="fixed inset-0 bg-black/60 z-[80] hidden flex items-center justify-center p-6 animate-fade-in">
+        <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden flex flex-col max-h-[90vh] shadow-modal">
             <!-- Header -->
-            <div class="flex justify-between items-center p-4 border-b border-white/10">
-                <h3 class="text-sm font-bold text-white">任务分享预览</h3>
-                <button onclick="closeTaskShareModal()" class="text-slate-400 hover:text-white">
+            <div class="flex justify-between items-center p-4 border-b border-border-light">
+                <h3 class="text-sm font-bold text-text-primary">任务分享预览</h3>
+                <button onclick="closeTaskShareModal()" class="text-text-tertiary hover:text-text-primary">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             
             <!-- Poster Preview Area -->
-            <div class="p-4 overflow-y-auto flex-1 bg-slate-900/50">
-                <div id="task-poster-node" class="bg-gradient-to-br from-slate-800 to-[#0B0F19] border border-white/10 rounded-xl p-5 shadow-2xl relative overflow-hidden">
+            <div class="p-4 overflow-y-auto flex-1 bg-bg-light">
+                <div id="task-poster-node" class="bg-gradient-to-br from-primary-1 to-white border border-border-base rounded-xl p-5 shadow-card relative overflow-hidden">
                     <!-- Decorative Elements -->
-                    <div class="absolute top-0 right-0 w-20 h-20 bg-neon-blue/10 blur-xl rounded-full -mr-10 -mt-10"></div>
-                    <div class="absolute bottom-0 left-0 w-20 h-20 bg-neon-purple/10 blur-xl rounded-full -ml-10 -mb-10"></div>
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-primary-2 rounded-full -mr-10 -mt-10"></div>
+                    <div class="absolute bottom-0 left-0 w-20 h-20 bg-secondary-purple/10 rounded-full -ml-10 -mb-10"></div>
                     
                     <!-- Content -->
                     <div class="relative z-10 text-center space-y-4">
-                        <div class="inline-block px-3 py-1 rounded-full border border-neon-blue/30 text-neon-blue text-[10px] bg-neon-blue/5 mb-2">
+                        <div class="inline-block px-3 py-1 rounded-full border border-primary/30 text-primary text-[10px] bg-primary-1 mb-2">
                             <i class="fa-solid fa-bullseye mr-1"></i> 重点任务
                         </div>
-                        <h2 id="poster-task-title" class="text-xl font-bold text-white leading-tight">...</h2>
+                        <h2 id="poster-task-title" class="text-xl font-bold text-text-primary leading-tight">...</h2>
                         
-                        <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-4"></div>
+                        <div class="w-full h-px bg-gradient-to-r from-transparent via-border-base to-transparent my-4"></div>
                         
-                        <div class="text-left bg-white/5 rounded-lg p-3 border border-white/5">
-                            <div class="text-[10px] text-slate-400 mb-1">执行方案 (SOP)</div>
-                            <div id="poster-task-desc" class="text-sm text-slate-200 leading-relaxed font-medium">...</div>
+                        <div class="text-left bg-white rounded-lg p-3 border border-border-light shadow-sm">
+                            <div class="text-[10px] text-text-tertiary mb-1">执行方案 (SOP)</div>
+                            <div id="poster-task-desc" class="text-sm text-text-primary leading-relaxed font-medium">...</div>
                         </div>
 
                         <div class="pt-4 flex justify-between items-end">
                              <div class="text-left">
-                                 <div class="text-[10px] text-slate-500">发布时间</div>
-                                 <div id="poster-create-time" class="text-xs text-slate-300 font-mono">...</div>
+                                 <div class="text-[10px] text-text-tertiary">发布时间</div>
+                                 <div id="poster-create-time" class="text-xs text-text-secondary font-mono">...</div>
                              </div>
                              <div class="text-right">
-                                 <div class="text-[10px] text-slate-500">药店智能决策系统</div>
-                                 <div class="text-[10px] text-slate-600">Smart Badge System</div>
+                                 <div class="text-[10px] text-text-tertiary">药店智能决策系统</div>
+                                 <div class="text-[10px] text-text-disabled">Smart Badge System</div>
                              </div>
                         </div>
                     </div>
@@ -600,12 +904,12 @@
             </div>
 
             <!-- Action Bar -->
-            <div class="p-4 border-t border-white/10 bg-[#0B0F19] grid grid-cols-2 gap-3">
-                <button onclick="downloadPoster()" class="flex items-center justify-center space-x-2 bg-slate-800 text-white py-3 rounded-lg hover:bg-slate-700 transition-colors">
+            <div class="p-4 border-t border-border-light bg-white grid grid-cols-2 gap-3">
+                <button onclick="downloadPoster()" class="flex items-center justify-center space-x-2 bg-bg-container text-text-primary py-3 rounded-lg hover:bg-bg-hover transition-colors border border-border-base">
                     <i class="fa-solid fa-download"></i>
                     <span class="text-xs font-bold">保存图片</span>
                 </button>
-                <button onclick="shareToWeChat()" class="flex items-center justify-center space-x-2 bg-green-600 text-white py-3 rounded-lg hover:bg-green-500 transition-colors">
+                <button onclick="shareToWeChat()" class="flex items-center justify-center space-x-2 bg-success text-white py-3 rounded-lg hover:opacity-90 transition-opacity">
                     <i class="fa-brands fa-weixin"></i>
                     <span class="text-xs font-bold">分享给店员</span>
                 </button>
@@ -614,18 +918,18 @@
     </div>
 
     <!-- Sentiment Detail View (Slide-in Page) -->
-    <div id="sentiment-detail-view" class="fixed inset-0 bg-[#0B0F19] z-[65] transform translate-x-full transition-transform duration-300 flex flex-col">
-        <header class="h-14 border-b border-white/10 flex items-center justify-between px-4 bg-[#0B0F19]">
-            <button onclick="hideSentimentDetailView()" class="w-8 h-8 flex items-center justify-center text-slate-400">
+    <div id="sentiment-detail-view" class="fixed inset-0 bg-bg-light z-[65] transform translate-x-full transition-transform duration-300 flex flex-col">
+        <header class="h-14 border-b border-border-light flex items-center justify-between px-4 bg-white">
+            <button onclick="hideSentimentDetailView()" class="w-8 h-8 flex items-center justify-center text-text-tertiary hover:text-text-primary">
                 <i class="fa-solid fa-arrow-left"></i>
             </button>
-            <h1 class="text-sm font-bold text-white">舆情详情</h1>
+            <h1 class="text-sm font-bold text-text-primary">舆情详情</h1>
             <div class="w-8"></div>
         </header>
 
         <div class="flex-1 overflow-y-auto pb-24">
             <!-- Header Card -->
-            <div class="p-5 bg-gradient-to-b from-slate-800/40 to-[#0B0F19] border-b border-white/5">
+            <div class="p-5 bg-gradient-to-b from-error-bg to-bg-light border-b border-border-light">
                 <!-- Type & Priority -->
                 <div class="flex items-center space-x-2 mb-3">
                     <span id="sentiment-type-tag" class="text-xs font-bold px-3 py-1 rounded-full">...</span>
@@ -633,10 +937,10 @@
                 </div>
 
                 <!-- Title -->
-                <h2 id="sentiment-title" class="text-lg font-bold text-white mb-3">...</h2>
+                <h2 id="sentiment-title" class="text-lg font-bold text-text-primary mb-3">...</h2>
 
                 <!-- Meta Info -->
-                <div class="flex items-center justify-between text-xs text-slate-400 mb-4">
+                <div class="flex items-center justify-between text-xs text-text-tertiary mb-4">
                     <div class="flex items-center space-x-4">
                         <span><i class="fa-regular fa-clock mr-1"></i><span id="sentiment-time">...</span></span>
                         <span><i class="fa-solid fa-store mr-1"></i><span id="sentiment-store">...</span></span>
@@ -644,28 +948,28 @@
                 </div>
 
                 <!-- Staff Info -->
-                <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-lg">
-                    <div class="w-10 h-10 rounded-full bg-slate-700 border border-white/10 overflow-hidden">
+                <div class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-border-base shadow-sm">
+                    <div class="w-10 h-10 rounded-full bg-bg-container border border-border-base overflow-hidden">
                         <img src="" id="sentiment-staff-avatar" class="w-full h-full object-cover">
                     </div>
                     <div>
-                        <div class="text-sm font-medium text-white" id="sentiment-staff-name">...</div>
-                        <div class="text-[10px] text-slate-400">当事员工</div>
+                        <div class="text-sm font-medium text-text-primary" id="sentiment-staff-name">...</div>
+                        <div class="text-[10px] text-text-tertiary">当事员工</div>
                     </div>
                 </div>
             </div>
 
             <!-- Event Summary -->
-            <div class="p-4 border-b border-white/5">
-                <h3 class="text-xs font-bold text-white border-l-2 border-neon-blue pl-2 mb-3">事件详情</h3>
-                <div class="glass-panel p-4 rounded-lg">
-                    <div id="sentiment-summary" class="text-sm text-slate-300 leading-relaxed">...</div>
+            <div class="p-4 border-b border-border-light bg-white">
+                <h3 class="text-xs font-bold text-text-primary border-l-2 border-primary pl-2 mb-3">事件详情</h3>
+                <div class="bg-bg-light p-4 rounded-lg border border-border-light">
+                    <div id="sentiment-summary" class="text-sm text-text-secondary leading-relaxed">...</div>
                 </div>
             </div>
 
             <!-- Conversation Transcript -->
-            <div class="p-4 pb-20">
-                <h3 class="text-xs font-bold text-white border-l-2 border-neon-blue pl-2 mb-3">对话记录</h3>
+            <div class="p-4 bg-white">
+                <h3 class="text-xs font-bold text-text-primary border-l-2 border-primary pl-2 mb-3">对话记录</h3>
                 <div id="sentiment-transcript" class="space-y-3">
                     <!-- Transcript bubbles -->
                 </div>
@@ -673,29 +977,29 @@
         </div>
 
         <!-- Footer Actions -->
-        <div class="fixed bottom-0 w-full p-4 bg-[#0B0F19]/95 backdrop-blur border-t border-white/10 z-[70]">
-            <button onclick="openSentimentShareModal()" class="w-full bg-neon-blue text-black font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(0,240,255,0.3)] active:scale-95 transition-transform flex items-center justify-center">
+        <div class="fixed bottom-0 w-full p-4 bg-white/95 backdrop-blur border-t border-border-light z-[70] shadow-hover">
+            <button onclick="openSentimentShareModal()" class="w-full btn-gradient-primary font-bold py-3 rounded-lg active:scale-95 flex items-center justify-center">
                 <i class="fa-solid fa-share-nodes mr-2"></i> 分享
             </button>
         </div>
     </div>
 
     <!-- Share Sentiment Modal (New) -->
-    <div id="share-sentiment-modal" class="fixed inset-0 bg-black/80 z-[80] hidden flex items-center justify-center p-6 animate-fade-in">
-        <div class="bg-[#151B2B] rounded-2xl w-full max-w-sm overflow-hidden flex flex-col max-h-[90vh]">
+    <div id="share-sentiment-modal" class="fixed inset-0 bg-black/60 z-[80] hidden flex items-center justify-center p-6 animate-fade-in">
+        <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden flex flex-col max-h-[90vh] shadow-modal">
             <!-- Header -->
-            <div class="flex justify-between items-center p-4 border-b border-white/10">
-                <h3 class="text-sm font-bold text-white">舆情分享预览</h3>
-                <button onclick="closeSentimentShareModal()" class="text-slate-400 hover:text-white">
+            <div class="flex justify-between items-center p-4 border-b border-border-light">
+                <h3 class="text-sm font-bold text-text-primary">舆情分享预览</h3>
+                <button onclick="closeSentimentShareModal()" class="text-text-tertiary hover:text-text-primary">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             
             <!-- Poster Preview Area -->
-            <div class="p-4 overflow-y-auto flex-1 bg-slate-900/50">
-                <div id="sentiment-poster-node" class="bg-gradient-to-br from-slate-800 to-[#0B0F19] border border-white/10 rounded-xl p-5 shadow-2xl relative overflow-hidden">
+            <div class="p-4 overflow-y-auto flex-1 bg-bg-light">
+                <div id="sentiment-poster-node" class="bg-gradient-to-br from-error-bg to-white border border-border-base rounded-xl p-5 shadow-card relative overflow-hidden">
                     <!-- Decorative Elements -->
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-neon-red/10 blur-xl rounded-full -mr-10 -mt-10"></div>
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-error/10 rounded-full -mr-10 -mt-10"></div>
                     
                     <!-- Content -->
                     <div class="relative z-10 space-y-4">
@@ -706,45 +1010,45 @@
                                 <span id="poster-sentiment-priority" class="ml-2 text-base">...</span>
                             </div>
                             <div class="text-right">
-                                <div class="text-[10px] text-slate-400">发生时间</div>
-                                <div id="poster-sentiment-time" class="text-xs text-slate-300 font-mono">...</div>
+                                <div class="text-[10px] text-text-tertiary">发生时间</div>
+                                <div id="poster-sentiment-time" class="text-xs text-text-secondary font-mono">...</div>
                             </div>
                         </div>
 
-                        <div class="w-full h-px bg-white/10 my-2"></div>
+                        <div class="w-full h-px bg-border-base my-2"></div>
 
                         <!-- Title -->
-                        <h2 id="poster-sentiment-title" class="text-lg font-bold text-white leading-tight">...</h2>
+                        <h2 id="poster-sentiment-title" class="text-lg font-bold text-text-primary leading-tight">...</h2>
                         
                         <!-- Staff Info -->
-                        <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-lg">
-                            <div class="w-10 h-10 rounded-full bg-slate-700 overflow-hidden border border-white/10">
+                        <div class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-border-base shadow-sm">
+                            <div class="w-10 h-10 rounded-full bg-bg-container overflow-hidden border border-border-base">
                                 <img src="" id="poster-sentiment-avatar" class="w-full h-full object-cover">
                             </div>
                             <div>
-                                <div id="poster-sentiment-staff" class="text-sm font-medium text-white">...</div>
-                                <div id="poster-sentiment-store" class="text-[10px] text-slate-400">...</div>
+                                <div id="poster-sentiment-staff" class="text-sm font-medium text-text-primary">...</div>
+                                <div id="poster-sentiment-store" class="text-[10px] text-text-tertiary">...</div>
                             </div>
                         </div>
 
                         <!-- Summary -->
-                        <div class="glass-panel p-3 rounded-lg border-l-2 border-neon-red">
-                            <div class="text-[10px] text-slate-400 mb-1">事件摘要</div>
-                            <div id="poster-sentiment-summary" class="text-xs text-slate-200 leading-relaxed line-clamp-4">...</div>
+                        <div class="bg-white p-3 rounded-lg border-l-2 border-error shadow-sm">
+                            <div class="text-[10px] text-text-tertiary mb-1">事件摘要</div>
+                            <div id="poster-sentiment-summary" class="text-xs text-text-secondary leading-relaxed line-clamp-4">...</div>
                         </div>
 
                         <!-- Key Transcript -->
-                        <div class="bg-white/5 rounded-lg p-3">
-                            <div class="text-[10px] text-slate-500 mb-2">关键对话片段</div>
-                            <div id="poster-sentiment-transcript" class="space-y-2 text-xs text-slate-300">
+                        <div class="bg-bg-light rounded-lg p-3 border border-border-light">
+                            <div class="text-[10px] text-text-tertiary mb-2">关键对话片段</div>
+                            <div id="poster-sentiment-transcript" class="space-y-2 text-xs text-text-secondary">
                                 <!-- Selected transcript -->
                             </div>
                         </div>
 
                         <div class="pt-4 flex justify-between items-end">
                             <div class="text-left">
-                                <div class="text-[10px] text-slate-500">药店智能决策系统</div>
-                                <div class="text-[10px] text-slate-600">Smart Badge System</div>
+                                <div class="text-[10px] text-text-tertiary">药店智能决策系统</div>
+                                <div class="text-[10px] text-text-disabled">Smart Badge System</div>
                             </div>
                         </div>
                     </div>
@@ -752,12 +1056,12 @@
             </div>
 
             <!-- Action Bar -->
-            <div class="p-4 border-t border-white/10 bg-[#0B0F19] grid grid-cols-2 gap-3">
-                <button onclick="downloadPoster()" class="flex items-center justify-center space-x-2 bg-slate-800 text-white py-3 rounded-lg hover:bg-slate-700 transition-colors">
+            <div class="p-4 border-t border-border-light bg-white grid grid-cols-2 gap-3">
+                <button onclick="downloadPoster()" class="flex items-center justify-center space-x-2 bg-bg-container text-text-primary py-3 rounded-lg hover:bg-bg-hover transition-colors border border-border-base">
                     <i class="fa-solid fa-download"></i>
                     <span class="text-xs font-bold">保存图片</span>
                 </button>
-                <button onclick="shareToWeChat()" class="flex items-center justify-center space-x-2 bg-green-600 text-white py-3 rounded-lg hover:bg-green-500 transition-colors">
+                <button onclick="shareToWeChat()" class="flex items-center justify-center space-x-2 bg-success text-white py-3 rounded-lg hover:opacity-90 transition-opacity">
                     <i class="fa-brands fa-weixin"></i>
                     <span class="text-xs font-bold">分享给店长</span>
                 </button>
@@ -766,65 +1070,65 @@
     </div>
 
     <!-- Share Case Modal (New) -->
-    <div id="share-case-modal" class="fixed inset-0 bg-black/80 z-[80] hidden flex items-center justify-center p-6 animate-fade-in">
-        <div class="bg-[#151B2B] rounded-2xl w-full max-w-sm overflow-hidden flex flex-col max-h-[90vh]">
+    <div id="share-case-modal" class="fixed inset-0 bg-black/60 z-[80] hidden flex items-center justify-center p-6 animate-fade-in">
+        <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden flex flex-col max-h-[90vh] shadow-modal">
             <!-- Header -->
-            <div class="flex justify-between items-center p-4 border-b border-white/10">
-                <h3 class="text-sm font-bold text-white">案例分享预览</h3>
-                <button onclick="closeCaseShareModal()" class="text-slate-400 hover:text-white">
+            <div class="flex justify-between items-center p-4 border-b border-border-light">
+                <h3 class="text-sm font-bold text-text-primary">案例分享预览</h3>
+                <button onclick="closeCaseShareModal()" class="text-text-tertiary hover:text-text-primary">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             
             <!-- Poster Preview Area -->
-            <div class="p-4 overflow-y-auto flex-1 bg-slate-900/50">
-                <div id="case-poster-node" class="bg-gradient-to-br from-[#1e1b4b] to-[#0B0F19] border border-white/10 rounded-xl p-5 shadow-2xl relative overflow-hidden">
+            <div class="p-4 overflow-y-auto flex-1 bg-bg-light">
+                <div id="case-poster-node" class="bg-gradient-to-br from-success-bg to-white border border-border-base rounded-xl p-5 shadow-card relative overflow-hidden">
                     <!-- Decorative Elements -->
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-neon-green/10 blur-xl rounded-full -mr-10 -mt-10"></div>
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-success/10 rounded-full -mr-10 -mt-10"></div>
                     
                     <!-- Content -->
                     <div class="relative z-10 space-y-4">
                         <div class="flex items-center justify-between">
                              <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-full bg-slate-700 overflow-hidden border border-white/10">
+                                <div class="w-10 h-10 rounded-full bg-bg-container overflow-hidden border border-border-base">
                                     <img src="" id="poster-case-avatar" class="w-full h-full object-cover">
                                 </div>
                                 <div>
-                                    <div id="poster-case-name" class="text-sm font-bold text-white">...</div>
-                                    <div id="poster-case-store" class="text-[10px] text-slate-400">...</div>
+                                    <div id="poster-case-name" class="text-sm font-bold text-text-primary">...</div>
+                                    <div id="poster-case-store" class="text-[10px] text-text-tertiary">...</div>
                                 </div>
                              </div>
                              <div class="text-right">
-                                 <div class="text-[10px] text-slate-400">接待时长</div>
-                                 <div id="poster-case-duration" class="text-sm font-bold text-white font-mono">...</div>
+                                 <div class="text-[10px] text-text-tertiary">接待时长</div>
+                                 <div id="poster-case-duration" class="text-sm font-bold text-text-primary font-mono">...</div>
                              </div>
                         </div>
 
-                        <div class="w-full h-px bg-white/10 my-2"></div>
+                        <div class="w-full h-px bg-border-base my-2"></div>
 
-                        <div class="inline-block px-3 py-1 rounded-full border border-neon-green/30 text-neon-green text-[10px] bg-neon-green/5 mb-1">
+                        <div class="inline-block px-3 py-1 rounded-full border border-success/30 text-success text-[10px] bg-success-bg mb-1">
                             <i class="fa-solid fa-thumbs-up mr-1"></i> 优秀案例
                         </div>
                         
-                        <div class="glass-panel p-3 rounded-lg border-l-2 border-neon-green">
-                            <div class="text-[10px] text-slate-400 mb-1">AI 亮点点评</div>
-                            <div id="poster-case-reason" class="text-sm text-white leading-relaxed font-medium">...</div>
+                        <div class="bg-white p-3 rounded-lg border-l-2 border-success shadow-sm">
+                            <div class="text-[10px] text-text-tertiary mb-1">AI 亮点点评</div>
+                            <div id="poster-case-reason" class="text-sm text-text-primary leading-relaxed font-medium">...</div>
                         </div>
 
-                        <div class="bg-white/5 rounded-lg p-3 flex flex-col">
-                            <div class="text-[10px] text-slate-500 mb-2">对话记录</div>
-                             <div id="poster-case-transcript" class="space-y-2 text-xs text-slate-300 max-h-60 overflow-y-auto pr-1">
+                        <div class="bg-bg-light rounded-lg p-3 flex flex-col border border-border-light">
+                            <div class="text-[10px] text-text-tertiary mb-2">对话记录</div>
+                             <div id="poster-case-transcript" class="space-y-2 text-xs text-text-secondary max-h-60 overflow-y-auto pr-1">
                                  <!-- Complete conversation transcript -->
                              </div>
                         </div>
 
                         <div class="pt-4 flex justify-between items-end">
                              <div class="text-left">
-                                 <div class="text-[10px] text-slate-500">会话时间</div>
-                                 <div id="poster-case-time" class="text-xs text-slate-300 font-mono">...</div>
+                                 <div class="text-[10px] text-text-tertiary">会话时间</div>
+                                 <div id="poster-case-time" class="text-xs text-text-secondary font-mono">...</div>
                              </div>
                              <div class="text-right">
-                                 <div class="text-[10px] text-slate-500">药店智能决策系统</div>
+                                 <div class="text-[10px] text-text-tertiary">药店智能决策系统</div>
                              </div>
                         </div>
                     </div>
@@ -832,12 +1136,12 @@
             </div>
 
             <!-- Action Bar -->
-            <div class="p-4 border-t border-white/10 bg-[#0B0F19] grid grid-cols-2 gap-3">
-                <button onclick="downloadPoster()" class="flex items-center justify-center space-x-2 bg-slate-800 text-white py-3 rounded-lg hover:bg-slate-700 transition-colors">
+            <div class="p-4 border-t border-border-light bg-white grid grid-cols-2 gap-3">
+                <button onclick="downloadPoster()" class="flex items-center justify-center space-x-2 bg-bg-container text-text-primary py-3 rounded-lg hover:bg-bg-hover transition-colors border border-border-base">
                     <i class="fa-solid fa-download"></i>
                     <span class="text-xs font-bold">保存图片</span>
                 </button>
-                <button onclick="shareToWeChat()" class="flex items-center justify-center space-x-2 bg-green-600 text-white py-3 rounded-lg hover:bg-green-500 transition-colors">
+                <button onclick="shareToWeChat()" class="flex items-center justify-center space-x-2 bg-success text-white py-3 rounded-lg hover:opacity-90 transition-opacity">
                     <i class="fa-brands fa-weixin"></i>
                     <span class="text-xs font-bold">分享到工作群</span>
                 </button>
@@ -896,10 +1200,107 @@
             },
             {
                 id: 's2',
-                type: 'risk',
-                typeText: '风险',
+                type: 'dispute',
+                typeText: '纠纷',
+                priority: 'high',
+                priorityIcon: '💥',
+                title: '顾客与店员发生激烈争吵',
+                time: '2026-01-13 11:20',
+                store: '万达广场店',
+                staff: {
+                    name: '赵敏',
+                    avatar: 'https://i.pravatar.cc/150?u=staff5'
+                },
+                summary: '顾客认为购买的钙片无效要求退货，店员赵敏告知已开封不能退。顾客情绪激动，指责店员欺骗消费者。双方发生激烈争吵，引发多名顾客围观。最终店长介入，同意换货并赔礼道歉才平息事态。',
+                riskLevel: 'high',
+                transcript: [
+                    { role: 'user', text: '我买的这个钙片吃了半个月，一点用都没有，你们给我退了！', time: '11:20:05' },
+                    { role: 'staff', text: '您好，这个已经开封了，按规定不能退货的。', time: '11:20:12' },
+                    { role: 'user', text: '什么规定？你们当时就说有效，现在没效你们就不管了是吧？', time: '11:20:20', highlight: true, note: '顾客情绪激动' },
+                    { role: 'staff', text: '大姐您别激动，保健品需要长期服用才有效果...', time: '11:20:28' },
+                    { role: 'user', text: '你说谁大姐呢？我看你们就是骗人的黑店！', time: '11:20:35', highlight: true, note: '冲突升级' }
+                ],
+                actionSuggest: '立即向顾客致歉，说明退换货政策，必要时破例处理以平息纠纷。对店员进行冲突处理技巧培训，强调遇到情绪激动顾客时应立即请店长介入。',
+                trainingSuggest: '全员培训"顾客投诉与纠纷处理规范"，学习降级技巧，避免语言冲突。建议设置"顾客权益保障专员"角色。'
+            },
+            {
+                id: 's3',
+                type: 'stock-out',
+                typeText: '商品缺货',
                 priority: 'medium',
+                priorityIcon: '📦',
+                title: '连花清瘟缺货导致顾客流失',
+                time: '2026-01-13 09:15',
+                store: '火车站店',
+                staff: {
+                    name: '李娟',
+                    avatar: 'https://i.pravatar.cc/150?u=staff6'
+                },
+                summary: '流感高发期，顾客点名要买连花清瘟胶囊，但门店已断货3天。店员推荐替代品被顾客拒绝，顾客表示"那我去隔壁买"后离店。当天该门店记录到8次类似缺货情况，造成销售机会损失。',
+                riskLevel: 'medium',
+                transcript: [
+                    { role: 'user', text: '有连花清瘟吗？', time: '09:15:05' },
+                    { role: 'staff', text: '不好意思，这个暂时没货了。您看要不试试感冒灵？效果也很好。', time: '09:15:12', highlight: true, note: '推荐替代品' },
+                    { role: 'user', text: '不要，我就要连花清瘟。那我去隔壁看看吧。', time: '09:15:20', highlight: true, note: '顾客流失' }
+                ],
+                actionSuggest: '立即联系供应商补货，并在门店入口处张贴"连花清瘟补货中"告示。统计近期热销药品缺货频次，优化库存预警机制。',
+                trainingSuggest: '培训店员在缺货场景下的应对话术，学习如何有效推荐替代品，提升转化率。'
+            },
+            {
+                id: 's4',
+                type: 'quality-issue',
+                typeText: '质量问题',
+                priority: 'high',
                 priorityIcon: '⚠️',
+                title: '顾客反映药品包装破损',
+                time: '2026-01-13 13:40',
+                store: '南门店',
+                staff: {
+                    name: '周杰',
+                    avatar: 'https://i.pravatar.cc/150?u=staff7'
+                },
+                summary: '顾客购买某品牌维生素后发现包装盒有破损，瓶盖松动。店员周杰立即为顾客更换新品并致歉。经核查，该批次商品在运输过程中受损，门店已将剩余库存下架，并向供应商反馈质量问题。',
+                riskLevel: 'high',
+                transcript: [
+                    { role: 'user', text: '你好，我刚买的这个维生素，包装盒都破了，瓶盖也松的。', time: '13:40:05', highlight: true, note: '质量问题' },
+                    { role: 'staff', text: '真的很抱歉！我马上给您换一瓶新的，您稍等。', time: '13:40:12' },
+                    { role: 'staff', text: '给您换好了，这瓶是完好的。给您带来不便真的很抱歉。', time: '13:40:35' },
+                    { role: 'user', text: '好的，谢谢。', time: '13:40:40' }
+                ],
+                actionSuggest: '立即对该批次商品进行全面检查，问题商品下架处理。联系供应商核实质量问题原因，必要时启动退货流程。',
+                trainingSuggest: '加强收货验收环节培训，要求员工对每批新货进行外观检查，发现包装破损及时记录并隔离。'
+            },
+            {
+                id: 's5',
+                type: 'price-dispute',
+                typeText: '价格争议',
+                priority: 'medium',
+                priorityIcon: '💰',
+                title: '顾客质疑价格比网上贵',
+                time: '2026-01-13 15:50',
+                store: '解放路店',
+                staff: {
+                    name: '孙丽',
+                    avatar: 'https://i.pravatar.cc/150?u=staff8'
+                },
+                summary: '顾客购买某保健品时用手机查询发现网购价格便宜30元，质疑门店价格虚高。店员孙丽解释实体店有房租、人工等成本，并强调可以提供专业用药咨询服务。顾客表示理解但仍未购买。',
+                riskLevel: 'low',
+                transcript: [
+                    { role: 'user', text: '这个蛋白粉多少钱？', time: '15:50:05' },
+                    { role: 'staff', text: '268元。', time: '15:50:08' },
+                    { role: 'user', text: '我看网上才238，你们这怎么贵这么多？', time: '15:50:15', highlight: true, note: '价格质疑' },
+                    { role: 'staff', text: '网上是便宜一点，但我们实体店可以现场为您讲解服用方法，有问题随时来咨询。', time: '15:50:25' },
+                    { role: 'user', text: '那我还是网上买吧，便宜点。', time: '15:50:35' }
+                ],
+                actionSuggest: '分析该商品定价策略，评估是否需要调整。可推出"线上价格匹配"或"会员专享价"等促销活动，提升竞争力。',
+                trainingSuggest: '培训店员应对价格质疑的话术，强调实体店的增值服务（专业咨询、快速取药、售后保障）。'
+            },
+            {
+                id: 's6',
+                type: 'service-risk',
+                typeText: '服务风险',
+                priority: 'high',
+                priorityIcon: '🚨',
                 title: '店员推荐药品时未询问过敏史',
                 time: '2026-01-13 16:20',
                 store: '滨江路分店',
@@ -918,7 +1319,31 @@
                 trainingSuggest: '全员进行"抗生素销售规范流程"复训，考核合格后方可上岗。重点强调过敏史询问环节的法律风险。'
             },
             {
-                id: 's3',
+                id: 's7',
+                type: 'store-anomaly',
+                typeText: '门店异常',
+                priority: 'medium',
+                priorityIcon: '🔧',
+                title: '门店空调故障影响顾客体验',
+                time: '2026-01-13 12:30',
+                store: 'CBD店',
+                staff: {
+                    name: '陈涛',
+                    avatar: 'https://i.pravatar.cc/150?u=staff9'
+                },
+                summary: '门店中央空调突然故障，室内温度升高，多名顾客抱怨闷热。店员陈涛及时联系物业维修，并为等待的顾客提供免费饮用水。维修耗时2小时，期间部分顾客提前离店。',
+                riskLevel: 'medium',
+                transcript: [
+                    { role: 'user', text: '你们店里怎么这么热啊？', time: '12:30:05' },
+                    { role: 'staff', text: '真的很抱歉，空调刚才突然坏了，我们已经在联系维修了。', time: '12:30:12' },
+                    { role: 'staff', text: '您要不先喝点水？我给您倒。', time: '12:30:20', highlight: true, note: '贴心服务' },
+                    { role: 'user', text: '算了，我先走了，太热了。', time: '12:30:28', highlight: true, note: '顾客流失' }
+                ],
+                actionSuggest: '加强设施设备定期维护，建立应急预案。遇到突发故障时，及时告知顾客并提供补偿措施（如临时降价、发放代金券）。',
+                trainingSuggest: '培训店员应对突发设施故障的应急话术和服务补救措施，减少顾客流失。'
+            },
+            {
+                id: 's8',
                 type: 'praise',
                 typeText: '好评',
                 priority: 'low',
@@ -941,30 +1366,6 @@
                 ],
                 actionSuggest: '建议将王芳的服务案例作为培训素材，在全公司推广。可给予月度"金牌店员"称号或物质奖励。',
                 trainingSuggest: '提取王芳的服务话术，制作成"老年人用药服务标准流程"，供其他员工学习。'
-            },
-            {
-                id: 's4',
-                type: 'anomaly',
-                typeText: '异常',
-                priority: 'medium',
-                priorityIcon: '❗',
-                title: '同一顾客短时间内购买大量镇咳药',
-                time: '2026-01-13 15:10',
-                store: '大学城店',
-                staff: {
-                    name: '刘洋',
-                    avatar: 'https://i.pravatar.cc/150?u=staff4'
-                },
-                summary: '同一顾客在30分钟内分两次购买含可待因成分的镇咳药水共10瓶，单次购买量均接近限购上限。店员刘洋虽然进行了登记，但未询问购买原因。此类行为可能涉及药品滥用风险，需引起重视。',
-                riskLevel: 'medium',
-                transcript: [
-                    { role: 'user', text: '来5瓶止咳水。', time: '15:10:05' },
-                    { role: 'staff', text: '需要登记身份证。', time: '15:10:10' },
-                    { role: 'user', text: '知道知道。', time: '15:10:15' },
-                    { role: 'staff', text: '好了，一共95块。', time: '15:10:25', highlight: true, note: '未询问用途' }
-                ],
-                actionSuggest: '建议立即调取该顾客的购买记录，核实购买频次。如发现异常，需向当地药监部门报告，并将该顾客列入重点关注名单。',
-                trainingSuggest: '对全员进行"特殊药品销售管理"培训，明确麻醉药品、精神药品的销售红线。遇到大量购买或频繁购买情况，必须向店长汇报。'
             }
         ];
 
@@ -1014,17 +1415,22 @@
         // --- Render Functions ---
         function renderMetrics() {
             const container = document.getElementById('metrics-scroll-container');
-            container.innerHTML = metricsData.map((m, idx) => `
-                <div onclick="openMetricDetailView(${idx})" class="inline-block w-40 glass-panel p-3 rounded-xl border border-white/5 active:scale-95 transition-transform cursor-pointer">
-                    <div class="text-[10px] text-slate-400 mb-1">${m.title}</div>
-                    <div class="text-xl font-bold text-white mb-2 font-mono">${m.value}</div>
-                    <div class="flex items-center text-[10px] ${m.isUp ? 'text-neon-green' : 'text-neon-red'}">
+            container.innerHTML = metricsData.map((m, idx) => {
+                // 客流量卡片(idx === 0)不使用任何动画特效,保持简洁静态展示
+                const activeClass = idx === 0 ? '' : 'active:scale-95';
+                const hoverClass = idx === 0 ? '' : 'hover:shadow-hover';
+                const transitionClass = idx === 0 ? '' : 'transition-transform';
+                return `
+                <div onclick="openMetricDetailView(${idx})" class="inline-block w-40 glass-panel p-3 rounded-xl ${activeClass} ${transitionClass} cursor-pointer shadow-card ${hoverClass}">
+                    <div class="text-[10px] text-text-tertiary mb-1">${m.title}</div>
+                    <div class="text-xl font-bold text-text-primary mb-2 font-mono">${m.value}</div>
+                    <div class="flex items-center text-[10px] ${m.isUp ? 'text-success' : 'text-error'}">
                         <i class="fa-solid fa-arrow-trend-${m.isUp ? 'up' : 'down'} mr-1"></i>
                         <span>${m.changeAbs}</span>
                         <span class="ml-1 opacity-70">(${m.changeRel})</span>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
             // Padding right hint
             container.insertAdjacentHTML('beforeend', '<div class="inline-block w-2"></div>');
         }
@@ -1032,29 +1438,29 @@
         function renderSupervisionTasks() {
             const container = document.getElementById('supervision-task-list');
             container.innerHTML = supervisionTasks.map(t => `
-                <div class="glass-panel p-3 rounded-lg border border-white/5 relative group cursor-pointer active:scale-95 transition-transform" onclick="openTaskDetailView(${t.id})">
+                <div class="glass-panel p-3 rounded-lg relative group cursor-pointer active:scale-95 transition-transform hover:shadow-hover" onclick="openTaskDetailView(${t.id})">
                     <div class="flex justify-between items-start mb-2">
                         <div class="flex-1">
-                            <h3 class="text-sm font-bold text-white mb-1">${t.title}</h3>
+                            <h3 class="text-sm font-bold text-text-primary mb-1">${t.title}</h3>
                             <div class="flex items-center space-x-2">
-                                <span class="text-[10px] text-slate-500"><i class="fa-regular fa-clock mr-1"></i>${t.createTime}</span>
+                                <span class="text-[10px] text-text-tertiary"><i class="fa-regular fa-clock mr-1"></i>${t.createTime}</span>
                             </div>
                         </div>
                         <div class="flex space-x-3">
-                            <button class="text-slate-500 hover:text-neon-blue" onclick="event.stopPropagation(); openTaskShareModal(${t.id})">
+                            <button class="text-text-tertiary hover:text-primary" onclick="event.stopPropagation(); openTaskShareModal(${t.id})">
                                 <i class="fa-solid fa-share-nodes text-xs"></i>
                             </button>
-                            <button class="text-slate-500 hover:text-neon-blue" onclick="event.stopPropagation(); openEditTaskView(event, ${t.id})">
+                            <button class="text-text-tertiary hover:text-primary" onclick="event.stopPropagation(); openEditTaskView(event, ${t.id})">
                                 <i class="fa-solid fa-pen text-xs"></i>
                             </button>
                         </div>
                     </div>
                     <div class="flex items-end justify-between">
                         <div>
-                            <div class="text-[10px] text-slate-500 mb-0.5">昨日执行率</div>
-                            <div class="text-lg font-bold text-white font-mono">${t.value}</div>
+                            <div class="text-[10px] text-text-tertiary mb-0.5">昨日执行率</div>
+                            <div class="text-lg font-bold text-text-primary font-mono">${t.value}</div>
                         </div>
-                        <div class="text-[10px] ${t.isUp ? 'text-neon-green' : 'text-neon-red'}">
+                        <div class="text-[10px] ${t.isUp ? 'text-success' : 'text-error'}">
                             ${t.changeRel}
                         </div>
                     </div>
@@ -1066,19 +1472,19 @@
             const container = document.getElementById('insights-keywords');
             container.innerHTML = hotWords.map((w, idx) => {
                 return `
-                <div class="glass-panel rounded-lg overflow-hidden border border-white/5">
+                <div class="glass-panel rounded-lg overflow-hidden shadow-card hover:shadow-hover transition-shadow">
                     <!-- Head -->
                     <div class="flex items-center justify-between p-3">
                         <div class="flex items-center space-x-3">
-                            <span class="font-mono text-sm font-bold w-4 text-center ${idx < 3 ? 'text-neon-blue' : 'text-slate-500'}">${w.rank}</span>
+                            <span class="font-mono text-sm font-bold w-4 text-center ${idx < 3 ? 'text-primary' : 'text-text-tertiary'}">${w.rank}</span>
                             <div>
-                                <div class="text-sm text-white font-medium flex items-center">
+                                <div class="text-sm text-text-primary font-medium flex items-center">
                                     ${w.text}
-                                    <span class="ml-2 text-[10px] bg-slate-700 text-slate-300 px-1.5 rounded">${w.type}</span>
+                                    <span class="ml-2 text-[10px] bg-bg-container text-text-secondary px-1.5 rounded">${w.type}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-xs text-white font-bold font-mono">${w.count}</div>
+                        <div class="text-xs text-text-primary font-bold font-mono">${w.count}</div>
                     </div>
                 </div>
             `}).join('');
@@ -1095,42 +1501,54 @@
                 let typeColorClass = '';
                 switch(s.type) {
                     case 'complaint':
-                        typeColorClass = 'text-neon-red bg-neon-red/20 border-neon-red/30';
+                        typeColorClass = 'text-error bg-error-bg border-error/30';
                         break;
-                    case 'risk':
-                        typeColorClass = 'text-orange-400 bg-orange-400/20 border-orange-400/30';
+                    case 'dispute':
+                        typeColorClass = 'text-error bg-error-bg border-error/30';
+                        break;
+                    case 'stock-out':
+                        typeColorClass = 'text-warning-text bg-warning-bg border-warning/30';
+                        break;
+                    case 'quality-issue':
+                        typeColorClass = 'text-error bg-error-bg border-error/30';
+                        break;
+                    case 'price-dispute':
+                        typeColorClass = 'text-warning-text bg-warning-bg border-warning/30';
+                        break;
+                    case 'service-risk':
+                        typeColorClass = 'text-error bg-error-bg border-error/30';
+                        break;
+                    case 'store-anomaly':
+                        typeColorClass = 'text-warning-text bg-warning-bg border-warning/30';
                         break;
                     case 'praise':
-                        typeColorClass = 'text-neon-green bg-neon-green/20 border-neon-green/30';
-                        break;
-                    case 'anomaly':
-                        typeColorClass = 'text-yellow-400 bg-yellow-400/20 border-yellow-400/30';
+                        typeColorClass = 'text-success bg-success-bg border-success/30';
                         break;
                 }
 
                 return `
-                <div onclick="openSentimentDetailView('${s.id}')" class="glass-panel rounded-xl p-4 border border-white/5 relative cursor-pointer active:scale-95 transition-transform">
+                <div onclick="openSentimentDetailView('${s.id}')" class="glass-panel rounded-xl p-4 relative cursor-pointer active:scale-95 transition-transform hover:shadow-hover">
                     <!-- Type & Priority -->
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center space-x-2">
                             <span class="text-xs font-bold px-2.5 py-1 rounded-full border ${typeColorClass}">${s.typeText}</span>
                         </div>
-                        <span class="text-[10px] text-slate-500">${s.time.split(' ')[1]}</span>
+                        <span class="text-[10px] text-text-tertiary">${s.time.split(' ')[1]}</span>
                     </div>
 
                     <!-- Title -->
-                    <h3 class="text-sm font-bold text-white mb-2">${s.title}</h3>
+                    <h3 class="text-sm font-bold text-text-primary mb-2">${s.title}</h3>
 
                     <!-- Summary -->
-                    <p class="text-xs text-slate-300 leading-relaxed mb-3 line-clamp-2">${s.summary}</p>
+                    <p class="text-xs text-text-secondary leading-relaxed mb-3 line-clamp-2">${s.summary}</p>
 
                     <!-- Meta Info -->
-                    <div class="flex items-center justify-between pt-2 border-t border-white/5">
-                        <div class="flex items-center space-x-3 text-[10px] text-slate-400">
+                    <div class="flex items-center justify-between pt-2 border-t border-border-light">
+                        <div class="flex items-center space-x-3 text-[10px] text-text-tertiary">
                             <span><i class="fa-solid fa-store mr-1"></i>${s.store}</span>
                             <span><i class="fa-solid fa-user mr-1"></i>${s.staff.name}</span>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
+                        <i class="fa-solid fa-chevron-right text-xs text-text-tertiary"></i>
                     </div>
                 </div>
                 `;
@@ -1140,35 +1558,35 @@
         function renderCases() {
             const container = document.getElementById('cases-list');
             container.innerHTML = casesData.map(c => `
-                <div onclick="openCaseDetailView('${c.id}')" class="glass-panel rounded-xl p-4 border border-white/5 relative group cursor-pointer active:scale-95 transition-transform">
+                <div onclick="openCaseDetailView('${c.id}')" class="glass-panel rounded-xl p-4 relative group cursor-pointer active:scale-95 transition-transform hover:shadow-hover">
                     <div class="flex justify-between items-start mb-3">
                          <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-slate-700 overflow-hidden border border-white/10">
+                            <div class="w-10 h-10 rounded-full bg-bg-container overflow-hidden border border-border-base">
                                 <img src="https://i.pravatar.cc/150?u=${c.id}" class="w-full h-full object-cover">
                             </div>
                             <div>
-                                <div class="text-sm font-bold text-white">${c.name}</div>
-                                <div class="text-[10px] text-slate-400">${c.store}</div>
+                                <div class="text-sm font-bold text-text-primary">${c.name}</div>
+                                <div class="text-[10px] text-text-tertiary">${c.store}</div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="bg-white/5 rounded-lg p-3 mb-3 border-l-2 border-neon-blue">
+                    <div class="bg-primary-1 rounded-lg p-3 mb-3 border-l-2 border-primary">
                         <div class="flex items-center space-x-2 mb-1">
-                             <span class="text-[10px] bg-neon-blue/20 text-neon-blue px-1.5 py-0.5 rounded font-bold">${c.tag}</span>
-                             <span class="text-[10px] text-slate-400">入选理由</span>
+                             <span class="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-bold">${c.tag}</span>
+                             <span class="text-[10px] text-text-tertiary">亮点点评</span>
                         </div>
-                        <div class="text-xs text-slate-200 leading-relaxed font-medium line-clamp-2">
+                        <div class="text-xs text-text-primary leading-relaxed font-medium line-clamp-2">
                             ${c.reason}
                         </div>
                     </div>
 
-                    <div class="flex justify-between items-center pt-2 border-t border-white/5">
-                        <div class="text-[10px] text-slate-500">
-                            会话时间 <span class="text-white font-mono ml-1">${c.startTime}</span>
+                    <div class="flex justify-between items-center pt-2 border-t border-border-light">
+                        <div class="text-[10px] text-text-tertiary">
+                            会话时间 <span class="text-text-primary font-mono ml-1">${c.startTime}</span>
                         </div>
-                         <div class="text-[10px] text-slate-500">
-                            时长 <span class="text-white font-mono ml-1">${c.duration}</span>
+                         <div class="text-[10px] text-text-tertiary">
+                            时长 <span class="text-text-primary font-mono ml-1">${c.duration}</span>
                         </div>
                     </div>
                 </div>
@@ -1181,24 +1599,32 @@
             const filterButtons = {
                 'all': 'filter-all',
                 'complaint': 'filter-complaint',
-                'risk': 'filter-risk',
-                'praise': 'filter-praise',
-                'anomaly': 'filter-anomaly'
+                'dispute': 'filter-dispute',
+                'stock-out': 'filter-stock-out',
+                'quality-issue': 'filter-quality-issue',
+                'price-dispute': 'filter-price-dispute',
+                'service-risk': 'filter-service-risk',
+                'store-anomaly': 'filter-store-anomaly',
+                'praise': 'filter-praise'
             };
             
             // Color mapping for active states
             const activeColors = {
-                'all': { bg: 'bg-neon-blue/20', text: 'text-neon-blue', border: 'border-neon-blue/30' },
-                'complaint': { bg: 'bg-neon-red/20', text: 'text-neon-red', border: 'border-neon-red/30' },
-                'risk': { bg: 'bg-orange-400/20', text: 'text-orange-400', border: 'border-orange-400/30' },
-                'praise': { bg: 'bg-neon-green/20', text: 'text-neon-green', border: 'border-neon-green/30' },
-                'anomaly': { bg: 'bg-yellow-400/20', text: 'text-yellow-400', border: 'border-yellow-400/30' }
+                'all': { bg: 'bg-primary-1', text: 'text-primary', border: 'border-primary/30' },
+                'complaint': { bg: 'bg-error-bg', text: 'text-error', border: 'border-error/30' },
+                'dispute': { bg: 'bg-error-bg', text: 'text-error', border: 'border-error/30' },
+                'stock-out': { bg: 'bg-warning-bg', text: 'text-warning-text', border: 'border-warning/30' },
+                'quality-issue': { bg: 'bg-error-bg', text: 'text-error', border: 'border-error/30' },
+                'price-dispute': { bg: 'bg-warning-bg', text: 'text-warning-text', border: 'border-warning/30' },
+                'service-risk': { bg: 'bg-error-bg', text: 'text-error', border: 'border-error/30' },
+                'store-anomaly': { bg: 'bg-warning-bg', text: 'text-warning-text', border: 'border-warning/30' },
+                'praise': { bg: 'bg-success-bg', text: 'text-success', border: 'border-success/30' }
             };
 
             // Reset all buttons to inactive state
             Object.values(filterButtons).forEach(btnId => {
                 const btn = document.getElementById(btnId);
-                btn.className = 'px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-slate-400 border border-white/10 transition-all';
+                btn.className = 'px-3 py-1.5 text-xs font-medium rounded-full bg-transparent text-text-tertiary border border-border-base transition-all';
             });
 
             // Set active button
@@ -1219,17 +1645,17 @@
             const sentimentPanel = document.getElementById('insights-sentiment');
 
             if (tab === 'keywords') {
-                keywordsBtn.classList.add('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                keywordsBtn.classList.remove('text-slate-400', 'bg-transparent');
-                sentimentBtn.classList.remove('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                sentimentBtn.classList.add('text-slate-400', 'bg-transparent');
+                keywordsBtn.classList.add('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                keywordsBtn.classList.remove('text-text-tertiary', 'bg-transparent');
+                sentimentBtn.classList.remove('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                sentimentBtn.classList.add('text-text-tertiary', 'bg-transparent');
                 keywordsPanel.classList.remove('hidden');
                 sentimentPanel.classList.add('hidden');
             } else {
-                sentimentBtn.classList.add('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                sentimentBtn.classList.remove('text-slate-400', 'bg-transparent');
-                keywordsBtn.classList.remove('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                keywordsBtn.classList.add('text-slate-400', 'bg-transparent');
+                sentimentBtn.classList.add('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                sentimentBtn.classList.remove('text-text-tertiary', 'bg-transparent');
+                keywordsBtn.classList.remove('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                keywordsBtn.classList.add('text-text-tertiary', 'bg-transparent');
                 sentimentPanel.classList.remove('hidden');
                 keywordsPanel.classList.add('hidden');
             }
@@ -1247,16 +1673,28 @@
             let typeColorClass = '';
             switch(s.type) {
                 case 'complaint':
-                    typeColorClass = 'bg-neon-red/20 text-neon-red border-neon-red/30';
+                    typeColorClass = 'bg-error-bg text-error border-error/30';
                     break;
-                case 'risk':
-                    typeColorClass = 'bg-orange-400/20 text-orange-400 border-orange-400/30';
+                case 'dispute':
+                    typeColorClass = 'bg-error-bg text-error border-error/30';
+                    break;
+                case 'stock-out':
+                    typeColorClass = 'bg-warning-bg text-warning-text border-warning/30';
+                    break;
+                case 'quality-issue':
+                    typeColorClass = 'bg-error-bg text-error border-error/30';
+                    break;
+                case 'price-dispute':
+                    typeColorClass = 'bg-warning-bg text-warning-text border-warning/30';
+                    break;
+                case 'service-risk':
+                    typeColorClass = 'bg-error-bg text-error border-error/30';
+                    break;
+                case 'store-anomaly':
+                    typeColorClass = 'bg-warning-bg text-warning-text border-warning/30';
                     break;
                 case 'praise':
-                    typeColorClass = 'bg-neon-green/20 text-neon-green border-neon-green/30';
-                    break;
-                case 'anomaly':
-                    typeColorClass = 'bg-yellow-400/20 text-yellow-400 border-yellow-400/30';
+                    typeColorClass = 'bg-success-bg text-success border-success/30';
                     break;
             }
 
@@ -1276,12 +1714,12 @@
             transcriptContainer.innerHTML = s.transcript.map(msg => {
                 const isStaff = msg.role === 'staff';
                 const alignClass = isStaff ? 'justify-end' : 'justify-start';
-                const bubbleClass = isStaff ? 'bg-slate-800/50 text-slate-200 rounded-tr-none border border-white/5' : 'bg-white/5 text-slate-300 rounded-tl-none border border-white/5';
+                const bubbleClass = isStaff ? 'bg-primary-1 text-text-primary rounded-tr-none border border-primary/20' : 'bg-bg-container text-text-secondary rounded-tl-none border border-border-base';
 
                 return `
                     <div class="flex ${alignClass}">
                         <div class="max-w-[80%] p-3 rounded-2xl text-xs leading-relaxed ${bubbleClass}">
-                            <div class="text-[9px] text-slate-500 mb-1">${isStaff ? '店员' : '顾客'} ${msg.time}</div>
+                            <div class="text-[9px] text-text-tertiary mb-1">${isStaff ? '店员' : '顾客'} ${msg.time}</div>
                             ${msg.text}
                         </div>
                     </div>
@@ -1304,16 +1742,28 @@
             let typeColorClass = '';
             switch(s.type) {
                 case 'complaint':
-                    typeColorClass = 'bg-neon-red/20 text-neon-red border-neon-red/30 border';
+                    typeColorClass = 'bg-error-bg text-error border-error/30 border';
                     break;
-                case 'risk':
-                    typeColorClass = 'bg-orange-400/20 text-orange-400 border-orange-400/30 border';
+                case 'dispute':
+                    typeColorClass = 'bg-error-bg text-error border-error/30 border';
+                    break;
+                case 'stock-out':
+                    typeColorClass = 'bg-warning-bg text-warning-text border-warning/30 border';
+                    break;
+                case 'quality-issue':
+                    typeColorClass = 'bg-error-bg text-error border-error/30 border';
+                    break;
+                case 'price-dispute':
+                    typeColorClass = 'bg-warning-bg text-warning-text border-warning/30 border';
+                    break;
+                case 'service-risk':
+                    typeColorClass = 'bg-error-bg text-error border-error/30 border';
+                    break;
+                case 'store-anomaly':
+                    typeColorClass = 'bg-warning-bg text-warning-text border-warning/30 border';
                     break;
                 case 'praise':
-                    typeColorClass = 'bg-neon-green/20 text-neon-green border-neon-green/30 border';
-                    break;
-                case 'anomaly':
-                    typeColorClass = 'bg-yellow-400/20 text-yellow-400 border-yellow-400/30 border';
+                    typeColorClass = 'bg-success-bg text-success border-success/30 border';
                     break;
             }
 
@@ -1332,7 +1782,7 @@
             const transcriptContainer = document.getElementById('poster-sentiment-transcript');
             transcriptContainer.innerHTML = keyTranscript.map(t => `
                 <div class="flex items-start space-x-2">
-                    <div class="font-bold text-slate-500 flex-shrink-0">${t.role === 'staff' ? '店员' : '顾客'}:</div>
+                    <div class="font-bold text-text-tertiary flex-shrink-0">${t.role === 'staff' ? '店员' : '顾客'}:</div>
                     <div>${t.text}</div>
                 </div>
             `).join('');
@@ -1364,18 +1814,18 @@
              list.innerHTML = c.transcript.map(msg => {
                  const isStaff = msg.role === 'staff';
                  const alignClass = isStaff ? 'justify-end' : 'justify-start';
-                 const bubbleClass = isStaff ? 'bg-neon-blue/10 text-white rounded-tr-none border border-neon-blue/20' : 'bg-slate-800 text-slate-300 rounded-tl-none border border-white/5';
+                 const bubbleClass = isStaff ? 'bg-primary-1 text-text-primary rounded-tr-none border border-primary/20' : 'bg-bg-container text-text-secondary rounded-tl-none border border-border-base';
 
                  return `
                     <div class="flex flex-col ${isStaff ? 'items-end' : 'items-start'} mb-4">
                         <div class="flex ${alignClass} mb-1">
-                            ${!isStaff ? '<div class="w-6 h-6 rounded-full bg-slate-600 flex-shrink-0 mr-2 flex items-center justify-center text-[10px]"><i class="fa-solid fa-user"></i></div>' : ''}
+                            ${!isStaff ? '<div class="w-6 h-6 rounded-full bg-bg-hover flex-shrink-0 mr-2 flex items-center justify-center text-[10px] text-text-tertiary"><i class="fa-solid fa-user"></i></div>' : ''}
                             <div class="max-w-[80%] p-3 rounded-2xl text-xs leading-relaxed ${bubbleClass}">
                                 ${msg.text}
                             </div>
-                            ${isStaff ? `<div class="w-6 h-6 rounded-full bg-slate-700 flex-shrink-0 ml-2 overflow-hidden"><img src="https://i.pravatar.cc/150?u=${c.id}" class="w-full h-full"></div>` : ''}
+                            ${isStaff ? `<div class="w-6 h-6 rounded-full bg-bg-container flex-shrink-0 ml-2 overflow-hidden border border-border-base"><img src="https://i.pravatar.cc/150?u=${c.id}" class="w-full h-full"></div>` : ''}
                         </div>
-                        <div class="text-[9px] text-slate-600 px-10 font-mono">${msg.time}</div>
+                        <div class="text-[9px] text-text-disabled px-10 font-mono">${msg.time}</div>
                     </div>
                  `;
              }).join('');
@@ -1394,12 +1844,12 @@
                 const btn = document.getElementById(`tab-home-${t}`);
                 const panel = document.getElementById(`panel-home-${t}`);
                 if (t === tab) {
-                    btn.classList.add('text-neon-blue', 'border-neon-blue');
-                    btn.classList.remove('text-slate-400', 'border-transparent');
+                    btn.classList.add('text-primary', 'border-primary');
+                    btn.classList.remove('text-text-tertiary', 'border-transparent');
                     panel.classList.remove('hidden');
                 } else {
-                    btn.classList.remove('text-neon-blue', 'border-neon-blue');
-                    btn.classList.add('text-slate-400', 'border-transparent');
+                    btn.classList.remove('text-primary', 'border-primary');
+                    btn.classList.add('text-text-tertiary', 'border-transparent');
                     panel.classList.add('hidden');
                 }
             });
@@ -1490,7 +1940,7 @@
             
             // Fill Change Info
             const changeEl = document.getElementById('metric-detail-change');
-            const colorClass = metric.isUp ? 'text-neon-green' : 'text-neon-red';
+            const colorClass = metric.isUp ? 'text-success' : 'text-error';
             const iconClass = metric.isUp ? 'up' : 'down';
             changeEl.className = `flex items-center justify-center text-sm ${colorClass}`;
             changeEl.innerHTML = `
@@ -1519,10 +1969,10 @@
                 // Reset trend buttons to default (7days)
                 const btn7days = document.getElementById('btn-trend-7days');
                 const btnHourly = document.getElementById('btn-trend-hourly');
-                btn7days.classList.add('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                btn7days.classList.remove('text-slate-400', 'bg-transparent');
-                btnHourly.classList.remove('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                btnHourly.classList.add('text-slate-400', 'bg-transparent');
+                btn7days.classList.add('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                btn7days.classList.remove('text-text-tertiary', 'bg-transparent');
+                btnHourly.classList.remove('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                btnHourly.classList.add('text-text-tertiary', 'bg-transparent');
             } else { // 其他指标 - Hide switch buttons, show simple title
                 trendSwitchContainer.classList.add('hidden');
                 trendSwitchContainer.classList.remove('flex');
@@ -1551,15 +2001,15 @@
             const btnHourly = document.getElementById('btn-trend-hourly');
             
             if (trendType === '7days') {
-                btn7days.classList.add('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                btn7days.classList.remove('text-slate-400', 'bg-transparent');
-                btnHourly.classList.remove('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                btnHourly.classList.add('text-slate-400', 'bg-transparent');
+                btn7days.classList.add('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                btn7days.classList.remove('text-text-tertiary', 'bg-transparent');
+                btnHourly.classList.remove('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                btnHourly.classList.add('text-text-tertiary', 'bg-transparent');
             } else {
-                btnHourly.classList.add('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                btnHourly.classList.remove('text-slate-400', 'bg-transparent');
-                btn7days.classList.remove('text-white', 'bg-neon-blue/20', 'border', 'border-neon-blue/30');
-                btn7days.classList.add('text-slate-400', 'bg-transparent');
+                btnHourly.classList.add('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                btnHourly.classList.remove('text-text-tertiary', 'bg-transparent');
+                btn7days.classList.remove('text-primary', 'bg-primary-1', 'border', 'border-primary/30');
+                btn7days.classList.add('text-text-tertiary', 'bg-transparent');
             }
             
             // Update current trend type and re-render chart
@@ -1582,10 +2032,12 @@
                     datasets: [{
                         label: metricsData[metricIndex].title,
                         data: trendData.data,
-                        borderColor: '#00F0FF',
-                        backgroundColor: 'rgba(0, 240, 255, 0.1)',
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-blue').trim(),
+                        backgroundColor: 'rgba(66, 153, 225, 0.1)',
                         borderWidth: 2,
-                        pointBackgroundColor: '#00F0FF',
+                        pointBackgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim(),
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
                         tension: 0.4,
                         fill: true
                     }]
@@ -1599,12 +2051,17 @@
                     scales: {
                         x: {
                             grid: { display: false, drawBorder: false },
-                            ticks: { color: '#94a3b8', font: { size: 10 } }
+                            ticks: { 
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-tertiary').trim(), 
+                                font: { size: 10 } 
+                            }
                         },
                         y: {
-                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            grid: { 
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--border-split').trim() 
+                            },
                             ticks: { 
-                                color: '#94a3b8', 
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-tertiary').trim(), 
                                 font: { size: 10 },
                                 callback: function(value) {
                                     return value + trendData.unit;
@@ -1622,20 +2079,20 @@
             if (!stores) return;
 
             list.innerHTML = stores.map((s, idx) => {
-                let colorClass = 'text-slate-200';
+                let colorClass = 'text-text-primary';
                 if (idx < 3) {
-                    colorClass = 'text-neon-green'; // Top 3
+                    colorClass = 'text-success'; // Top 3
                 } else if (idx >= stores.length - 2) {
-                    colorClass = 'text-neon-red'; // Bottom 2
+                    colorClass = 'text-error'; // Bottom 2
                 } else {
-                    colorClass = 'text-neon-blue'; // Others
+                    colorClass = 'text-primary'; // Others
                 }
                 
                 return `
-                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/5">
+                    <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-border-base shadow-sm">
                         <div class="flex items-center space-x-3">
-                            <span class="text-xs text-slate-500 w-4 font-mono">${idx + 1}</span>
-                            <span class="text-sm text-slate-200">${s.name}</span>
+                            <span class="text-xs text-text-tertiary w-4 font-mono">${idx + 1}</span>
+                            <span class="text-sm text-text-primary">${s.name}</span>
                         </div>
                         <span class="text-sm font-bold font-mono ${colorClass}">${s.value}</span>
                     </div>
@@ -1738,10 +2195,12 @@
                     datasets: [{
                         label: '执行率',
                         data: data,
-                        borderColor: '#00F0FF',
-                        backgroundColor: 'rgba(0, 240, 255, 0.1)',
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-blue').trim(),
+                        backgroundColor: 'rgba(66, 153, 225, 0.1)',
                         borderWidth: 2,
-                        pointBackgroundColor: '#00F0FF',
+                        pointBackgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim(),
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
                         tension: 0.4,
                         fill: true
                     }]
@@ -1755,11 +2214,19 @@
                     scales: {
                         x: {
                             grid: { display: false, drawBorder: false },
-                            ticks: { color: '#94a3b8', font: { size: 10 } }
+                            ticks: { 
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-tertiary').trim(), 
+                                font: { size: 10 } 
+                            }
                         },
                         y: {
-                            grid: { color: 'rgba(255,255,255,0.05)' },
-                            ticks: { color: '#94a3b8', font: { size: 10 } },
+                            grid: { 
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--border-split').trim() 
+                            },
+                            ticks: { 
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-tertiary').trim(), 
+                                font: { size: 10 } 
+                            },
                             min: 50,
                             max: 100
                         }
@@ -1780,12 +2247,12 @@
             ];
 
             list.innerHTML = stores.map((s, idx) => {
-                let colorClass = s.status === 'high' ? 'text-neon-green' : (s.status === 'mid' ? 'text-neon-blue' : 'text-neon-red');
+                let colorClass = s.status === 'high' ? 'text-success' : (s.status === 'mid' ? 'text-primary' : 'text-error');
                 return `
-                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/5">
+                    <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-border-base shadow-sm">
                         <div class="flex items-center space-x-3">
-                            <span class="text-xs text-slate-500 w-4 font-mono">${idx + 1}</span>
-                            <span class="text-sm text-slate-200">${s.name}</span>
+                            <span class="text-xs text-text-tertiary w-4 font-mono">${idx + 1}</span>
+                            <span class="text-sm text-text-primary">${s.name}</span>
                         </div>
                         <span class="text-sm font-bold font-mono ${colorClass}">${s.rate}</span>
                     </div>
@@ -1805,8 +2272,150 @@
         }
 
         // --- AI Interaction & Task Creation ---
+        
+        // Update input character count
+        function updateInputCharCount() {
+            const input = document.getElementById('ai-input-desc');
+            const countSpan = document.getElementById('ai-input-count');
+            const clearBtn = document.getElementById('btn-clear-input');
+            const currentLength = input.value.length;
+            const maxLength = 200;
+            
+            // Update count display
+            const colorClass = currentLength >= maxLength ? 'text-error' : 'text-primary';
+            countSpan.innerHTML = `<span class="${colorClass}">${currentLength}</span>/${maxLength}`;
+            
+            // Show/hide clear button
+            if (currentLength > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+        }
+        
+        // Clear input
+        function clearInput() {
+            const input = document.getElementById('ai-input-desc');
+            const voiceWarning = document.getElementById('voice-warning');
+            
+            input.value = '';
+            updateInputCharCount();
+            voiceWarning.classList.add('hidden');
+        }
+        
+        // Voice input functionality
+        let recognition = null;
+        let isVoiceInputActive = false;
+        
+        function startVoiceInput() {
+            const input = document.getElementById('ai-input-desc');
+            const btn = document.getElementById('btn-voice-input');
+            const voiceWarning = document.getElementById('voice-warning');
+            
+            // Check browser support
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('您的浏览器不支持语音识别功能，请使用Chrome、Edge等现代浏览器。');
+                return;
+            }
+            
+            // Stop recording if already active
+            if (isVoiceInputActive && recognition) {
+                recognition.stop();
+                return;
+            }
+            
+            // Initialize speech recognition
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'zh-CN';
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            
+            let finalTranscript = input.value; // Start with existing text
+            
+            recognition.onstart = function() {
+                isVoiceInputActive = true;
+                btn.classList.add('bg-error', 'text-white', 'animate-pulse');
+                btn.classList.remove('bg-primary-1', 'text-primary');
+                voiceWarning.classList.add('hidden');
+            };
+            
+            recognition.onresult = function(event) {
+                let interimTranscript = '';
+                
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript;
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+                
+                const combinedText = finalTranscript + interimTranscript;
+                
+                // Check character limit
+                if (combinedText.length > 200) {
+                    // Truncate to 200 characters
+                    finalTranscript = combinedText.substring(0, 200);
+                    input.value = finalTranscript;
+                    updateInputCharCount();
+                    
+                    // Show warning
+                    voiceWarning.classList.remove('hidden');
+                    
+                    // Stop recognition
+                    recognition.stop();
+                } else {
+                    input.value = combinedText;
+                    updateInputCharCount();
+                }
+            };
+            
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+                let errorMsg = '语音识别出错，请重试。';
+                
+                switch(event.error) {
+                    case 'no-speech':
+                        errorMsg = '未检测到语音，请重试。';
+                        break;
+                    case 'audio-capture':
+                        errorMsg = '无法访问麦克风，请检查权限设置。';
+                        break;
+                    case 'not-allowed':
+                        errorMsg = '麦克风权限被拒绝，请在浏览器设置中允许访问。';
+                        break;
+                }
+                
+                alert(errorMsg);
+                resetVoiceButton();
+            };
+            
+            recognition.onend = function() {
+                resetVoiceButton();
+            };
+            
+            // Start recognition
+            try {
+                recognition.start();
+            } catch (e) {
+                console.error('Failed to start speech recognition:', e);
+                alert('语音识别启动失败，请重试。');
+                resetVoiceButton();
+            }
+        }
+        
+        function resetVoiceButton() {
+            const btn = document.getElementById('btn-voice-input');
+            isVoiceInputActive = false;
+            btn.classList.remove('bg-error', 'text-white', 'animate-pulse');
+            btn.classList.add('bg-primary-1', 'text-primary');
+        }
+        
         function fillInput(text) {
             document.getElementById('ai-input-desc').value = text;
+            updateInputCharCount();
         }
 
         function triggerGenerate() {
@@ -1901,20 +2510,20 @@
                  profileView.classList.add('hidden');
                  
                  // Update Navigation
-                 navDashboard.classList.add('text-neon-blue');
-                 navDashboard.classList.remove('text-slate-500');
-                 navProfile.classList.add('text-slate-500');
-                 navProfile.classList.remove('text-neon-blue');
+                 navDashboard.classList.add('text-primary');
+                 navDashboard.classList.remove('text-text-tertiary');
+                 navProfile.classList.add('text-text-tertiary');
+                 navProfile.classList.remove('text-primary');
              } else if(tab === 'profile') {
                  // Show Profile
                  dashboardView.classList.add('hidden');
                  profileView.classList.remove('hidden');
                  
                  // Update Navigation
-                 navDashboard.classList.remove('text-neon-blue');
-                 navDashboard.classList.add('text-slate-500');
-                 navProfile.classList.remove('text-slate-500');
-                 navProfile.classList.add('text-neon-blue');
+                 navDashboard.classList.remove('text-primary');
+                 navDashboard.classList.add('text-text-tertiary');
+                 navProfile.classList.remove('text-text-tertiary');
+                 navProfile.classList.add('text-primary');
              }
         }
         
@@ -1958,7 +2567,7 @@
             const transcriptContainer = document.getElementById('poster-case-transcript');
             transcriptContainer.innerHTML = c.transcript.map(t => `
                 <div class="flex items-start space-x-2 mb-2">
-                    <div class="font-bold ${t.role === 'staff' ? 'text-neon-blue' : 'text-slate-400'} flex-shrink-0">${t.role === 'staff' ? '店员' : '顾客'}:</div>
+                    <div class="font-bold ${t.role === 'staff' ? 'text-primary' : 'text-text-tertiary'} flex-shrink-0">${t.role === 'staff' ? '店员' : '顾客'}:</div>
                     <div class="flex-1">${t.text}</div>
                 </div>
             `).join('');
