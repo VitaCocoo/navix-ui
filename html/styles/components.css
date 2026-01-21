@@ -1,0 +1,465 @@
+/**
+ * 组件样式
+ * 定义各类UI组件的样式
+ */
+
+/* Tailwind动画增强 */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.3s ease-out forwards;
+}
+
+/* 行截断 */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ========== AI聊天界面样式 ========== */
+
+/* AI头像容器 */
+.ai-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-teal) 100%);
+    padding: 2px;
+    flex-shrink: 0;
+}
+
+.ai-avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 消息气泡基础样式（AI消息） */
+.message-bubble {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 16px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.message-bubble:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-1px);
+}
+
+.message-bubble:active {
+    transform: scale(0.98);
+}
+
+/* 用户气泡样式（点击工具栏按钮时显示） */
+.user-bubble {
+    background: var(--primary-color);
+    color: white;
+    border-radius: 12px;
+    padding: 12px 16px;
+    max-width: 60%;
+    margin-left: auto;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: right;
+}
+
+/* 欢迎消息特殊样式 */
+.welcome-message-bubble {
+    background: linear-gradient(135deg, var(--primary-1) 0%, var(--info-bg) 100%);
+    border: 2px solid var(--primary-color);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-hover);
+}
+
+.welcome-message-bubble .message-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-8);
+    margin-bottom: 12px;
+}
+
+.welcome-message-bubble .message-content {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.8;
+    white-space: pre-line;
+}
+
+/* 消息类型标签 */
+.message-type-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.message-type-badge.type-risk {
+    background: var(--error-bg);
+    color: var(--error-color);
+}
+
+.message-type-badge.type-data-change {
+    background: var(--warning-bg);
+    color: var(--warning-text);
+}
+
+.message-type-badge.type-excellent {
+    background: var(--success-bg);
+    color: var(--success-color);
+}
+
+.message-type-badge.type-suggestion {
+    background: var(--info-bg);
+    color: var(--info-color);
+}
+
+/* 消息标题 */
+.message-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+/* 消息总结 */
+.message-summary {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    white-space: pre-line;
+}
+
+/* 消息时间 */
+.message-time {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 8px;
+}
+
+/* 消息操作按钮区域 */
+.message-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.message-action-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.message-action-btn.primary {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.message-action-btn.primary:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
+}
+
+.message-action-btn.secondary {
+    background: var(--bg-container);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-base);
+}
+
+.message-action-btn.secondary:hover {
+    background: var(--bg-hover);
+}
+
+.message-action-btn.success {
+    background: var(--success-bg);
+    color: var(--success-color);
+    border: 1px solid var(--success-border);
+}
+
+.message-action-btn.success:hover {
+    background: var(--success-color);
+    color: white;
+}
+
+/* 消息内图表容器 */
+.message-chart-container {
+    margin: 12px 0;
+    padding: 12px;
+    background: var(--bg-light);
+    border-radius: 8px;
+}
+
+/* 日期分组标题 */
+.message-date-divider {
+    text-align: center;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg-light);
+    z-index: 10;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+}
+
+/* AI问候卡片 */
+.ai-greeting-card {
+    background: var(--gradient-accent);
+    border-radius: 16px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-hover);
+}
+
+.ai-greeting-card .greeting-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.ai-greeting-card .greeting-text {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+/* 聊天容器 */
+.chat-container {
+    height: calc(100vh - 56px - 100px);
+    overflow-y: auto;
+    padding: 16px;
+    padding-bottom: 80px;
+}
+
+.chat-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: var(--border-base);
+    border-radius: 2px;
+}
+
+/* 空状态 */
+.empty-messages {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-tertiary);
+}
+
+.empty-messages i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+
+.empty-messages p {
+    font-size: 14px;
+}
+
+/* ========== 底部工具栏样式 ========== */
+
+.toolbar-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 8px;
+    background: var(--bg-light);
+    border: 1px solid var(--border-base);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toolbar-btn:hover {
+    background: var(--primary-1);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.15);
+}
+
+.toolbar-btn:active {
+    transform: translateY(0);
+}
+
+.toolbar-btn i {
+    font-size: 20px;
+}
+
+/* ========== AI回复卡片样式 ========== */
+
+/* 任务列表卡片 */
+.ai-response-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+    animation: slideUp 0.3s ease-out forwards;
+}
+
+.ai-response-card .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-split);
+}
+
+.ai-response-card .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.ai-response-card .card-subtitle {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+}
+
+/* 任务项样式 */
+.task-item {
+    padding: 14px;
+    background: var(--bg-light);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.task-item:hover {
+    background: var(--primary-1);
+    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.1);
+    transform: translateX(4px);
+}
+
+.task-item .task-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.task-item .task-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.task-item .task-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.task-item .task-value {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.task-item .task-change {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.task-item .task-change.up {
+    color: var(--success-color);
+}
+
+.task-item .task-change.down {
+    color: var(--error-color);
+}
+
+/* 指标卡片样式 */
+.metric-item {
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary-1) 0%, var(--bg-light) 100%);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-split);
+}
+
+.metric-item .metric-title {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.metric-item .metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.metric-item .metric-change {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.metric-item .metric-change.up {
+    color: var(--success-color);
+}
+
+.metric-item .metric-change.down {
+    color: var(--error-color);
+}

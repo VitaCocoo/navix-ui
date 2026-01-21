@@ -1,0 +1,76 @@
+/**
+ * 渐变色应用样式
+ * 定义各类渐变色的应用场景
+ */
+
+/* 主按钮渐变 */
+.btn-gradient-primary {
+    background: var(--gradient-primary);
+    color: var(--text-inverse);
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.2);
+}
+
+.btn-gradient-primary:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-gradient-primary:active {
+    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.4);
+    transform: translateY(0);
+}
+
+/* 强调渐变卡片 */
+.card-gradient-accent {
+    background: var(--gradient-accent);
+    color: var(--text-inverse);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.card-gradient-accent:hover {
+    filter: brightness(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(66, 153, 225, 0.25);
+}
+
+/* 成功渐变元素 */
+.gradient-success {
+    background: var(--gradient-success);
+}
+
+/* 装饰性渐变分隔线 */
+.gradient-divider {
+    height: 2px;
+    background: var(--gradient-divider);
+    border: none;
+    margin: 16px 0;
+}
+
+/* 文字渐变效果 */
+.text-gradient {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* 渐变顶部栏 */
+.topbar-gradient {
+    background: var(--gradient-topbar);
+}
+
+/* 数据卡片渐变背景 */
+.metric-card-gradient {
+    background: var(--gradient-card);
+    transition: all 0.3s ease;
+}
+
+.metric-card-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}

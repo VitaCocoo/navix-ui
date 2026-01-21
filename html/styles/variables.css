@@ -1,0 +1,107 @@
+/**
+ * CSS Variables 色彩系统
+ * 定义全局CSS变量，包括色彩、阴影、渐变等
+ */
+
+:root {
+    /* ===== 主品牌色梯度 ===== */
+    --primary-1: #E8F4FD;
+    --primary-2: #BEE3F8;
+    --primary-3: #90CDF4;
+    --primary-4: #63B3ED;
+    --primary-5: #4299E1;
+    --primary-6: #3182CE;
+    --primary-7: #2D7DD2;
+    --primary-8: #2C5AA0;
+    --primary-9: #1A365D;
+    --primary-10: #0D1B2E;
+    
+    /* 主要交互色 */
+    --primary-color: #4299E1;
+    --primary-hover: #3182CE;
+    --primary-active: #2D7DD2;
+    
+    /* ===== 辅助色 ===== */
+    --secondary-teal: #2EC4B6;
+    --secondary-teal-bg: rgba(46, 196, 182, 0.1);
+    --secondary-orange: #FF9F1C;
+    --secondary-purple: #9F7AEA;
+    --secondary-pink: #ED64A6;
+    
+    /* ===== 功能色 ===== */
+    --success-color: #48BB78;
+    --success-bg: #F0FFF4;
+    --success-border: #9AE6B4;
+    
+    --warning-color: #ECC94B;
+    --warning-text: #D69E2E;
+    --warning-bg: #FFFBEB;
+    --warning-border: #F6E05E;
+    
+    --error-color: #F56565;
+    --error-bg: #FFF5F5;
+    --error-border: #FEB2B2;
+    
+    --info-color: #4299E1;
+    --info-bg: #E8F4FD;
+    --info-border: #90CDF4;
+    
+    --disabled-color: #E2E8F0;
+    
+    /* ===== 文字颜色 ===== */
+    --text-primary: #2D3748;
+    --text-secondary: #4A5568;
+    --text-tertiary: #718096;
+    --text-disabled: #A0AEC0;
+    --text-inverse: #FFFFFF;
+    
+    /* ===== 背景颜色 ===== */
+    --bg-base: #FFFFFF;
+    --bg-light: #F7FAFC;
+    --bg-container: #EDF2F7;
+    --bg-hover: #E2E8F0;
+    
+    /* ===== 边框颜色 ===== */
+    --border-base: #E2E8F0;
+    --border-light: #EDF2F7;
+    --border-split: #F7FAFC;
+    
+    /* ===== 中性灰度 ===== */
+    --gray-100: #F7FAFC;
+    --gray-300: #E2E8F0;
+    --gray-500: #718096;
+    --gray-700: #4A5568;
+    --gray-900: #2D3748;
+    
+    /* ===== 图表色彩 ===== */
+    --chart-blue: #2D7DD2;
+    --chart-orange: #FF9F1C;
+    --chart-teal: #2EC4B6;
+    --chart-purple: #9F7AEA;
+    --chart-pink: #ED64A6;
+    --chart-green: #68D391;
+    
+    /* ===== 阴影 ===== */
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-modal: 0 12px 32px rgba(0, 0, 0, 0.16);
+    
+    /* ===== 渐变色定义 ===== */
+    /* 主要渐变 */
+    --gradient-primary: linear-gradient(135deg, #4299E1 0%, #2C5AA0 100%);
+    --gradient-accent: linear-gradient(135deg, #4299E1 0%, #2EC4B6 100%);
+    --gradient-success: linear-gradient(135deg, #48BB78 0%, #38A169 100%);
+    --gradient-warning: linear-gradient(135deg, #FF9F1C 0%, #ECC94B 100%);
+    
+    /* 装饰性渐变 */
+    --gradient-bg: linear-gradient(180deg, #F7FAFC 0%, #FFFFFF 100%);
+    --gradient-card: linear-gradient(135deg, rgba(66, 153, 225, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
+    --gradient-topbar: linear-gradient(90deg, #FFFFFF 0%, #E8F4FD 100%);
+    --gradient-divider: linear-gradient(90deg, transparent 0%, #4299E1 50%, transparent 100%);
+    
+    /* 数据可视化渐变 */
+    --gradient-chart-fill: linear-gradient(180deg, rgba(66, 153, 225, 0.2) 0%, rgba(66, 153, 225, 0.05) 100%);
+    --gradient-chart-blue: linear-gradient(135deg, #90CDF4 0%, #2D7DD2 100%);
+    --gradient-chart-orange: linear-gradient(135deg, #FFA94D 0%, #FF9F1C 100%);
+    --gradient-chart-teal: linear-gradient(135deg, #81E6D9 0%, #2EC4B6 100%);
+}
